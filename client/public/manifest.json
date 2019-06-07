@@ -1,0 +1,20 @@
+{
+  "short_name": "Interactieve voorstelling",
+  "name": "Interactieve voorstelling Opera en Ballet Vlaanderen",
+  "icons": [
+    {
+      "src": "/assets/img/obv-350.png",
+      "sizes": "350x350",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/img/obv-600.png",
+      "sizes": "600x600",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#FFCA88",
+  "background_color": "#444444"
+}
