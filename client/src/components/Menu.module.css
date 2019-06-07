@@ -1,0 +1,8 @@
+.link{
+  color: brown;
+}
+
+.navigatie{
+  display: grid;
+  grid-gap: 1rem;
+}

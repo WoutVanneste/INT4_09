@@ -1,11 +1,12 @@
 import React from "react";
 import Menu from "../components/Menu";
+import styles from "./Player.module.css";
 
 const Player = () => {
   return (
     <>
       <Menu />
-      <p>Player container</p>
+      <p className={styles.title}>Player container</p>
     </>
   );
 };

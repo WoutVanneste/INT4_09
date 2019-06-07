@@ -1,11 +1,12 @@
 import React from "react";
 import Menu from "../components/Menu";
+import styles from "./Admin.module.css";
 
 const Admin = () => {
   return (
     <>
       <Menu />
-      <p>Admin container</p>
+      <p className={styles.title}>Admin container</p>
     </>
   );
 };
