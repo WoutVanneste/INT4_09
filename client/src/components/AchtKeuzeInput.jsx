@@ -13,7 +13,7 @@ const KeuzeInput = () => {
         <input type="radio" name="naam" value="waarde" /> {"optie 6"}
         <input type="radio" name="naam" value="waarde" /> {"optie 7"}
         <input type="radio" name="naam" value="waarde" /> {"optie 8"}
-        <button>Verzenden</button>
+        <input type="submit" value="Antwoorden" />
       </form>
     </>
   );

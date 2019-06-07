@@ -9,7 +9,7 @@ class Admin extends Component {
   }
   handleSubmitForm = () => {
     //hier wordt de gebruiker doorgestuurd naar de player pagina, we geven ook het aantal opties mee voor de vraag.
-    //'vraag' is de data die we meegeven om in de player component uit te lezen.
+    //'vraag' is de data die we meegeven om in de player container uit te lezen.
     this.props.history.push({
       pathname: "/player",
       vraag: this.state.selectedOption
@@ -28,11 +28,27 @@ class Admin extends Component {
           <input
             type="radio"
             name="naam"
+            value="slider"
+            checked={this.state.selectedOption === "slider"}
+            onChange={this.handleChangeOption}
+          />{" "}
+          {"slider"}
+          <input
+            type="radio"
+            name="naam"
+            value="tekst"
+            checked={this.state.selectedOption === "tekst"}
+            onChange={this.handleChangeOption}
+          />{" "}
+          {"tekst"}
+          <input
+            type="radio"
+            name="naam"
             value="2"
             checked={this.state.selectedOption === "2"}
             onChange={this.handleChangeOption}
           />{" "}
-          {"2 vragen"}
+          {"2 opties"}
           <input
             type="radio"
             name="naam"
@@ -40,7 +56,7 @@ class Admin extends Component {
             checked={this.state.selectedOption === "4"}
             onChange={this.handleChangeOption}
           />{" "}
-          {"4 vragen"}
+          {"4 opties"}
           <input
             type="radio"
             name="naam"
@@ -48,7 +64,7 @@ class Admin extends Component {
             checked={this.state.selectedOption === "8"}
             onChange={this.handleChangeOption}
           />{" "}
-          {"8 vragen"}
+          {"8 opties"}
           <input type="submit" value="Stel vraag" />
         </form>
       </>

@@ -3,10 +3,10 @@ import React from "react";
 const TekstInput = () => {
   return (
     <>
-      <p>Een tekstinput</p>
+      <p>Tekstinput</p>
       <form>
         <input type="text" />
-        <button>Verzenden</button>
+        <input type="submit" value="Antwoorden" />
       </form>
     </>
   );

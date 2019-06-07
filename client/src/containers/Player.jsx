@@ -3,6 +3,8 @@ import Menu from "../components/Menu";
 import TweeKeuzeInput from "../components/TweeKeuzeInput";
 import VierKeuzeInput from "../components/VierKeuzeInput";
 import AchtKeuzeInput from "../components/AchtKeuzeInput";
+import TekstInput from "../components/TekstInput";
+import SliderInput from "../components/SliderInput";
 import styles from "./Player.module.css";
 
 const Player = vraag => {
@@ -19,6 +21,10 @@ const Player = vraag => {
         return <VierKeuzeInput />;
       case "8":
         return <AchtKeuzeInput />;
+      case "tekst":
+        return <TekstInput />;
+      case "slider":
+        return <SliderInput />;
       default:
         return <TweeKeuzeInput />;
     }
