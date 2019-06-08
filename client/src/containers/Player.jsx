@@ -5,6 +5,7 @@ import VierKeuzeInput from "../components/VierKeuzeInput";
 import AchtKeuzeInput from "../components/AchtKeuzeInput";
 import TekstInput from "../components/TekstInput";
 import SliderInput from "../components/SliderInput";
+import Wachtscherm from "../components/Wachtscherm";
 import styles from "./Player.module.css";
 import { socket } from "./App.js";
 
@@ -42,6 +43,8 @@ class Player extends Component {
           return <TekstInput />;
         case "slider":
           return <SliderInput />;
+        case "wachtscherm":
+          return <Wachtscherm />;
         default:
           return <p>De gamemaster heeft nog geen vraag doorgestuurd</p>;
       }

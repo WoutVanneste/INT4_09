@@ -1,16 +1,11 @@
-.title{
-  font-size: 3rem;
-  color: blue;
-}
-
-.admin_radio_label{
+.radio_label{
   position: relative;
   cursor: pointer;
 }
-.admin_radio_input{
+.radio_input{
   display: none;
 }
-.admin_radio_span{
+.radio_span{
   font-size: 2rem;
   padding: 1rem;
   position: relative;
@@ -21,8 +16,9 @@
   height: 10rem;
   background-color: #0E0D36; 
   border-radius: .5rem;
+  transition: color .2s ease;
 }
 
-.admin_radio_label .admin_radio_input:checked ~.admin_radio_span{
+.radio_label .radio_input:checked ~.radio_span{
   color: #F7B32B
 }
