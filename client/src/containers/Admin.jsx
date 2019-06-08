@@ -1,24 +1,39 @@
 import React, { Component } from "react";
 import Menu from "../components/Menu";
 import styles from "./Admin.module.css";
+import { socket } from "./App.js";
 
 class Admin extends Component {
   constructor(props) {
     super(props);
     this.state = { selectedOption: "" };
   }
-  handleSubmitForm = () => {
+  handleSubmitForm = e => {
     //hier wordt de gebruiker doorgestuurd naar de player pagina, we geven ook het aantal opties mee voor de vraag.
     //'vraag' is de data die we meegeven om in de player container uit te lezen.
-    this.props.history.push({
-      pathname: "/player",
-      vraag: this.state.selectedOption
-    });
+
+    e.preventDefault();
+    console.log(e);
+
+    // this.props.history.push({
+    //   pathname: "/player",
+    //   vraag: this.state.selectedOption
+    // });
+    console.log(this.state.selectedOption);
+    socket.emit("question", this.state.selectedOption); // emit de value van de input.
   };
   handleChangeOption = e => {
     //iedere keer en andere radio button wordt aangeklikt, wordt dit aangepast in de state.
     this.setState({ selectedOption: e.currentTarget.value });
   };
+
+  componentDidMount() {
+    socket.on("question", type => {
+      // vang een socket emit op.
+      console.log(`socket message`, type);
+    });
+  }
+
   render() {
     return (
       <>

@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
+import socketIOClient from "socket.io-client";
+
 // import styles from "./App.module.css";
 
 import Home from "./Home";
@@ -8,7 +10,17 @@ import Player from "./Player";
 import Projectie from "./Projectie";
 import { ROUTES } from "../constants";
 
+var socket;
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      endpoint: "http://localhost:4000/"
+    };
+
+    socket = socketIOClient(this.state.endpoint);
+  }
+
   render() {
     return (
       <main>
@@ -24,3 +36,4 @@ class App extends Component {
 }
 
 export default withRouter(App);
+export { socket };
