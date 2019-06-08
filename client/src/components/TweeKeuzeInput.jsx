@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { socket } from "../containers/App.js";
 
 const TweeKeuzeInput = () => {
   // react hooks met een waarde en methode om deze aan te passen.
@@ -9,6 +10,8 @@ const TweeKeuzeInput = () => {
     // Het antwoord wordt uit de state gehaald.
     e.preventDefault();
     console.log(huidigAntwoord);
+
+    socket.emit("answer", huidigAntwoord); // emit de value van de input.
   };
 
   const handleChangeRadio = e => {

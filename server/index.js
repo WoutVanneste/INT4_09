@@ -31,16 +31,23 @@ io.on("connection", socket => {
   });
 });
 
-io.on("connection", socket => {
-  socket.on("number update", msg => {
-    io.emit("number update", msg);
-  });
-});
+// io.on("connection", socket => {
+//   socket.on("number update", msg => {
+//     io.emit("number update", msg);
+//   });
+// });
 
 io.on("connection", socket => {
   socket.on("question", msg => {
     console.log(`question emit`);
     io.emit("question", msg);
+  });
+});
+
+io.on("connection", socket => {
+  socket.on("answer", msg => {
+    console.log(`answer emit`);
+    io.emit("answer", msg);
   });
 });
 
