@@ -5,7 +5,7 @@ import styles from "./Admin.module.css";
 class Admin extends Component {
   constructor(props) {
     super(props);
-    this.state = { selectedOption: "2" };
+    this.state = { selectedOption: "" };
   }
   handleSubmitForm = () => {
     //hier wordt de gebruiker doorgestuurd naar de player pagina, we geven ook het aantal opties mee voor de vraag.
@@ -31,6 +31,7 @@ class Admin extends Component {
             value="slider"
             checked={this.state.selectedOption === "slider"}
             onChange={this.handleChangeOption}
+            required
           />{" "}
           {"slider"}
           <input
@@ -39,6 +40,7 @@ class Admin extends Component {
             value="tekst"
             checked={this.state.selectedOption === "tekst"}
             onChange={this.handleChangeOption}
+            required
           />{" "}
           {"tekst"}
           <input
@@ -47,6 +49,7 @@ class Admin extends Component {
             value="2"
             checked={this.state.selectedOption === "2"}
             onChange={this.handleChangeOption}
+            required
           />{" "}
           {"2 opties"}
           <input
@@ -55,6 +58,7 @@ class Admin extends Component {
             value="4"
             checked={this.state.selectedOption === "4"}
             onChange={this.handleChangeOption}
+            required
           />{" "}
           {"4 opties"}
           <input
@@ -63,6 +67,7 @@ class Admin extends Component {
             value="8"
             checked={this.state.selectedOption === "8"}
             onChange={this.handleChangeOption}
+            required
           />{" "}
           {"8 opties"}
           <input type="submit" value="Stel vraag" />

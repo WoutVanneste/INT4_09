@@ -26,7 +26,7 @@ const Player = vraag => {
       case "slider":
         return <SliderInput />;
       default:
-        return <TweeKeuzeInput />;
+        return <p>De gamemaster heeft nog geen vraag doorgestuurd</p>;
     }
   };
   return (
