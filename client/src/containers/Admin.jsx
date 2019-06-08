@@ -19,6 +19,7 @@ class Admin extends Component {
     //   pathname: "/player",
     //   vraag: this.state.selectedOption
     // });
+
     console.log(this.state.selectedOption);
     socket.emit("question", this.state.selectedOption); // emit de value van de input.
   };
