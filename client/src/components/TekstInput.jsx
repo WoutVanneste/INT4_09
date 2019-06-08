@@ -1,43 +1,35 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 
-class TekstInput extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { tekst: "" };
-  }
+const TekstInput = () => {
+  // react hooks met een waarde en methode om deze aan te passen.
+  const initialState = "";
+  const [huidigAntwoord, setHuidigAntwoord] = useState(initialState);
 
-  handleSubmitForm = e => {
+  const handleSubmitForm = e => {
+    // Het antwoord wordt uit de state gehaald.
     e.preventDefault();
-    // Hieronder halen we de tekst uit de state om deze te versturen.
-    const tekst = this.state.tekst;
-    console.log(tekst);
-    this.props.history.push({
-      pathname: "/projectie",
-      antwoord: this.state.tekst
-    });
+    console.log(huidigAntwoord);
   };
 
-  handleChangeTekst = e => {
-    // Elke keer de tekst verandert wordt deze aangepast in de state.
-    this.setState({ tekst: e.currentTarget.value });
+  const handleChangeTekst = e => {
+    // Elke keer het antwoord verandert wordt deze aangepast in de state.
+    setHuidigAntwoord(e.currentTarget.value);
   };
 
-  render() {
-    return (
-      <>
-        <p>Tekstinput</p>
-        <form onSubmit={this.handleSubmitForm}>
-          <input
-            type="text"
-            onChange={this.handleChangeTekst}
-            value={this.state.tekst}
-          />
-          <input type="submit" value="Antwoorden" />
-        </form>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <p>Tekstinput</p>
+      <form onSubmit={handleSubmitForm}>
+        <input
+          type="text"
+          onChange={handleChangeTekst}
+          value={huidigAntwoord}
+        />
+        <input type="submit" value="Antwoorden" />
+      </form>
+    </>
+  );
+};
 
 export default withRouter(TekstInput);

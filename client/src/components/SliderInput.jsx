@@ -1,45 +1,36 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import React, { useState } from "react";
 
-class SliderInput extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { slider: "" };
-  }
+const SliderInput = () => {
+  // react hooks met een waarde en methode om deze aan te passen.
+  const initialState = "";
+  const [huidigAntwoord, setHuidigAntwoord] = useState(initialState);
 
-  handleSubmitForm = e => {
+  const handleSubmitForm = e => {
+    // Het antwoord wordt uit de state gehaald.
     e.preventDefault();
-    // Hieronder halen we de slider uit de state om deze te versturen.
-    const slider = this.state.slider;
-    console.log(slider);
-    this.props.history.push({
-      pathname: "/projectie",
-      antwoord: this.state.slider
-    });
+    console.log(huidigAntwoord);
   };
 
-  handleChangeSlider = e => {
-    // Elke keer de slider verandert wordt deze aangepast in de state.
-    this.setState({ slider: e.currentTarget.value });
+  const handleChangeSlider = e => {
+    // Elke keer het antwoord verandert wordt deze aangepast in de state.
+    setHuidigAntwoord(e.currentTarget.value);
   };
 
-  render() {
-    return (
-      <>
-        <p>Slider input</p>
-        <form onSubmit={this.handleSubmitForm}>
-          <input
-            type="range"
-            min="0"
-            max="100"
-            onChange={this.handleChangeSlider}
-            value={this.state.slider}
-          />
-          <input type="submit" value="Antwoorden" />
-        </form>
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <p>Slider input</p>
+      <form onSubmit={handleSubmitForm}>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          onChange={handleChangeSlider}
+          value={huidigAntwoord}
+        />
+        <input type="submit" value="Antwoorden" />
+      </form>
+    </>
+  );
+};
 
-export default withRouter(SliderInput);
+export default SliderInput;
