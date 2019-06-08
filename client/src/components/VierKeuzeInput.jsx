@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 
 class VierKeuzeInput extends Component {
   constructor(props) {
@@ -10,6 +11,10 @@ class VierKeuzeInput extends Component {
     // Hieronder halen we het antwoord uit de state om deze te versturen.
     const antwoord = this.state.huidigAntwoord;
     console.log(antwoord);
+    this.props.history.push({
+      pathname: "/projectie",
+      antwoord: this.state.huidigAntwoord
+    });
   };
 
   handleRadioChange = e => {
@@ -22,7 +27,7 @@ class VierKeuzeInput extends Component {
   render() {
     return (
       <>
-        <p>4 opties</p>
+        <p>De gamemaster gaf je 4 opties</p>
         <form onSubmit={this.handleSubmitForm}>
           <input
             type="radio"
@@ -63,4 +68,4 @@ class VierKeuzeInput extends Component {
   }
 }
 
-export default VierKeuzeInput;
+export default withRouter(VierKeuzeInput);

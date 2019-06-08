@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 
 class SliderInput extends Component {
   constructor(props) {
@@ -11,6 +12,10 @@ class SliderInput extends Component {
     // Hieronder halen we de slider uit de state om deze te versturen.
     const slider = this.state.slider;
     console.log(slider);
+    this.props.history.push({
+      pathname: "/projectie",
+      antwoord: this.state.slider
+    });
   };
 
   handleChangeSlider = e => {
@@ -37,4 +42,4 @@ class SliderInput extends Component {
   }
 }
 
-export default SliderInput;
+export default withRouter(SliderInput);

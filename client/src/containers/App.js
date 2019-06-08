@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch, withRouter } from "react-router-dom";
-// import styles from "./App.module.css";
+import styles from "./App.module.css";
 
 import Home from "./Home";
 import Admin from "./Admin";
@@ -11,7 +11,7 @@ import { ROUTES } from "../constants";
 class App extends Component {
   render() {
     return (
-      <main>
+      <main className={styles.layout}>
         <Switch>
           <Route path={ROUTES.home} exact strict component={Home} />
           <Route path={ROUTES.admin} component={Admin} />
