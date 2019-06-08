@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 
 class TekstInput extends Component {
   constructor(props) {
@@ -11,6 +12,10 @@ class TekstInput extends Component {
     // Hieronder halen we de tekst uit de state om deze te versturen.
     const tekst = this.state.tekst;
     console.log(tekst);
+    this.props.history.push({
+      pathname: "/projectie",
+      antwoord: this.state.tekst
+    });
   };
 
   handleChangeTekst = e => {
@@ -35,4 +40,4 @@ class TekstInput extends Component {
   }
 }
 
-export default TekstInput;
+export default withRouter(TekstInput);
