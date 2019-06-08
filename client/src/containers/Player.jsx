@@ -12,7 +12,7 @@ const Player = vraag => {
   const aantalKeuzes = vraag.location.vraag;
 
   //op basis van het aantal opties wordt een andere component getoond met het juiste aantal opties.
-  //als er niks is meegegeven, zijn er standaard 2 opties voor.
+  //als er niks is meegegeven, komt er een empty state melding.
   const keuzeSwitch = () => {
     switch (aantalKeuzes) {
       case "2":
