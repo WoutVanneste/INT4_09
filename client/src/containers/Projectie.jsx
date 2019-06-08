@@ -7,25 +7,34 @@ class Projectie extends Component {
   //const antwoord = antwoordPlayer.location.antwoord;
   constructor(props) {
     super(props);
-    this.state = { antwoord: "" };
+    this.state = { antwoorden: [] };
   }
 
   componentDidMount() {
     // Vangt de emit op
     socket.on("answer", answer => {
       console.log(`socket message`, answer);
-      this.setState({ antwoord: answer });
+      //this.setState({ antwoorden: answer });
+
+      this.setState({
+        antwoorden: [...this.state.antwoorden, answer]
+      });
       // Verander de state zodat keuzeswitch opnieuw wordt gerenderd
     });
   }
 
   render() {
-    const { antwoord } = this.state;
+    const { antwoorden } = this.state;
     return (
       <>
         <Menu />
         <p className={styles.title}>Projectie container</p>
-        <p>Het antwoord van de speler was: {antwoord}</p>
+        <p>De verschillende antwoorden waren:</p>
+        <ul>
+          {antwoorden.map(antwoord => (
+            <li key={antwoord}>{antwoord}</li>
+          ))}
+        </ul>
       </>
     );
   }
