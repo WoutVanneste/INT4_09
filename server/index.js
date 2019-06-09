@@ -2,67 +2,61 @@ const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
 const axios = require("axios");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const cookieParser = require("cookie-parser");
+require("dotenv").config();
 
 const port = process.env.PORT || 4000;
 const index = require("./app/routes/index");
 
+mongoose
+  .connect(process.env.DB_URL, {
+    useNewUrlParser: true,
+    useFindAndModify: false,
+    useCreateIndex: true
+  })
+  .then(() => console.log("db connected"))
+  .catch(e => {
+    console.log("Error, exiting", e);
+    process.exit();
+  });
+
 const app = express();
 app.use(index);
 
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+require("./app/routes/questions.routes.js")(app);
+require("./app/routes/answers.routes.js")(app);
+
 const server = http.createServer(app);
 
-const io = socketIo(server); // < Interesting!
-
-// const getApiAndEmit = async socket => {
-//   try {
-//     const res = await axios.get(
-//       "https://api.darksky.net/forecast/80020a30b58f7a737643c06fcada38de/37.8267,-122.4233"
-//     ); // Getting the data from DarkSky
-//     socket.emit("FromAPI", res.data.currently.temperature); // Emitting a new message. It will be consumed by the client
-//   } catch (error) {
-//     console.error(`Error: ${error.code}`);
-//   }
-// };
+const io = socketIo(server); // initialiseer socket
 
 io.on("connection", socket => {
+  // User connected
   console.log("a user connected");
   socket.on("disconnect", () => {
     console.log("user disconnected");
   });
-});
-
-// io.on("connection", socket => {
-//   socket.on("number update", msg => {
-//     io.emit("number update", msg);
-//   });
-// });
-
-io.on("connection", socket => {
+  // Vraag doorsturen
   socket.on("question", msg => {
     console.log(`question emit`);
     io.emit("question", msg);
   });
+  // Antwoord doorsturen
   socket.on("answer", msg => {
     console.log(`answer emit`);
     io.emit("answer", msg);
   });
+  // Projectie clearen
   socket.on("clear", msg => {
     console.log(`clear emit`);
     io.emit("clear", msg);
   });
 });
-
-// let interval;
-
-// io.on("connection", socket => {
-//   console.log("New client connected");
-//   if (interval) {
-//     clearInterval(interval);
-//   }
-//   interval = setInterval(() => getApiAndEmit(socket), 10000);
-//   socket.on("disconnect", () => {
-//     console.log("Client disconnected");
-//   });
-// });
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
