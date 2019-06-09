@@ -12,8 +12,9 @@
 }
 
 .player_form{
+  margin: 7.5rem 0;
   width: 100%;
-  grid-gap: 2rem;
+  grid-gap: 7.5rem;
   display: grid;
   justify-items: center;
   grid-template-areas: 'wrapper'

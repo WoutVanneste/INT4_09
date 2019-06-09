@@ -46,7 +46,7 @@ class Admin extends Component {
         <Menu />
         <p className="title">Admin container</p>
         <p className={styles.admin_keuze}>
-          Kies welk soort vraag de spelers krijgen:
+          Kies welk soort vraag moeten de spelers krijgen?
         </p>
         <form
           action=""

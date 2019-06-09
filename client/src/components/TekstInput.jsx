@@ -23,27 +23,20 @@ const TekstInput = () => {
   };
 
   return (
-    <>
-      <p>Tekstinput</p>
-      <form onSubmit={handleSubmitForm} className={styles.player_form}>
-        <input
-          type="text"
-          onChange={handleChangeTekst}
-          value={huidigAntwoord}
-        />
-        <input
-          type="submit"
-          value="Antwoorden"
-          className={
-            styles.player_submit +
-            " " +
-            (huidigAntwoord === ""
-              ? buttonStyles.submit_form_empty
-              : buttonStyles.submit_form)
-          }
-        />
-      </form>
-    </>
+    <form onSubmit={handleSubmitForm} className={styles.player_form}>
+      <input type="text" onChange={handleChangeTekst} value={huidigAntwoord} />
+      <input
+        type="submit"
+        value="Antwoorden"
+        className={
+          styles.player_submit +
+          " " +
+          (huidigAntwoord === ""
+            ? buttonStyles.submit_form_empty
+            : buttonStyles.submit_form)
+        }
+      />
+    </form>
   );
 };
 

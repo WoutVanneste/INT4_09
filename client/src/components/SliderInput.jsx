@@ -22,29 +22,26 @@ const SliderInput = () => {
   };
 
   return (
-    <>
-      <p>Slider input</p>
-      <form onSubmit={handleSubmitForm} className={styles.player_form}>
-        <input
-          type="range"
-          min="0"
-          max="100"
-          onChange={handleChangeSlider}
-          value={huidigAntwoord}
-        />
-        <input
-          type="submit"
-          value="Antwoorden"
-          className={
-            styles.player_submit +
-            " " +
-            (huidigAntwoord === ""
-              ? buttonStyles.submit_form_empty
-              : buttonStyles.submit_form)
-          }
-        />
-      </form>
-    </>
+    <form onSubmit={handleSubmitForm} className={styles.player_form}>
+      <input
+        type="range"
+        min="0"
+        max="100"
+        onChange={handleChangeSlider}
+        value={huidigAntwoord}
+      />
+      <input
+        type="submit"
+        value="Antwoorden"
+        className={
+          styles.player_submit +
+          " " +
+          (huidigAntwoord === ""
+            ? buttonStyles.submit_form_empty
+            : buttonStyles.submit_form)
+        }
+      />
+    </form>
   );
 };
 
