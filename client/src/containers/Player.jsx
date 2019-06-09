@@ -7,13 +7,19 @@ import TekstInput from "../components/TekstInput";
 import SliderInput from "../components/SliderInput";
 import Wachtscherm from "../components/Wachtscherm";
 import TijdOp from "../components/TijdOp";
+import Geantwoord from "../components/Geantwoord";
 import styles from "./Player.module.css";
 import { socket } from "./App.js";
 
 class Player extends Component {
   constructor(props) {
     super(props);
-    this.state = { aantalKeuzes: "", counter: 10 };
+    this.state = {
+      aantalKeuzes: "",
+      counter: 10
+    };
+
+    this.antwoordVersturen = this.antwoordVersturen.bind(this);
   }
 
   componentDidMount() {
@@ -25,22 +31,23 @@ class Player extends Component {
       // timer wordt opnieuw op 10 gezet door een nieuwe vraag
       this.setState({ aantalKeuzes: type, counter: 10 });
 
-      //timer start als je op player komt.
-      // de timer css klopt nog niet volledig,
-      // aangezien we stoppen na 10s zou de css aangepast moeten worden op dat moment.
+      // timer start als je op player komt.
+      // de timer css klopt nog niet volledig
       this.mijnInterval = setInterval(() => {
         this.setState(prevState => ({
           counter: prevState.counter >= 1 ? prevState.counter - 1 : 0
         }));
-        console.log("ik doe iets");
         if (this.state.counter === 0) {
           clearInterval(this.mijnInterval);
-
+          // na 10 seconden krijgt speler scherm 'te laat' te zien
           this.setState({ aantalKeuzes: "te laat" });
-          console.log("timer gestopt");
         }
       }, 1000);
     });
+  }
+
+  antwoordVersturen() {
+    this.setState({ aantalKeuzes: "op tijd" });
   }
 
   //op basis van het aantal opties wordt een andere component getoond met het juiste aantal opties.
@@ -69,7 +76,7 @@ class Player extends Component {
                   </svg>
                 </div>
               </div>
-              <TweeKeuzeInput />
+              <TweeKeuzeInput verstuurAntwoord={this.antwoordVersturen} />
             </>
           );
         case "4":
@@ -85,7 +92,7 @@ class Player extends Component {
                   </svg>
                 </div>
               </div>
-              <VierKeuzeInput />
+              <VierKeuzeInput verstuurAntwoord={this.antwoordVersturen} />
             </>
           );
         case "8":
@@ -101,7 +108,7 @@ class Player extends Component {
                   </svg>
                 </div>
               </div>
-              <AchtKeuzeInput />
+              <AchtKeuzeInput verstuurAntwoord={this.antwoordVersturen} />
             </>
           );
         case "tekst":
@@ -119,7 +126,7 @@ class Player extends Component {
                   </svg>
                 </div>
               </div>
-              <TekstInput />
+              <TekstInput verstuurAntwoord={this.antwoordVersturen} />
             </>
           );
         case "slider":
@@ -137,13 +144,15 @@ class Player extends Component {
                   </svg>
                 </div>
               </div>
-              <SliderInput />
+              <SliderInput verstuurAntwoord={this.antwoordVersturen} />
             </>
           );
         case "wachtscherm":
           return <Wachtscherm />;
         case "te laat":
           return <TijdOp />;
+        case "op tijd":
+          return <Geantwoord />;
         default:
           return (
             <p className={styles.player_melding}>
