@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { socket } from "../containers/App.js";
+import buttonStyles from "../styles/buttons.module.css";
+import styles from "./form.module.css";
 
 const SliderInput = () => {
   // react hooks met een waarde en methode om deze aan te passen.
@@ -22,7 +24,7 @@ const SliderInput = () => {
   return (
     <>
       <p>Slider input</p>
-      <form onSubmit={handleSubmitForm}>
+      <form onSubmit={handleSubmitForm} className={styles.player_form}>
         <input
           type="range"
           min="0"
@@ -30,7 +32,17 @@ const SliderInput = () => {
           onChange={handleChangeSlider}
           value={huidigAntwoord}
         />
-        <input type="submit" value="Antwoorden" />
+        <input
+          type="submit"
+          value="Antwoorden"
+          className={
+            styles.player_submit +
+            " " +
+            (huidigAntwoord === ""
+              ? buttonStyles.submit_form_empty
+              : buttonStyles.submit_form)
+          }
+        />
       </form>
     </>
   );

@@ -28,7 +28,7 @@ class Projectie extends Component {
     return (
       <>
         <Menu />
-        <p className={styles.title}>Projectie container</p>
+        <p className="title">Projectie container</p>
         <p>De verschillende antwoorden waren:</p>
         <ul>
           {antwoorden.map(antwoord => (

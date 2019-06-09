@@ -41,79 +41,89 @@ class Admin extends Component {
     return (
       <>
         <Menu />
-        <p className={styles.title}>Admin container</p>
-        <p>Kies welk soort vraag de spelers krijgen:</p>
-        <form action="" onSubmit={this.handleSubmitForm}>
-          <label htmlFor="sliderInput" className={radioStyles.radio_label}>
-            <input
-              id="sliderInput"
-              type="radio"
-              name="keuze"
-              value="slider"
-              checked={this.state.selectedOption === "slider"}
-              onChange={this.handleChangeOption}
-              required
-              className={radioStyles.radio_input}
-            />
-            <span className={radioStyles.radio_span}>slider</span>
-          </label>
-          <label htmlFor="tekstInput" className={radioStyles.radio_label}>
-            <input
-              id="tekstInput"
-              type="radio"
-              name="keuze"
-              value="tekst"
-              checked={this.state.selectedOption === "tekst"}
-              onChange={this.handleChangeOption}
-              required
-              className={radioStyles.radio_input}
-            />
-            <span className={radioStyles.radio_span}>tekst</span>
-          </label>
-          <label htmlFor="2keuzes" className={radioStyles.radio_label}>
-            <input
-              id="2keuzes"
-              type="radio"
-              name="keuze"
-              value="2"
-              checked={this.state.selectedOption === "2"}
-              onChange={this.handleChangeOption}
-              required
-              className={radioStyles.radio_input}
-            />
-            <span className={radioStyles.radio_span}>2 opties</span>
-          </label>
-          <label htmlFor="4keuzes" className={radioStyles.radio_label}>
-            <input
-              id="4keuzes"
-              type="radio"
-              name="keuze"
-              value="4"
-              checked={this.state.selectedOption === "4"}
-              onChange={this.handleChangeOption}
-              required
-              className={radioStyles.radio_input}
-            />
-            <span className={radioStyles.radio_span}>4 opties</span>
-          </label>
-          <label htmlFor="8keuzes" className={radioStyles.radio_label}>
-            <input
-              id="8keuzes"
-              type="radio"
-              name="keuze"
-              value="8"
-              checked={this.state.selectedOption === "8"}
-              onChange={this.handleChangeOption}
-              required
-              className={radioStyles.radio_input}
-            />
-            <span className={radioStyles.radio_span}>8 opties</span>
-          </label>
+        <p className="title">Admin container</p>
+        <p className={styles.admin_keuze}>
+          Kies welk soort vraag de spelers krijgen:
+        </p>
+        <form
+          action=""
+          onSubmit={this.handleSubmitForm}
+          className={styles.admin_form}
+        >
+          <div className={styles.admin_input_wrapper}>
+            <label htmlFor="sliderInput" className={radioStyles.radio_label}>
+              <input
+                id="sliderInput"
+                type="radio"
+                name="keuze"
+                value="slider"
+                checked={this.state.selectedOption === "slider"}
+                onChange={this.handleChangeOption}
+                required
+                className={radioStyles.radio_input}
+              />
+              <span className={radioStyles.radio_span}>slider</span>
+            </label>
+            <label htmlFor="tekstInput" className={radioStyles.radio_label}>
+              <input
+                id="tekstInput"
+                type="radio"
+                name="keuze"
+                value="tekst"
+                checked={this.state.selectedOption === "tekst"}
+                onChange={this.handleChangeOption}
+                required
+                className={radioStyles.radio_input}
+              />
+              <span className={radioStyles.radio_span}>tekst</span>
+            </label>
+            <label htmlFor="2keuzes" className={radioStyles.radio_label}>
+              <input
+                id="2keuzes"
+                type="radio"
+                name="keuze"
+                value="2"
+                checked={this.state.selectedOption === "2"}
+                onChange={this.handleChangeOption}
+                required
+                className={radioStyles.radio_input}
+              />
+              <span className={radioStyles.radio_span}>2 opties</span>
+            </label>
+            <label htmlFor="4keuzes" className={radioStyles.radio_label}>
+              <input
+                id="4keuzes"
+                type="radio"
+                name="keuze"
+                value="4"
+                checked={this.state.selectedOption === "4"}
+                onChange={this.handleChangeOption}
+                required
+                className={radioStyles.radio_input}
+              />
+              <span className={radioStyles.radio_span}>4 opties</span>
+            </label>
+            <label htmlFor="8keuzes" className={radioStyles.radio_label}>
+              <input
+                id="8keuzes"
+                type="radio"
+                name="keuze"
+                value="8"
+                checked={this.state.selectedOption === "8"}
+                onChange={this.handleChangeOption}
+                required
+                className={radioStyles.radio_input}
+              />
+              <span className={radioStyles.radio_span}>8 opties</span>
+            </label>
+          </div>
           <input
             className={
-              this.state.selectedOption === ""
+              styles.admin_submit +
+              " " +
+              (this.state.selectedOption === ""
                 ? buttonStyles.submit_form_empty
-                : buttonStyles.submit_form
+                : buttonStyles.submit_form)
             }
             type="submit"
             value="Verstuur vraag"

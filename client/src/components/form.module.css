@@ -1,0 +1,22 @@
+.player_submit{
+  grid-area: submit;
+}
+
+.player_input_wrapper{
+  grid-area: wrapper;
+  display: grid;
+  width: 100%;
+
+  justify-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+}
+
+.player_form{
+  width: 100%;
+  grid-gap: 2rem;
+  display: grid;
+  justify-items: center;
+  grid-template-areas: 'wrapper'
+  'submit';
+  grid-template-rows: repeat(2, max-content);
+}

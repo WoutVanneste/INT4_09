@@ -46,14 +46,18 @@ class Player extends Component {
         case "wachtscherm":
           return <Wachtscherm />;
         default:
-          return <p>De gamemaster heeft nog geen vraag doorgestuurd</p>;
+          return (
+            <p className={styles.player_melding}>
+              De gamemaster heeft nog geen vraag doorgestuurd
+            </p>
+          );
       }
     };
 
     return (
       <>
         <Menu />
-        <p className={styles.title}>Player container</p>
+        <p className="title">Player container</p>
         {keuzeSwitch()}
       </>
     );

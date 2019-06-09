@@ -1,4 +1,5 @@
 @import "./reset.css";
+@import "./colors.module.css";
 
 html {
   font-size: 62.5%;
@@ -11,6 +12,17 @@ html {
 
 
 body {
-  color: white;
-  background-color: #02002C;
+  color: var(--white-color);;
+  font-family: adobe-caslon-pro;
+  background-image: radial-gradient(35% 60%, var(--blue-color) 35%, var(--dark-color) 60%);
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+  padding: 5rem;
+}
+
+.title{
+  font-size: 3rem;
+  color: var(--white-color);
 }

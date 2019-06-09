@@ -1,0 +1,11 @@
+:global(:root){
+  --light-color: #3E3D5E;
+  --ultralight-color: #BBD5ED;
+  --dark-color: #0E0D36;
+  --blue-color: #110E5C;
+  --ultradark-color: #02002C;
+  --orange-color: #F7B32B;
+  --darkorange-color: #876E51;
+  --white-color: #fff;
+  --black-color: #000;
+}

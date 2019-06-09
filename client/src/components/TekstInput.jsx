@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { withRouter } from "react-router-dom";
 import { socket } from "../containers/App.js";
+import buttonStyles from "../styles/buttons.module.css";
+import styles from "./form.module.css";
 
 const TekstInput = () => {
   // react hooks met een waarde en methode om deze aan te passen.
@@ -23,13 +25,23 @@ const TekstInput = () => {
   return (
     <>
       <p>Tekstinput</p>
-      <form onSubmit={handleSubmitForm}>
+      <form onSubmit={handleSubmitForm} className={styles.player_form}>
         <input
           type="text"
           onChange={handleChangeTekst}
           value={huidigAntwoord}
         />
-        <input type="submit" value="Antwoorden" />
+        <input
+          type="submit"
+          value="Antwoorden"
+          className={
+            styles.player_submit +
+            " " +
+            (huidigAntwoord === ""
+              ? buttonStyles.submit_form_empty
+              : buttonStyles.submit_form)
+          }
+        />
       </form>
     </>
   );
