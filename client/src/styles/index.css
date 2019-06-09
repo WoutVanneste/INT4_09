@@ -14,7 +14,7 @@ html {
 body {
   color: var(--white-color);;
   font-family: adobe-caslon-pro;
-  background-image: radial-gradient(35% 60%, var(--blue-color) 35%, var(--dark-color) 60%);
+  background-image: radial-gradient(200% 50%, var(--blue-color) 15%, var(--dark-color) 60%);
   background-size: cover;
   background-repeat: no-repeat;
   width: 100vw;
