@@ -4,11 +4,15 @@ import styles from "./Admin.module.css";
 import radioStyles from "../styles/radioButtons.module.css";
 import buttonStyles from "../styles/buttons.module.css";
 import { socket } from "./App.js";
+import { inject, observer } from "mobx-react";
 
 class Admin extends Component {
+  currentQuestion = 0;
+
   constructor(props) {
     super(props);
     this.state = { selectedOption: "" };
+    console.log(`props`, props.questionStore.questions);
   }
   handleSubmitForm = e => {
     //hier wordt de gebruiker doorgestuurd naar de player pagina, we geven ook het aantal opties mee voor de vraag.
@@ -41,6 +45,8 @@ class Admin extends Component {
   }
 
   render() {
+    const { questions } = this.props.questionStore.questions;
+
     return (
       <>
         <Menu />
@@ -54,7 +60,7 @@ class Admin extends Component {
           className={styles.admin_form}
         >
           <div className={styles.admin_input_wrapper}>
-            <label htmlFor="sliderInput" className={radioStyles.radio_label}>
+            {/* <label htmlFor="sliderInput" className={radioStyles.radio_label}>
               <input
                 id="sliderInput"
                 type="radio"
@@ -118,7 +124,32 @@ class Admin extends Component {
                 className={radioStyles.radio_input}
               />
               <span className={radioStyles.radio_span}>8 opties</span>
-            </label>
+            </label> */}
+            {this.props.questionStore.questions.length > 0 ? (
+              this.props.questionStore.questions.map(question => (
+                <label
+                  htmlFor={question.id}
+                  className={radioStyles.radio_label}
+                  key={question.id}
+                >
+                  <input
+                    id={question.id}
+                    type="radio"
+                    name="keuze"
+                    value={question.type}
+                    checked={this.state.selectedOption === question.type}
+                    onChange={this.handleChangeOption}
+                    required
+                    className={radioStyles.radio_input}
+                  />
+                  <span className={radioStyles.radio_span}>
+                    {question.question}
+                  </span>
+                </label>
+              ))
+            ) : (
+              <p>Vragen aan het ophalen...</p>
+            )}
           </div>
           <input
             className={
@@ -149,4 +180,4 @@ class Admin extends Component {
   }
 }
 
-export default Admin;
+export default inject(`questionStore`)(observer(Admin));

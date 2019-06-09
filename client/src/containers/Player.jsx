@@ -111,7 +111,7 @@ class Player extends Component {
               <AchtKeuzeInput verstuurAntwoord={this.antwoordVersturen} />
             </>
           );
-        case "tekst":
+        case "text":
           return (
             <>
               <div className={styles.vraag_wrapper}>

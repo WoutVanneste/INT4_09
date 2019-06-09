@@ -4,17 +4,24 @@ import Api from "../api";
 
 configure({ enforceActions: `observed` });
 class QuestionStore {
-  // drinks = [];
+  questions = [];
 
   constructor(rootStore) {
     this.rootStore = rootStore;
     this.api = new Api(`questions`);
-    // this.getAll();
+    this.getAll();
   }
 
-  // getAll = () => {
-  //   this.api.getAll().then(d => d.forEach(this._addDrink));
-  // };
+  getAll = () => {
+    this.api.getAll().then(d => d.forEach(this.addQuestionsToArray));
+  };
+
+  addQuestionsToArray = data => {
+    this.questions.push(data);
+    //console.log(`functie werkt`);
+    //console.log(data);
+    console.log(this.questions);
+  };
 
   // addDrink = data => {
   //   const newDrink = new Drink();
@@ -44,11 +51,9 @@ class QuestionStore {
   // };
 }
 
-// decorate(DrinkStore, {
-//   drinks: observable,
-//   addDrink: action,
-//   deleteDrink: action,
-//   updateDrink: action
-// });
+decorate(QuestionStore, {
+  questions: observable,
+  addQuestionsToArray: action
+});
 
 export default QuestionStore;
