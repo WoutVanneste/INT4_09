@@ -8,6 +8,7 @@ class AchtKeuzeInput extends Component {
   constructor(props) {
     super(props);
     this.state = { huidigAntwoord: "" };
+    console.log(props);
   }
 
   handleSubmitForm = e => {
@@ -25,7 +26,7 @@ class AchtKeuzeInput extends Component {
     return (
       <form onSubmit={this.handleSubmitForm} className={styles.player_form}>
         <div className={styles.player_input_wrapper}>
-          <label htmlFor="optie1" className={radioStyles.radio_label}>
+          {/* <label htmlFor="optie1" className={radioStyles.radio_label}>
             <input
               type="radio"
               id="optie1"
@@ -120,7 +121,29 @@ class AchtKeuzeInput extends Component {
               className={radioStyles.radio_input}
             />
             <span className={radioStyles.radio_span}>optie 8</span>
-          </label>
+          </label> */}
+          {this.props.question.options.length > 0 ? (
+            this.props.question.options.map((question, index) => (
+              <label
+                htmlFor={index}
+                className={radioStyles.radio_label}
+                key={index}
+              >
+                <input
+                  id={index}
+                  type="radio"
+                  name="keuze"
+                  value={question}
+                  checked={this.state.huidigAntwoord === question}
+                  onChange={this.handleChangeRadio}
+                  className={radioStyles.radio_input}
+                />
+                <span className={radioStyles.radio_span}>{question}</span>
+              </label>
+            ))
+          ) : (
+            <p>Antwoorden aan het ophalen...</p>
+          )}
         </div>
         <input
           className={
