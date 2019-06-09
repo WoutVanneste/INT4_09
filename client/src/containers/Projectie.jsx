@@ -12,6 +12,10 @@ class Projectie extends Component {
 
   componentDidMount() {
     // Vangt de emit op
+    socket.on("clear", answer => {
+      this.setState({ antwoorden: [] });
+    });
+
     socket.on("answer", answer => {
       console.log(`socket message`, answer);
       //this.setState({ antwoorden: answer });

@@ -17,6 +17,7 @@ class Admin extends Component {
     e.preventDefault();
     console.log(this.state.selectedOption);
     socket.emit("question", this.state.selectedOption); // emit de value van de input.
+    socket.emit("clear", true);
   };
 
   handleChangeOption = e => {
@@ -26,8 +27,10 @@ class Admin extends Component {
 
   handleClickButton = e => {
     //spelers krijgen een wachtscherm te zien.
+    e.preventDefault();
     this.setState({ selectedOption: "wachtscherm" });
-    socket.emit("question", this.state.selectedOption);
+    console.log(this.state);
+    socket.emit("question", "wachtscherm");
   };
 
   componentDidMount() {

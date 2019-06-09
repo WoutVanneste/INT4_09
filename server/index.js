@@ -42,12 +42,13 @@ io.on("connection", socket => {
     console.log(`question emit`);
     io.emit("question", msg);
   });
-});
-
-io.on("connection", socket => {
   socket.on("answer", msg => {
     console.log(`answer emit`);
     io.emit("answer", msg);
+  });
+  socket.on("clear", msg => {
+    console.log(`clear emit`);
+    io.emit("clear", msg);
   });
 });
 
