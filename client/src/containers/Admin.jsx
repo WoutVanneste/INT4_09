@@ -133,13 +133,17 @@ class Admin extends Component {
             disabled={this.state.selectedOption === "" ? true : false}
           />
         </form>
-        <p>Laat de spelers maar weer wachten:</p>
-        <button
-          className={buttonStyles.submit_form}
-          onClick={this.handleClickButton}
-        >
-          Wachtscherm
-        </button>
+        <div className={styles.wachtscherm_wrapper}>
+          <p className={styles.wachtscherm_tekst}>
+            Laat de spelers maar weer wachten
+          </p>
+          <button
+            className={buttonStyles.submit_form}
+            onClick={this.handleClickButton}
+          >
+            Wachtscherm
+          </button>
+        </div>
       </>
     );
   }

@@ -6,6 +6,7 @@ import AchtKeuzeInput from "../components/AchtKeuzeInput";
 import TekstInput from "../components/TekstInput";
 import SliderInput from "../components/SliderInput";
 import Wachtscherm from "../components/Wachtscherm";
+import TijdOp from "../components/TijdOp";
 import styles from "./Player.module.css";
 import { socket } from "./App.js";
 
@@ -34,6 +35,8 @@ class Player extends Component {
         console.log("ik doe iets");
         if (this.state.counter === 0) {
           clearInterval(this.mijnInterval);
+
+          this.setState({ aantalKeuzes: "te laat" });
           console.log("timer gestopt");
         }
       }, 1000);
@@ -139,6 +142,8 @@ class Player extends Component {
           );
         case "wachtscherm":
           return <Wachtscherm />;
+        case "te laat":
+          return <TijdOp />;
         default:
           return (
             <p className={styles.player_melding}>
