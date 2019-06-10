@@ -10,13 +10,15 @@ import TijdOp from "../components/TijdOp";
 import Geantwoord from "../components/Geantwoord";
 import styles from "./Player.module.css";
 import { socket } from "./App.js";
+import QuestionStore from "../store/QuestionStore";
 
 class Player extends Component {
   constructor(props) {
     super(props);
     this.state = {
       aantalKeuzes: "",
-      counter: 10
+      counter: 10,
+      taal: this.props.location.state.taal
     };
 
     this.antwoordVersturen = this.antwoordVersturen.bind(this);
@@ -56,6 +58,35 @@ class Player extends Component {
   //via vraag.location.vraag kunnen we de data die we meegaven vanuit de admin opvragen, zo weten we hoeveel opties er zijn voor de vraag.
   render() {
     const { aantalKeuzes, counter } = this.state;
+    const taalSwitch = () => {
+      switch (this.state.taal) {
+        case "nl":
+          return (
+            <p className={styles.player_melding}>
+              De gamemaster heeft nog geen vraag doorgestuurd
+            </p>
+          );
+        case "fr":
+          return (
+            <p className={styles.player_melding}>
+              Le gamemaster n'a pas encore envoyé de question
+            </p>
+          );
+        case "en":
+          return (
+            <p className={styles.player_melding}>
+              The gamemaster has not yet forwarded a question
+            </p>
+          );
+
+        default:
+          return (
+            <p className={styles.player_melding}>
+              De gamemaster heeft nog geen vraag doorgestuurd
+            </p>
+          );
+      }
+    };
     const keuzeSwitch = () => {
       switch (aantalKeuzes) {
         case "2":
@@ -154,21 +185,11 @@ class Player extends Component {
         case "op tijd":
           return <Geantwoord />;
         default:
-          return (
-            <p className={styles.player_melding}>
-              De gamemaster heeft nog geen vraag doorgestuurd
-            </p>
-          );
+          return taalSwitch();
       }
     };
 
-    return (
-      <>
-        <Menu />
-        <p className="title">Player container</p>
-        {keuzeSwitch()}
-      </>
-    );
+    return <>{keuzeSwitch()}</>;
   }
 }
 
