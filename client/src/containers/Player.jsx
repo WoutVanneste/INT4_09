@@ -60,9 +60,10 @@ class Player extends Component {
     console.log(`antwoord verstuurd`);
     this.setState({ aantalKeuzes: "op tijd" });
     console.log(this.props);
+
     this.props.answerStore.addAnswerToDatabase({
       question: "dit is een vraag",
-      answers: [{ id: "12", answer: "dit is mijn antwoord" }]
+      answers: [{ answer: "dit is mijn antwoord" }]
     });
   }
 
@@ -135,44 +136,6 @@ class Player extends Component {
               />
             </>
           );
-        // case "4":
-        //   return (
-        //     <>
-        //       <div className={styles.vraag_wrapper}>
-        //         <p className={styles.vraag}>{this.state.question.question}</p>
-
-        //         <div className={styles.timer_wrapper}>
-        //           <span className={styles.timer}>{counter}</span>
-        //           <svg className={styles.circle_svg}>
-        //             <circle r="18" cx="20" cy="20" className={styles.circle} />
-        //           </svg>
-        //         </div>
-        //       </div>
-        //       <VierKeuzeInput
-        //         verstuurAntwoord={this.antwoordVersturen}
-        //         question={this.state.question}
-        //       />
-        //     </>
-        //   );
-        // case "8":
-        //   return (
-        //     <>
-        //       <div className={styles.vraag_wrapper}>
-        //         <p className={styles.vraag}>{this.state.question.question}</p>
-
-        //         <div className={styles.timer_wrapper}>
-        //           <span className={styles.timer}>{counter}</span>
-        //           <svg className={styles.circle_svg}>
-        //             <circle r="18" cx="20" cy="20" className={styles.circle} />
-        //           </svg>
-        //         </div>
-        //       </div>
-        //       <AchtKeuzeInput
-        //         verstuurAntwoord={this.antwoordVersturen}
-        //         question={this.state.question}
-        //       />
-        //     </>
-        //   );
         case "text":
           return (
             <>

@@ -18,23 +18,19 @@ class Projectie extends Component {
     });
 
     socket.on("answer", answer => {
-      console.log(`socket message`, answer);
-      //this.setState({ antwoorden: answer });
-
+      // antwoord toevoegen aan de state indien een nieuw antwoord binnekomt
       this.setState({
         antwoorden: [...this.state.antwoorden, answer]
       });
-      // Verander de state zodat keuzeswitch opnieuw wordt gerenderd
     });
   }
 
   handleJoinRoom = e => {
     e.preventDefault();
-    console.log(this.roomRef.current.value);
+    // Room joinen
     if (this.roomRef.current.value) {
       socket.emit("join", this.roomRef.current.value);
       this.setState({ roomId: this.roomRef.current.value });
-      //props.joinedRoom(this.roomRef.current.value);
     }
   };
 

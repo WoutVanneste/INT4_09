@@ -25,54 +25,6 @@ class VierKeuzeInput extends Component {
     return (
       <form onSubmit={this.handleSubmitForm} className={styles.player_form}>
         <div className={styles.player_input_wrapper}>
-          {/* <label htmlFor="optie1" className={radioStyles.radio_label}>
-            <input
-              type="radio"
-              id="optie1"
-              name="keuze"
-              value="optie 1"
-              checked={this.state.huidigAntwoord === "optie 1"}
-              onChange={this.handleChangeRadio}
-              className={radioStyles.radio_input}
-            />
-            <span className={radioStyles.radio_span}>optie 1</span>
-          </label>
-          <label htmlFor="optie2" className={radioStyles.radio_label}>
-            <input
-              type="radio"
-              id="optie2"
-              name="keuze"
-              value="optie 2"
-              checked={this.state.huidigAntwoord === "optie 2"}
-              onChange={this.handleChangeRadio}
-              className={radioStyles.radio_input}
-            />
-            <span className={radioStyles.radio_span}>optie 2</span>
-          </label>
-          <label htmlFor="optie3" className={radioStyles.radio_label}>
-            <input
-              type="radio"
-              id="optie3"
-              name="keuze"
-              value="optie 3"
-              checked={this.state.huidigAntwoord === "optie 3"}
-              onChange={this.handleChangeRadio}
-              className={radioStyles.radio_input}
-            />
-            <span className={radioStyles.radio_span}>optie 3</span>
-          </label>
-          <label htmlFor="optie4" className={radioStyles.radio_label}>
-            <input
-              type="radio"
-              id="optie4"
-              name="keuze"
-              value="optie 4"
-              checked={this.state.huidigAntwoord === "optie 4"}
-              onChange={this.handleChangeRadio}
-              className={radioStyles.radio_input}
-            />
-            <span className={radioStyles.radio_span}>optie 4</span>
-          </label> */}
           {this.props.question.options.length > 0 ? (
             this.props.question.options.map((question, index) => (
               <label

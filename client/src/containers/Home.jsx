@@ -21,8 +21,6 @@ const Home = ({ questionStore, history }) => {
         taal = "nl";
         break;
     }
-    // questionStore.setLanguage(taal);
-    // history.push(ROUTES.player);
   };
   return (
     <>

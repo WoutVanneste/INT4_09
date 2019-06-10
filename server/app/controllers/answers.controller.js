@@ -48,7 +48,7 @@ exports.findOne = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
-  if (!req.body.answer) {
+  if (!req.body.answers) {
     return res.status(400).send("answer mag niet leeg zijn");
   }
 
