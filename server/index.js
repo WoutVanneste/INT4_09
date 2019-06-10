@@ -38,6 +38,11 @@ const io = socketIo(server); // initialiseer socket
 
 io.on("connection", socket => {
   console.log(`socket id`, socket.id);
+  // Join a custom room created by the admin
+  socket.on("join", room => {
+    socket.join(room);
+    console.log("room: " + room + " joined by:" + socket.id);
+  });
   // User connected
   console.log("a user connected");
   socket.on("disconnect", () => {

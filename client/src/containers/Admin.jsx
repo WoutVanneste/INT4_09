@@ -9,7 +9,7 @@ import { inject, observer } from "mobx-react";
 class Admin extends Component {
   constructor(props) {
     super(props);
-    this.state = { selectedOption: 0 };
+    this.state = { selectedOption: 0, roomName: "" };
     console.log(`props`, props.questionStore.questions);
   }
   handleSubmitForm = e => {
@@ -41,6 +41,17 @@ class Admin extends Component {
     console.log(this.state.selectedOption);
   };
 
+  handleCreateRoom = e => {
+    e.preventDefault();
+    console.log(this.state.roomName);
+    socket.emit("join", this.state.roomName);
+  };
+
+  handleChangeRoomTekst = e => {
+    this.setState({ roomName: e.currentTarget.value });
+    console.log(e.currentTarget.value);
+  };
+
   handleClickButton = e => {
     //spelers krijgen een wachtscherm te zien.
     e.preventDefault();
@@ -69,6 +80,14 @@ class Admin extends Component {
       <>
         <Menu />
         <p className="title">Admin container</p>
+        <div>
+          <h1>Maak een room aan</h1>
+          <form action="" onSubmit={this.handleCreateRoom}>
+            <input type="text" onChange={this.handleChangeRoomTekst} />
+            <input type="submit" value="Maak een room" />
+          </form>
+          <p>Room name: {this.state.roomName}</p>
+        </div>
         <p className={styles.admin_keuze}>
           Kies welk soort vraag moeten de spelers krijgen?
         </p>

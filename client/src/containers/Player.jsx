@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import Menu from "../components/Menu";
+// import Menu from "../components/Menu";
 import TweeKeuzeInput from "../components/TweeKeuzeInput";
-import VierKeuzeInput from "../components/VierKeuzeInput";
-import AchtKeuzeInput from "../components/AchtKeuzeInput";
+// import VierKeuzeInput from "../components/VierKeuzeInput";
+// import AchtKeuzeInput from "../components/AchtKeuzeInput";
 import TekstInput from "../components/TekstInput";
 import SliderInput from "../components/SliderInput";
 import Wachtscherm from "../components/Wachtscherm";
 import TijdOp from "../components/TijdOp";
 import Geantwoord from "../components/Geantwoord";
+import JoinRoom from "../components/JoinRoom";
+
 import styles from "./Player.module.css";
 import { socket } from "./App.js";
 import { inject, observer } from "mobx-react";
@@ -19,7 +21,8 @@ class Player extends Component {
       aantalKeuzes: "",
       taal: this.props.location.state.taal,
       counter: 60,
-      question: ""
+      question: "",
+      room: ""
     };
 
     this.antwoordVersturen = this.antwoordVersturen.bind(this);
@@ -63,6 +66,11 @@ class Player extends Component {
     });
   }
 
+  joinedRoom = roomId => {
+    console.log(roomId);
+    this.setState({ room: roomId });
+  };
+
   //op basis van het aantal opties wordt een andere component getoond met het juiste aantal opties.
   //als er niks is meegegeven, komt er een empty state melding.
 
@@ -98,6 +106,7 @@ class Player extends Component {
           );
       }
     };
+
     const keuzeSwitch = () => {
       switch (aantalKeuzes) {
         case "2":
@@ -213,7 +222,16 @@ class Player extends Component {
       }
     };
 
-    return <>{keuzeSwitch()}</>;
+    if (this.state.room === "") {
+      console.log(`nog geen room man`);
+      return (
+        <>
+          <JoinRoom joinedRoom={this.joinedRoom} />
+        </>
+      );
+    } else {
+      return <>{keuzeSwitch()}</>;
+    }
   }
 }
 
