@@ -5,9 +5,10 @@ import { socket } from "./App.js";
 
 class Projectie extends Component {
   //const antwoord = antwoordPlayer.location.antwoord;
+  roomRef = React.createRef();
   constructor(props) {
     super(props);
-    this.state = { antwoorden: [] };
+    this.state = { antwoorden: [], roomId: "" };
   }
 
   componentDidMount() {
@@ -27,20 +28,45 @@ class Projectie extends Component {
     });
   }
 
+  handleJoinRoom = e => {
+    e.preventDefault();
+    console.log(this.roomRef.current.value);
+    if (this.roomRef.current.value) {
+      socket.emit("join", this.roomRef.current.value);
+      this.setState({ roomId: this.roomRef.current.value });
+      //props.joinedRoom(this.roomRef.current.value);
+    }
+  };
+
   render() {
-    const { antwoorden } = this.state;
-    return (
-      <>
-        <Menu />
-        <p className="title">Projectie container</p>
-        <p>De verschillende antwoorden waren:</p>
-        <ul>
-          {antwoorden.map(antwoord => (
-            <li key={antwoord}>{antwoord}</li>
-          ))}
-        </ul>
-      </>
-    );
+    const { antwoorden, roomId } = this.state;
+
+    if (roomId === "") {
+      return (
+        <>
+          <Menu />
+          <p className="title">Projectie container</p>
+          <p>Join een room</p>
+          <form action="" onSubmit={this.handleJoinRoom}>
+            <input type="text" ref={this.roomRef} />
+            <input type="submit" value="Join een room" />
+          </form>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <Menu />
+          <p className="title">Projectie container</p>
+          <p>De verschillende antwoorden waren:</p>
+          <ul>
+            {antwoorden.map(antwoord => (
+              <li key={antwoord}>{antwoord}</li>
+            ))}
+          </ul>
+        </>
+      );
+    }
   }
 }
 

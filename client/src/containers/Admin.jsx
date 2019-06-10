@@ -18,10 +18,10 @@ class Admin extends Component {
 
     e.preventDefault();
     console.log(this.state.selectedOption);
-    socket.emit(
-      "question",
-      this.props.questionStore.questions[this.state.selectedOption]
-    ); // emit de value van de input.
+    socket.emit("question", {
+      question: this.props.questionStore.questions[this.state.selectedOption],
+      room: this.state.roomName
+    }); // emit de value van de input.
     socket.emit("clear", true);
   };
 

@@ -38,30 +38,32 @@ const io = socketIo(server); // initialiseer socket
 
 io.on("connection", socket => {
   console.log(`socket id`, socket.id);
+
   // Join a custom room created by the admin
   socket.on("join", room => {
     socket.join(room);
     console.log("room: " + room + " joined by:" + socket.id);
+
+    // Vraag doorsturen
+    socket.on("question", ({ question, room }) => {
+      console.log(`question emit`, room);
+      io.to(room).emit("question", question);
+    });
+    // Antwoord doorsturen
+    socket.on("answer", msg => {
+      console.log(`answer emit`);
+      io.emit("answer", msg);
+    });
+    // Projectie clearen
+    socket.on("clear", msg => {
+      console.log(`clear emit`);
+      io.emit("clear", msg);
+    });
   });
   // User connected
   console.log("a user connected");
   socket.on("disconnect", () => {
     console.log("user disconnected");
-  });
-  // Vraag doorsturen
-  socket.on("question", msg => {
-    console.log(`question emit`);
-    io.emit("question", msg);
-  });
-  // Antwoord doorsturen
-  socket.on("answer", msg => {
-    console.log(`answer emit`);
-    io.emit("answer", msg);
-  });
-  // Projectie clearen
-  socket.on("clear", msg => {
-    console.log(`clear emit`);
-    io.emit("clear", msg);
   });
 });
 
