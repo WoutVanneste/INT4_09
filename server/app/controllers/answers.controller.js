@@ -1,20 +1,22 @@
 const Answer = require("../models/answer.model.js");
 
 exports.create = (req, res) => {
-  if (!req.body.answers) {
-    return res.status(500).send({ err: "answer can not be emptyyyy" });
-  }
+  // if (!req.body.answers) {
+  //   return res.status(500).send({ err: "answer can not be emptyyyy" });
+  // }
 
   const answer = new Answer({
     question: req.body.question,
     answers: req.body.answers
   });
 
+  console.log(`answer in de controller`, req.body);
+
   answer
     .save()
     .then(answer => res.send(answer))
     .catch(err => {
-      res.status(500).send({ error: err.answer || "Error" });
+      res.status(500).send({ error: err.answer || "Alles is kapot" });
     });
 };
 

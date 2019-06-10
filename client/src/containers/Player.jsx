@@ -26,6 +26,9 @@ class Player extends Component {
 
   componentDidMount() {
     // Vangt de emit op
+    socket.on("connect", data => {
+      console.log(`connected`, data);
+    });
     socket.on("question", type => {
       console.log(`socket message`, type);
       clearInterval(this.mijnInterval);

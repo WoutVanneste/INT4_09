@@ -12,14 +12,19 @@ class AnswerStore {
   }
 
   addAnswerToDatabase = data => {
+    console.log(`data`, data);
     const answer = new Answer();
     answer.updateFromServer(data);
+    console.log(`answer`, answer);
     this.api
       .create(answer)
+      .then(console.log(`apiAnswer`, answer))
       .then(answerValues => answer.updateFromServer(answerValues));
-    //console.log(`functie werkt`);
-    //console.log(data);
-    console.log(this.questions);
+
+    //this.api.create(data);
+    // this.api
+    //   .create(answer)
+    //   .then(answerValues => answer.updateFromServer(answerValues));
   };
 
   // addDrink = data => {

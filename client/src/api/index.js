@@ -9,6 +9,7 @@ class Api {
   };
 
   create = async entity => {
+    console.log(`entity loggen`, entity.values);
     const r = await fetch(
       `/api/${this.entity}`,
       this.getOptions(`post`, entity.values)
@@ -33,6 +34,7 @@ class Api {
   };
 
   getOptions = (method, body = null) => {
+    console.log(`body`, body);
     const options = {
       method: method.toUpperCase(),
       headers: {
@@ -41,6 +43,7 @@ class Api {
     };
     if (body) {
       options.body = JSON.stringify(body);
+      console.log(`er is een body mann`);
     }
     return options;
   };

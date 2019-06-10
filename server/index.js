@@ -37,6 +37,7 @@ const server = http.createServer(app);
 const io = socketIo(server); // initialiseer socket
 
 io.on("connection", socket => {
+  console.log(`socket id`, socket.id);
   // User connected
   console.log("a user connected");
   socket.on("disconnect", () => {
