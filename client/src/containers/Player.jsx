@@ -11,6 +11,7 @@ import Geantwoord from "../components/Geantwoord";
 import JoinRoom from "../components/JoinRoom";
 
 import styles from "./Player.module.css";
+import meldingStyles from "../styles/melding.module.css";
 import { socket } from "./App.js";
 import { inject, observer } from "mobx-react";
 
@@ -26,6 +27,7 @@ class Player extends Component {
     };
 
     this.antwoordVersturen = this.antwoordVersturen.bind(this);
+    this.openWachtscherm = this.openWachtscherm.bind(this);
   }
 
   componentDidMount() {
@@ -56,9 +58,14 @@ class Player extends Component {
     });
   }
 
+  openWachtscherm() {
+    this.setState({ aantalKeuzes: "wachtscherm" });
+  }
+
   antwoordVersturen() {
     console.log(`antwoord verstuurd`);
     this.setState({ aantalKeuzes: "op tijd" });
+    clearInterval(this.mijnInterval);
     console.log(this.props);
     this.props.answerStore.addAnswerToDatabase({
       question: "dit is een vraag",
@@ -81,26 +88,26 @@ class Player extends Component {
       switch (this.state.taal) {
         case "nl":
           return (
-            <p className={styles.player_melding}>
+            <p className={meldingStyles.player_melding}>
               De gamemaster heeft nog geen vraag doorgestuurd
             </p>
           );
         case "fr":
           return (
-            <p className={styles.player_melding}>
+            <p className={meldingStyles.player_melding}>
               Le gamemaster n'a pas encore envoyé de question
             </p>
           );
         case "en":
           return (
-            <p className={styles.player_melding}>
+            <p className={meldingStyles.player_melding}>
               The gamemaster has not yet forwarded a question
             </p>
           );
 
         default:
           return (
-            <p className={styles.player_melding}>
+            <p className={meldingStyles.player_melding}>
               De gamemaster heeft nog geen vraag doorgestuurd
             </p>
           );
@@ -214,9 +221,9 @@ class Player extends Component {
         case "wachtscherm":
           return <Wachtscherm />;
         case "te laat":
-          return <TijdOp />;
+          return <TijdOp tijdverstreken={this.openWachtscherm} />;
         case "op tijd":
-          return <Geantwoord />;
+          return <Geantwoord tijdverstreken={this.openWachtscherm} />;
         default:
           return taalSwitch();
       }
