@@ -1,5 +1,7 @@
 import React from "react";
 import { socket } from "../containers/App.js";
+import styles from "./JoinRoom.module.css";
+import buttonStyles from "../styles/buttons.module.css";
 
 const JoinRoom = props => {
   const roomRef = React.createRef();
@@ -14,10 +16,27 @@ const JoinRoom = props => {
 
   return (
     <>
-      <div>
-        <form action="" onSubmit={handleJoinRoom}>
-          <input type="text" ref={roomRef} />
-          <input type="submit" value="Join een room" />
+      <div className={styles.room_wrapper}>
+        <h1 className={styles.title}>Interactieve voorstelling</h1>
+        <span className={styles.bijschrift}>
+          Vul hieronder de voorstelling van de gamemaster in
+        </span>
+        <form
+          action=""
+          onSubmit={handleJoinRoom}
+          className={styles.form_wrapper}
+        >
+          <input
+            type="text"
+            ref={roomRef}
+            className={styles.input}
+            placeholder="voorstelling123"
+          />
+          <input
+            type="submit"
+            value="Deelnemen aan voorstelling"
+            className={buttonStyles.submit_form}
+          />
         </form>
       </div>
     </>
