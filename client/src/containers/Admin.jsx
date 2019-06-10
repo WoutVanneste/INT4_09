@@ -7,11 +7,9 @@ import { socket } from "./App.js";
 import { inject, observer } from "mobx-react";
 
 class Admin extends Component {
-  currentQuestion = 0;
-
   constructor(props) {
     super(props);
-    this.state = { selectedOption: "" };
+    this.state = { selectedOption: 0 };
     console.log(`props`, props.questionStore.questions);
   }
   handleSubmitForm = e => {
@@ -20,21 +18,41 @@ class Admin extends Component {
 
     e.preventDefault();
     console.log(this.state.selectedOption);
-    socket.emit("question", this.state.selectedOption); // emit de value van de input.
+    socket.emit(
+      "question",
+      this.props.questionStore.questions[this.state.selectedOption]
+    ); // emit de value van de input.
     socket.emit("clear", true);
   };
 
   handleChangeOption = e => {
+    //console.log(`aangepast`);
+    //console.log(`data in change option`, parseInt(e.currentTarget.value, 10));
     // Elke keer het antwoord verandert wordt deze aangepast in de state.
-    this.setState({ selectedOption: e.currentTarget.value });
+    this.setState({ selectedOption: parseInt(e.currentTarget.value, 10) });
+    // console.log(`ik pas de state aan naar`, this.state.selectedOption);
+    // this.setState({
+    //   selectedOption: {
+    //     ...this.state.selectedOption,
+    //     type: e.currentTarget.value
+    //   }
+    // });
+
+    console.log(this.state.selectedOption);
   };
 
   handleClickButton = e => {
     //spelers krijgen een wachtscherm te zien.
     e.preventDefault();
-    this.setState({ selectedOption: "wachtscherm" });
+    //this.setState({ selectedOption: "wachtscherm" });
+    // this.setState({
+    //   selectedOption: {
+    //     ...this.state.selectedOption,
+    //     type: "wachtscherm"
+    //   }
+    // });
     console.log(this.state);
-    socket.emit("question", "wachtscherm");
+    socket.emit("question", { type: "wachtscherm" });
   };
 
   componentDidMount() {
@@ -126,7 +144,7 @@ class Admin extends Component {
               <span className={radioStyles.radio_span}>8 opties</span>
             </label> */}
             {this.props.questionStore.questions.length > 0 ? (
-              this.props.questionStore.questions.map(question => (
+              this.props.questionStore.questions.map((question, index) => (
                 <label
                   htmlFor={question.id}
                   className={radioStyles.radio_label}
@@ -136,8 +154,8 @@ class Admin extends Component {
                     id={question.id}
                     type="radio"
                     name="keuze"
-                    value={question.type}
-                    checked={this.state.selectedOption === question.type}
+                    value={index}
+                    checked={this.state.selectedOption === index}
                     onChange={this.handleChangeOption}
                     required
                     className={radioStyles.radio_input}

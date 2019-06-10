@@ -10,15 +10,16 @@ import TijdOp from "../components/TijdOp";
 import Geantwoord from "../components/Geantwoord";
 import styles from "./Player.module.css";
 import { socket } from "./App.js";
-import QuestionStore from "../store/QuestionStore";
+import { inject, observer } from "mobx-react";
 
 class Player extends Component {
   constructor(props) {
     super(props);
     this.state = {
       aantalKeuzes: "",
-      counter: 10,
-      taal: this.props.location.state.taal
+      taal: this.props.location.state.taal,
+      counter: 60,
+      question: ""
     };
 
     this.antwoordVersturen = this.antwoordVersturen.bind(this);
@@ -31,7 +32,8 @@ class Player extends Component {
       clearInterval(this.mijnInterval);
       // Verander de state zodat keuzeswitch opnieuw wordt gerenderd
       // timer wordt opnieuw op 10 gezet door een nieuwe vraag
-      this.setState({ aantalKeuzes: type, counter: 10 });
+      this.setState({ aantalKeuzes: type.type, counter: 60, question: type });
+      console.log(`question state`, this.state.question);
 
       // timer start als je op player komt.
       // de timer css klopt nog niet volledig
@@ -49,7 +51,13 @@ class Player extends Component {
   }
 
   antwoordVersturen() {
+    console.log(`antwoord verstuurd`);
     this.setState({ aantalKeuzes: "op tijd" });
+    console.log(this.props);
+    this.props.answerStore.addAnswerToDatabase({
+      question: "dit is een vraag",
+      answers: [{ id: "12", answer: "dit is mijn antwoord" }]
+    });
   }
 
   //op basis van het aantal opties wordt een andere component getoond met het juiste aantal opties.
@@ -90,10 +98,12 @@ class Player extends Component {
     const keuzeSwitch = () => {
       switch (aantalKeuzes) {
         case "2":
+        case "4":
+        case "8":
           return (
             <>
               <div className={styles.vraag_wrapper}>
-                <p className={styles.vraag}>De gamemaster gaf je 2 opties</p>
+                <p className={styles.vraag}>{this.state.question.question}</p>
 
                 <div className={styles.timer_wrapper}>
                   <span className={styles.timer}>{counter}</span>
@@ -107,48 +117,55 @@ class Player extends Component {
                   </svg>
                 </div>
               </div>
-              <TweeKeuzeInput verstuurAntwoord={this.antwoordVersturen} />
+              <TweeKeuzeInput
+                verstuurAntwoord={this.antwoordVersturen}
+                question={this.state.question}
+              />
             </>
           );
-        case "4":
-          return (
-            <>
-              <div className={styles.vraag_wrapper}>
-                <p className={styles.vraag}>De gamemaster gaf je 4 opties</p>
+        // case "4":
+        //   return (
+        //     <>
+        //       <div className={styles.vraag_wrapper}>
+        //         <p className={styles.vraag}>{this.state.question.question}</p>
 
-                <div className={styles.timer_wrapper}>
-                  <span className={styles.timer}>{counter}</span>
-                  <svg className={styles.circle_svg}>
-                    <circle r="18" cx="20" cy="20" className={styles.circle} />
-                  </svg>
-                </div>
-              </div>
-              <VierKeuzeInput verstuurAntwoord={this.antwoordVersturen} />
-            </>
-          );
-        case "8":
-          return (
-            <>
-              <div className={styles.vraag_wrapper}>
-                <p className={styles.vraag}>De gamemaster gaf je 8 opties</p>
+        //         <div className={styles.timer_wrapper}>
+        //           <span className={styles.timer}>{counter}</span>
+        //           <svg className={styles.circle_svg}>
+        //             <circle r="18" cx="20" cy="20" className={styles.circle} />
+        //           </svg>
+        //         </div>
+        //       </div>
+        //       <VierKeuzeInput
+        //         verstuurAntwoord={this.antwoordVersturen}
+        //         question={this.state.question}
+        //       />
+        //     </>
+        //   );
+        // case "8":
+        //   return (
+        //     <>
+        //       <div className={styles.vraag_wrapper}>
+        //         <p className={styles.vraag}>{this.state.question.question}</p>
 
-                <div className={styles.timer_wrapper}>
-                  <span className={styles.timer}>{counter}</span>
-                  <svg className={styles.circle_svg}>
-                    <circle r="18" cx="20" cy="20" className={styles.circle} />
-                  </svg>
-                </div>
-              </div>
-              <AchtKeuzeInput verstuurAntwoord={this.antwoordVersturen} />
-            </>
-          );
+        //         <div className={styles.timer_wrapper}>
+        //           <span className={styles.timer}>{counter}</span>
+        //           <svg className={styles.circle_svg}>
+        //             <circle r="18" cx="20" cy="20" className={styles.circle} />
+        //           </svg>
+        //         </div>
+        //       </div>
+        //       <AchtKeuzeInput
+        //         verstuurAntwoord={this.antwoordVersturen}
+        //         question={this.state.question}
+        //       />
+        //     </>
+        //   );
         case "text":
           return (
             <>
               <div className={styles.vraag_wrapper}>
-                <p className={styles.vraag}>
-                  De gamemaster gaf je een tekstinput
-                </p>
+                <p className={styles.vraag}>{this.state.question.question}</p>
 
                 <div className={styles.timer_wrapper}>
                   <span className={styles.timer}>{counter}</span>
@@ -157,16 +174,17 @@ class Player extends Component {
                   </svg>
                 </div>
               </div>
-              <TekstInput verstuurAntwoord={this.antwoordVersturen} />
+              <TekstInput
+                verstuurAntwoord={this.antwoordVersturen}
+                question={this.state.question}
+              />
             </>
           );
         case "slider":
           return (
             <>
               <div className={styles.vraag_wrapper}>
-                <p className={styles.vraag}>
-                  De gamemaster gaf je een slider input
-                </p>
+                <p className={styles.vraag}>{this.state.question.question}</p>
 
                 <div className={styles.timer_wrapper}>
                   <span className={styles.timer}>{counter}</span>
@@ -175,7 +193,10 @@ class Player extends Component {
                   </svg>
                 </div>
               </div>
-              <SliderInput verstuurAntwoord={this.antwoordVersturen} />
+              <SliderInput
+                verstuurAntwoord={this.antwoordVersturen}
+                question={this.state.question}
+              />
             </>
           );
         case "wachtscherm":
@@ -193,4 +214,4 @@ class Player extends Component {
   }
 }
 
-export default Player;
+export default inject(`answerStore`)(observer(Player));

@@ -1,8 +1,8 @@
 const Answer = require("../models/answer.model.js");
 
 exports.create = (req, res) => {
-  if (!req.body.answer) {
-    return res.status(500).send({ err: "answer can not be empty" });
+  if (!req.body.answers) {
+    return res.status(500).send({ err: "answer can not be emptyyyy" });
   }
 
   const answer = new Answer({
