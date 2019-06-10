@@ -17,6 +17,7 @@ class Player extends Component {
     super(props);
     this.state = {
       aantalKeuzes: "",
+      taal: this.props.location.state.taal,
       counter: 60,
       question: ""
     };
@@ -68,6 +69,35 @@ class Player extends Component {
   //via vraag.location.vraag kunnen we de data die we meegaven vanuit de admin opvragen, zo weten we hoeveel opties er zijn voor de vraag.
   render() {
     const { aantalKeuzes, counter } = this.state;
+    const taalSwitch = () => {
+      switch (this.state.taal) {
+        case "nl":
+          return (
+            <p className={styles.player_melding}>
+              De gamemaster heeft nog geen vraag doorgestuurd
+            </p>
+          );
+        case "fr":
+          return (
+            <p className={styles.player_melding}>
+              Le gamemaster n'a pas encore envoyé de question
+            </p>
+          );
+        case "en":
+          return (
+            <p className={styles.player_melding}>
+              The gamemaster has not yet forwarded a question
+            </p>
+          );
+
+        default:
+          return (
+            <p className={styles.player_melding}>
+              De gamemaster heeft nog geen vraag doorgestuurd
+            </p>
+          );
+      }
+    };
     const keuzeSwitch = () => {
       switch (aantalKeuzes) {
         case "2":
@@ -179,21 +209,11 @@ class Player extends Component {
         case "op tijd":
           return <Geantwoord />;
         default:
-          return (
-            <p className={styles.player_melding}>
-              De gamemaster heeft nog geen vraag doorgestuurd
-            </p>
-          );
+          return taalSwitch();
       }
     };
 
-    return (
-      <>
-        <Menu />
-        <p className="title">Player container</p>
-        {keuzeSwitch()}
-      </>
-    );
+    return <>{keuzeSwitch()}</>;
   }
 }
 
