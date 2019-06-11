@@ -82,6 +82,10 @@ io.on("connection", socket => {
       console.log(`clear emit`);
       io.emit("clear", msg);
     });
+
+    socket.on("tijd op", () => {
+      io.emit("tijd op");
+    });
   });
   // User connected
   console.log("a user connected");

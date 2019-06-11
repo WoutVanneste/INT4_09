@@ -13,22 +13,37 @@ class Admin extends Component {
       selectedOption: 0,
       roomName: "",
       numberOfAnswers: 0,
-      playerCount: 0
+      playerCount: 0,
+      counter: 10
     };
   }
   handleSubmitForm = e => {
     e.preventDefault(); // stop form versturen
-    console.log(
-      "nieuwtestje",
-      this.props.questionStore.questions[this.state.selectedOption]
-    );
+
+    socket.emit("clear", true); // verwijder alles op de projectie
+
     socket.emit("question", {
       // stuur een socket vraag event en geef de vraag en room mee
-
       question: this.props.questionStore.questions[this.state.selectedOption],
       room: this.state.roomName
     });
-    socket.emit("clear", true); // verwijder alles op de projectie
+
+    this.mijnInterval = setInterval(() => {
+      this.setState(prevState => ({
+        counter: prevState.counter >= 1 ? prevState.counter - 1 : 0
+      }));
+      if (this.state.counter === 0) {
+        clearInterval(this.mijnInterval);
+        // na 10 seconden krijgt speler scherm 'te laat' te zien
+        socket.emit("tijd op");
+      }
+    }, 1000);
+
+    // this.props.answerStore.addAnswerToDatabase({
+    //   question: this.props.questionStore.questions[this.state.selectedOption]
+    //     .question,
+    //   answers: []
+    // });
   };
 
   handleChangeOption = e => {
@@ -94,7 +109,12 @@ class Admin extends Component {
   }
 
   render() {
-    const { selectedOption, playerCount, numberOfAnswers } = this.state;
+    const {
+      selectedOption,
+      playerCount,
+      numberOfAnswers,
+      counter
+    } = this.state;
 
     return (
       <>
@@ -102,6 +122,7 @@ class Admin extends Component {
         <p className="title">Admin container</p>
         {/* <p>{`aantal spelers: ${playerCount}`}</p> */}
         <p>{`aantal antwoorden: ${numberOfAnswers}`}</p>
+        <span className={styles.timer}>{counter}</span>
 
         <div>
           <h1>Maak een room aan</h1>
@@ -175,4 +196,4 @@ class Admin extends Component {
   }
 }
 
-export default inject(`questionStore`)(observer(Admin));
+export default inject(`questionStore`, `answerStore`)(observer(Admin));

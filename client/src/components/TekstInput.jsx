@@ -12,7 +12,7 @@ class TekstInput extends Component {
 
   handleSubmitForm = e => {
     // Het antwoord wordt uit de state gehaald.
-    socket.emit("answer", this.huidigAntwoord); // emit de value van de input.
+    //socket.emit("answer", this.huidigAntwoord); // emit de value van de input.
     e.preventDefault();
     this.props.verstuurAntwoord({ antwoord: this.state.huidigAntwoord });
   };
