@@ -123,12 +123,12 @@ class Admin extends Component {
             {this.props.questionStore.questions.length > 0 ? (
               this.props.questionStore.questions.map((question, index) => (
                 <label
-                  htmlFor={question.question}
+                  htmlFor={question._id}
                   className={radioStyles.radio_label}
                   key={`vraag_${question._id}`}
                 >
                   <input
-                    id={question.question}
+                    id={question._id}
                     type="radio"
                     name="keuze"
                     value={index}
