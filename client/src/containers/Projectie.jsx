@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import Menu from "../components/Menu";
-import styles from "./Projectie.module.css";
+// import Menu from "../components/Menu";
+// import styles from "./Projectie.module.css";
 import { socket } from "./App.js";
 import { inject, observer } from "mobx-react";
 
@@ -57,8 +57,7 @@ class Projectie extends Component {
     if (roomId === "") {
       return (
         <>
-          <Menu />
-          <p className="title">Projectie container</p>
+          {/* <Menu /> */}
           <p>Join een room</p>
           <form action="" onSubmit={this.handleJoinRoom}>
             <input type="text" ref={this.roomRef} />
@@ -69,7 +68,7 @@ class Projectie extends Component {
     } else {
       return (
         <>
-          <Menu />
+          {/* <Menu /> */}
           <p className="title">Projectie container</p>
           <p>De verschillende antwoorden waren:</p>
           <ul>

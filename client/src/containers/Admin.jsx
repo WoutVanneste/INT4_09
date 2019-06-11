@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Menu from "../components/Menu";
+// import Menu from "../components/Menu";
 import styles from "./Admin.module.css";
 import radioStyles from "../styles/radioButtons.module.css";
 import buttonStyles from "../styles/buttons.module.css";
@@ -118,19 +118,35 @@ class Admin extends Component {
 
     return (
       <>
-        <Menu />
-        <p className="title">Admin container</p>
+        {/* <Menu /> */}
         {/* <p>{`aantal spelers: ${playerCount}`}</p> */}
         <p>{`aantal antwoorden: ${numberOfAnswers}`}</p>
         <span className={styles.timer}>{counter}</span>
 
-        <div>
-          <h1>Maak een room aan</h1>
-          <form action="" onSubmit={this.handleCreateRoom}>
-            <input type="text" onChange={this.handleChangeRoomTekst} />
-            <input type="submit" value="Maak een room" />
+        <div className={styles.room_wrapper}>
+          <h1 className={styles.title}>Maak een room aan</h1>
+          <form
+            className={styles.room_form}
+            action=""
+            onSubmit={this.handleCreateRoom}
+          >
+            <input
+              className={styles.room_input}
+              type="text"
+              onChange={this.handleChangeRoomTekst}
+            />
+            <input
+              className={`${buttonStyles.submit_form} ${styles.room_submit}`}
+              type="submit"
+              value="Maak een room"
+            />
           </form>
-          <p>Room name: {this.state.roomName}</p>
+          <p className={`${styles.room_info} ${styles.room_info_naam}`}>
+            Room name: {this.state.roomName}
+          </p>
+          <p className={`${styles.room_info} ${styles.room_info_aantal}`}>
+            Aantal antwoorden voor deze vraag: {numberOfAnswers}
+          </p>
         </div>
         <p className={styles.admin_keuze}>
           Kies welk soort vraag moeten de spelers krijgen?

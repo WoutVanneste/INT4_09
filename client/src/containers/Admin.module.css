@@ -66,3 +66,51 @@
   text-align: center;
   font-size: 2rem;
 }
+
+.room_wrapper{
+  display: grid;
+  width: 40rem;
+  grid-gap: 2.5rem;
+  align-items: center;
+  grid-template-areas: 
+  'title title'
+  'input infoNaam'
+  'submit infoAantal';
+  grid-template-columns: repeat(2, max-content);
+  grid-template-rows: repeat(3, max-content);
+}
+
+.room_info_aantal{
+  grid-area: infoAantal
+}
+
+.room_info_naam{
+  grid-area: infoNaam
+}
+
+.room_submit{
+  grid-area: submit
+}
+
+.title{
+  font-size: 2.5rem;
+  grid-area: title;
+}
+
+.room_info{
+  font-size: 2rem;
+}
+
+.room_input{
+  grid-area: input;
+  color: var(--white-color);
+  font-family:  adobe-caslon-pro;
+  font-size: 2.5rem;
+  margin: 3rem 0;
+  padding: 1.5rem 2rem;
+  width: 100%;
+  display: inline-block;
+  background: var( --ultradark-color);
+  border: .1rem solid rgba(187,213,237,0.50);
+  border-radius: 3.5rem;
+}

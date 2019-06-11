@@ -17,9 +17,10 @@ body {
   background-image: radial-gradient(200% 50%, var(--blue-color) 15%, var(--dark-color) 60%);
   background-size: cover;
   background-repeat: no-repeat;
-  width: 100vw;
-  height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
   padding: 5rem;
+  background-attachment: fixed;
 }
 
 .title{
