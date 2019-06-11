@@ -13,7 +13,7 @@ import JoinRoom from "../components/JoinRoom";
 import styles from "./Player.module.css";
 import taalStyles from "./Home.module.css";
 
-import meldingStyles from "../styles/melding.module.css";
+// import meldingStyles from "../styles/melding.module.css";
 import { socket } from "./App.js";
 import { inject, observer } from "mobx-react";
 
@@ -144,7 +144,7 @@ class Player extends Component {
                       r="18"
                       cx="20"
                       cy="20"
-                      className={styles.circle + " " + this.timerStijl}
+                      className={`${styles.circle} ${this.timerStijl}`}
                     />
                   </svg>
                 </div>

@@ -4,7 +4,7 @@ import socketIOClient from "socket.io-client";
 
 import styles from "./App.module.css";
 
-import Home from "./Home";
+// import Home from "./Home";
 import Admin from "./Admin";
 import Player from "./Player";
 import Projectie from "./Projectie";
