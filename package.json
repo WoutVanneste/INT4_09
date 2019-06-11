@@ -1,0 +1,16 @@
+{
+  "name": "int-4",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:Wout-Vanneste-student/INT4_09.git",
+  "author": "Wout Vanneste <wout.vanneste@student.howest.be>",
+  "license": "MIT",
+  "scripts": {
+    "start": "cd server/ && yarn && yarn start",
+    "build": "cd client/ && yarn && yarn build"
+  },
+  "cacheDirectories": [
+    "client/node_modules",
+    "server/node_modules"
+  ]
+}
