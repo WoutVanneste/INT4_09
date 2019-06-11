@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { observer } from "mobx-react";
+import { observer, inject } from "mobx-react";
 import { socket } from "../containers/App.js";
 import radioStyles from "../styles/radioButtons.module.css";
 import buttonStyles from "../styles/buttons.module.css";
@@ -12,10 +12,15 @@ class TweeKeuzeInput extends Component {
   }
 
   handleSubmitForm = e => {
+    e.preventDefault();
+
     // Het antwoord wordt uit de state gehaald.
     socket.emit("answer", this.state.huidigAntwoord); // emit de value van de input.
-    e.preventDefault();
-    this.props.verstuurAntwoord();
+    // this.props.answerStore.addAnswerToDatabase({
+    //   question: "dit is de tweede vraag",
+    //   answers: [{ answer: this.state.huidigAntwoord }]
+    // });
+    this.props.verstuurAntwoord({ antwoord: this.state.huidigAntwoord });
   };
 
   handleChangeRadio = e => {
@@ -66,4 +71,4 @@ class TweeKeuzeInput extends Component {
   }
 }
 
-export default observer(TweeKeuzeInput);
+export default inject(`answerStore`)(observer(TweeKeuzeInput));

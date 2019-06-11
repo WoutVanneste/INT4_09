@@ -12,7 +12,7 @@ class SliderInput extends Component {
     // Het antwoord wordt uit de state gehaald.
     socket.emit("answer", this.state.huidigAntwoord); // emit de value van de input.
     e.preventDefault();
-    this.props.verstuurAntwoord();
+    this.props.verstuurAntwoord({ antwoord: this.state.huidigAntwoord });
   };
 
   handleChangeSlider = e => {

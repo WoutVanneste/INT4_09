@@ -12,6 +12,8 @@ class Projectie extends Component {
   }
 
   componentDidMount() {
+    // socket.emit("projectie", "projectie");
+
     // Vangt de emit op
     socket.on("clear", answer => {
       this.setState({ antwoorden: [] });

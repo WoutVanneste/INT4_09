@@ -62,17 +62,23 @@ class Player extends Component {
     this.setState({ aantalKeuzes: "wachtscherm" });
   }
 
-  antwoordVersturen() {
-    console.log(`antwoord verstuurd`);
+  antwoordVersturen = antwoord => {
+    console.log(antwoord);
+    // console.log(`antwoord verstuurd`);
     this.setState({ aantalKeuzes: "op tijd" });
     clearInterval(this.mijnInterval);
-    console.log(this.props);
+    // console.log(this.props);
 
-    this.props.answerStore.addAnswerToDatabase({
-      question: "dit is een vraag",
-      answers: [{ answer: "dit is mijn antwoord" }]
-    });
-  }
+    // this.props.answerStore.addAnswerToDatabase({
+    //   question: "dit is de tweede vraag",
+    //   answers: [{ answer: "dit is het eerste antwoord" }]
+    // });
+    console.log(this.state.question);
+    // this.props.answerStore.addAnswerToDatabase({
+    //   question: this.state.question,
+    //   answers: [antwoord]
+    // });
+  };
 
   joinedRoom = roomId => {
     console.log(roomId);

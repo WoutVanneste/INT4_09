@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const AnswerSchema = mongoose.Schema({
   question: String,
-  answers: []
+  answers: [{}]
 });
 
 module.exports = mongoose.model("Answer", AnswerSchema);

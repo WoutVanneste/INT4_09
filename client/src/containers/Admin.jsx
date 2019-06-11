@@ -9,7 +9,12 @@ import { inject, observer } from "mobx-react";
 class Admin extends Component {
   constructor(props) {
     super(props);
-    this.state = { selectedOption: 0, roomName: "" };
+    this.state = {
+      selectedOption: 0,
+      roomName: "",
+      numberOfAnswers: 0,
+      playerCount: 0
+    };
   }
   handleSubmitForm = e => {
     e.preventDefault(); // stop form versturen
@@ -62,15 +67,38 @@ class Admin extends Component {
       // vang een socket emit op. Puur om te testen of de vraag verstuurd was, mag weg later
       console.log(`socket message`, type);
     });
+
+    // socket.emit("admin", "admin");
+
+    socket.on("user joined", msg => {
+      console.log(`user joined`);
+    });
+
+    socket.on("clear", msg => {
+      this.setState({ numberOfAnswers: 0 });
+    });
+
+    socket.on("answer", msg => {
+      this.setState((prevState, props) => ({
+        numberOfAnswers: parseInt((prevState.numberOfAnswers += 1))
+      }));
+    });
+
+    // socket.on("player count", playerCount => {
+    //   this.setState({ playerCount: playerCount });
+    // });
   }
 
   render() {
-    const { selectedOption } = this.state;
+    const { selectedOption, playerCount, numberOfAnswers } = this.state;
 
     return (
       <>
         <Menu />
         <p className="title">Admin container</p>
+        {/* <p>{`aantal spelers: ${playerCount}`}</p> */}
+        <p>{`aantal antwoorden: ${numberOfAnswers}`}</p>
+
         <div>
           <h1>Maak een room aan</h1>
           <form action="" onSubmit={this.handleCreateRoom}>
@@ -91,12 +119,12 @@ class Admin extends Component {
             {this.props.questionStore.questions.length > 0 ? (
               this.props.questionStore.questions.map((question, index) => (
                 <label
-                  htmlFor={question.id}
+                  htmlFor={question._id}
                   className={radioStyles.radio_label}
-                  key={question.id}
+                  key={`vraag_${question._id}`}
                 >
                   <input
-                    id={question.id}
+                    id={question._id}
                     type="radio"
                     name="keuze"
                     value={index}

@@ -36,8 +36,31 @@ const server = http.createServer(app);
 
 const io = socketIo(server); // initialiseer socket
 
+let connectionCounter = 0;
+
 io.on("connection", socket => {
   console.log(`socket id`, socket.id);
+
+  connectionCounter++;
+  socket.emit("player count", connectionCounter);
+  console.log(connectionCounter);
+
+  //io.emit("user joined", msg);
+
+  socket.on("admin", () => {
+    connectionCounter--;
+    socket.emit("player count", connectionCounter);
+    console.log(`admin connected`);
+    console.log(connectionCounter);
+  });
+
+  socket.on("projectie", () => {
+    connectionCounter--;
+    socket.emit("player count", connectionCounter);
+
+    console.log(`projectie connected`);
+    console.log(connectionCounter);
+  });
 
   // Join a custom room created by the admin
   socket.on("join", room => {
@@ -63,6 +86,8 @@ io.on("connection", socket => {
   // User connected
   console.log("a user connected");
   socket.on("disconnect", () => {
+    connectionCounter--;
+    console.log(connectionCounter);
     console.log("user disconnected");
   });
 });

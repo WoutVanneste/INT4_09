@@ -1,4 +1,4 @@
-import uuid from "uuid";
+// import uuid from "uuid";
 import { decorate, observable, action, computed } from "mobx";
 
 class Answer {
@@ -7,10 +7,6 @@ class Answer {
     this.question = question;
     //this.answers = [{ id: (this.id = id), answer: (this.answer = answer) }];
     this.answers = answers;
-    //this.answer = answer;
-    // console.log(`question in model`, question);
-    // console.log(`answer in model`, answer);
-    // console.log(`id in model`, id);
   }
 
   // setId = value => (this.id = value);
@@ -22,27 +18,23 @@ class Answer {
   // setAnswer = value => (this.answer = value);
   setAnswers = value => (this.answers = value);
 
-  // updateFromServer = values => {
-  //   this.setId(values._id);
-  //   this.setQuestion(values.question);
-  //   this.setAnswer(values.answer);
-  // };
-
   updateFromServer = values => {
     console.log(`values in updatefromserver`, values);
     this.setQuestion(values.question);
     this.setAnswers(values.answers);
   };
+
+  get values() {
+    return { question: this.question, answers: this.answers };
+  }
 }
 
 decorate(Answer, {
-  id: observable,
   question: observable,
-  answer: observable,
-  setId: action,
+  answers: observable,
   setQuestion: action,
-  setAnswer: action,
-  setAnswers: action
+  setAnswers: action,
+  values: computed
 });
 
 export default Answer;
