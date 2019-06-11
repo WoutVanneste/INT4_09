@@ -11,7 +11,7 @@ import Geantwoord from "../components/Geantwoord";
 import JoinRoom from "../components/JoinRoom";
 
 import styles from "./Player.module.css";
-import taalStyles from "./Home.module.css";
+// import taalStyles from "./Home.module.css";
 
 // import meldingStyles from "../styles/melding.module.css";
 import { socket } from "./App.js";
@@ -217,32 +217,26 @@ class Player extends Component {
           <>
             <h1 className={styles.title}>Selecteer jouw taal</h1>
             <div className={styles.taal_wrapper}>
-              <ul>
-                <li>
-                  <button
-                    className={taalStyles.link}
-                    onClick={() => this.setState({ taal: "nl" })}
-                  >
-                    Nederlands
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className={taalStyles.link}
-                    onClick={() => this.setState({ taal: "fr" })}
-                  >
-                    Fran&ccedil;ais
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className={taalStyles.link}
-                    onClick={() => this.setState({ taal: "en" })}
-                  >
-                    English
-                  </button>
-                </li>
-              </ul>
+              <button
+                className={styles.link}
+                onClick={() => this.setState({ taal: "nl" })}
+              >
+                Nederlands
+              </button>
+
+              <button
+                className={styles.link}
+                onClick={() => this.setState({ taal: "fr" })}
+              >
+                Fran&ccedil;ais
+              </button>
+
+              <button
+                className={styles.link}
+                onClick={() => this.setState({ taal: "en" })}
+              >
+                English
+              </button>
             </div>
           </>
         );

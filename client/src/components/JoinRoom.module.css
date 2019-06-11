@@ -35,10 +35,9 @@
   background: var( --ultradark-color);
   border: .1rem solid rgba(187,213,237,0.50);
   border-radius: 3.5rem;
-  
 }
 
 .input::placeholder{
   font-style: italic;
-  
+  opacity: .5;
 }
