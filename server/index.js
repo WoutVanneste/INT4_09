@@ -1,7 +1,8 @@
 const express = require("express");
 const http = require("http");
 const socketIo = require("socket.io");
-const axios = require("axios");
+const path = require("path");
+// const axios = require("axios");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
@@ -24,6 +25,8 @@ mongoose
 
 const app = express();
 app.use(index);
+
+app.use(express.static(path.resolve(__dirname, "../client/build")));
 
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -90,6 +93,10 @@ io.on("connection", socket => {
     console.log(connectionCounter);
     console.log("user disconnected");
   });
+});
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
 });
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
