@@ -25,7 +25,8 @@ class App extends Component {
     return (
       <main className={styles.layout}>
         <Switch>
-          <Route path={ROUTES.home} exact strict component={Home} />
+          <Route path={ROUTES.home} exact strict component={Player} />{" "}
+          {/* ga direct naar de player pagina via home */}
           <Route path={ROUTES.admin} component={Admin} />
           <Route path={ROUTES.player} component={Player} />
           <Route path={ROUTES.projectie} component={Projectie} />

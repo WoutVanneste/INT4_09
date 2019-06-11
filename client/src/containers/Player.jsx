@@ -11,6 +11,8 @@ import Geantwoord from "../components/Geantwoord";
 import JoinRoom from "../components/JoinRoom";
 
 import styles from "./Player.module.css";
+import taalStyles from "./Home.module.css";
+
 import meldingStyles from "../styles/melding.module.css";
 import { socket } from "./App.js";
 import { inject, observer } from "mobx-react";
@@ -20,7 +22,7 @@ class Player extends Component {
     super(props);
     this.state = {
       aantalKeuzes: "",
-      taal: this.props.location.state.taal,
+      taal: "",
       counter: 60,
       question: "",
       room: ""
@@ -85,41 +87,45 @@ class Player extends Component {
     this.setState({ room: roomId });
   };
 
+  handleClickLanguage = e => {
+    console.log(e);
+  };
+
   //op basis van het aantal opties wordt een andere component getoond met het juiste aantal opties.
   //als er niks is meegegeven, komt er een empty state melding.
 
   //via vraag.location.vraag kunnen we de data die we meegaven vanuit de admin opvragen, zo weten we hoeveel opties er zijn voor de vraag.
   render() {
     const { aantalKeuzes, counter } = this.state;
-    const taalSwitch = () => {
-      switch (this.state.taal) {
-        case "nl":
-          return (
-            <p className={meldingStyles.player_melding}>
-              De gamemaster heeft nog geen vraag doorgestuurd
-            </p>
-          );
-        case "fr":
-          return (
-            <p className={meldingStyles.player_melding}>
-              Le gamemaster n'a pas encore envoyé de question
-            </p>
-          );
-        case "en":
-          return (
-            <p className={meldingStyles.player_melding}>
-              The gamemaster has not yet forwarded a question
-            </p>
-          );
+    // const taalSwitch = () => {
+    //   switch (this.state.taal) {
+    //     case "nl":
+    //       return (
+    //         <p className={meldingStyles.player_melding}>
+    //           De gamemaster heeft nog geen vraag doorgestuurd
+    //         </p>
+    //       );
+    //     case "fr":
+    //       return (
+    //         <p className={meldingStyles.player_melding}>
+    //           Le gamemaster n'a pas encore envoyé de question
+    //         </p>
+    //       );
+    //     case "en":
+    //       return (
+    //         <p className={meldingStyles.player_melding}>
+    //           The gamemaster has not yet forwarded a question
+    //         </p>
+    //       );
 
-        default:
-          return (
-            <p className={meldingStyles.player_melding}>
-              De gamemaster heeft nog geen vraag doorgestuurd
-            </p>
-          );
-      }
-    };
+    //     default:
+    //       return (
+    //         <p className={meldingStyles.player_melding}>
+    //           De gamemaster heeft nog geen vraag doorgestuurd
+    //         </p>
+    //       );
+    //   }
+    // };
 
     const keuzeSwitch = () => {
       switch (aantalKeuzes) {
@@ -194,7 +200,7 @@ class Player extends Component {
         case "op tijd":
           return <Geantwoord tijdverstreken={this.openWachtscherm} />;
         default:
-          return taalSwitch();
+          return <Wachtscherm />;
       }
     };
 
@@ -206,7 +212,44 @@ class Player extends Component {
         </>
       );
     } else {
-      return <>{keuzeSwitch()}</>;
+      if (this.state.taal === "") {
+        return (
+          <>
+            <h1 className={styles.title}>Selecteer jouw taal</h1>
+            <div className={styles.taal_wrapper}>
+              <ul>
+                <li>
+                  <button
+                    className={taalStyles.link}
+                    onClick={() => this.setState({ taal: "nl" })}
+                  >
+                    Nederlands
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className={taalStyles.link}
+                    onClick={() => this.setState({ taal: "fr" })}
+                  >
+                    Fran&ccedil;ais
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className={taalStyles.link}
+                    onClick={() => this.setState({ taal: "en" })}
+                  >
+                    English
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </>
+        );
+      } else {
+        console.log(`nu is er een taal`);
+        return <>{keuzeSwitch()}</>;
+      }
     }
   }
 }
