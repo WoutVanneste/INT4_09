@@ -18,9 +18,13 @@ class Admin extends Component {
   }
   handleSubmitForm = e => {
     e.preventDefault(); // stop form versturen
-
+    console.log(
+      "nieuwtestje",
+      this.props.questionStore.questions[this.state.selectedOption]
+    );
     socket.emit("question", {
       // stuur een socket vraag event en geef de vraag en room mee
+
       question: this.props.questionStore.questions[this.state.selectedOption],
       room: this.state.roomName
     });
@@ -119,12 +123,12 @@ class Admin extends Component {
             {this.props.questionStore.questions.length > 0 ? (
               this.props.questionStore.questions.map((question, index) => (
                 <label
-                  htmlFor={question._id}
+                  htmlFor={question.question}
                   className={radioStyles.radio_label}
                   key={`vraag_${question._id}`}
                 >
                   <input
-                    id={question._id}
+                    id={question.question}
                     type="radio"
                     name="keuze"
                     value={index}

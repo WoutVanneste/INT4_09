@@ -74,10 +74,10 @@ class Player extends Component {
     //   answers: [{ answer: "dit is het eerste antwoord" }]
     // });
     console.log(this.state.question);
-    // this.props.answerStore.addAnswerToDatabase({
-    //   question: this.state.question,
-    //   answers: [antwoord]
-    // });
+    this.props.answerStore.addAnswerToDatabase({
+      question: this.state.question.question,
+      answers: [antwoord]
+    });
   };
 
   joinedRoom = roomId => {
