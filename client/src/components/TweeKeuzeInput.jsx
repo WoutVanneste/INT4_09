@@ -15,7 +15,6 @@ class TweeKeuzeInput extends Component {
     e.preventDefault();
 
     // Het antwoord wordt uit de state gehaald.
-    socket.emit("answer", this.state.huidigAntwoord); // emit de value van de input.
     // this.props.answerStore.addAnswerToDatabase({
     //   question: "dit is de tweede vraag",
     //   answers: [{ answer: this.state.huidigAntwoord }]

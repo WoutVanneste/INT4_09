@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-// import Menu from "../components/Menu";
 import TweeKeuzeInput from "../components/TweeKeuzeInput";
-// import VierKeuzeInput from "../components/VierKeuzeInput";
-// import AchtKeuzeInput from "../components/AchtKeuzeInput";
 import TekstInput from "../components/TekstInput";
 import SliderInput from "../components/SliderInput";
 import Wachtscherm from "../components/Wachtscherm";
@@ -23,7 +20,7 @@ class Player extends Component {
     this.state = {
       aantalKeuzes: "",
       taal: "",
-      counter: 60,
+      counter: 20,
       question: "",
       room: ""
     };
@@ -42,7 +39,7 @@ class Player extends Component {
       clearInterval(this.mijnInterval);
       // Verander de state zodat keuzeswitch opnieuw wordt gerenderd
       // timer wordt opnieuw op 10 gezet door een nieuwe vraag
-      this.setState({ aantalKeuzes: type.type, counter: 60, question: type });
+      this.setState({ aantalKeuzes: type.type, counter: 20, question: type });
       console.log(`question state`, this.state.question);
 
       // timer start als je op player komt.
@@ -68,6 +65,8 @@ class Player extends Component {
     console.log(antwoord);
     // console.log(`antwoord verstuurd`);
     this.setState({ aantalKeuzes: "op tijd" });
+    socket.emit("answer", { antwoord: antwoord.antwoord, id: socket.id }); // emit de value van de input.
+
     clearInterval(this.mijnInterval);
     // console.log(this.props);
 
@@ -76,10 +75,10 @@ class Player extends Component {
     //   answers: [{ answer: "dit is het eerste antwoord" }]
     // });
     console.log(this.state.question);
-    this.props.answerStore.addAnswerToDatabase({
-      question: this.state.question.question,
-      answers: [antwoord]
-    });
+    // this.props.answerStore.addAnswerToDatabase({
+    //   question: this.state.question.question,
+    //   answers: [antwoord]
+    // });
   };
 
   joinedRoom = roomId => {

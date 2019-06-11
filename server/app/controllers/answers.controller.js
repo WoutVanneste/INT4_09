@@ -20,6 +20,33 @@ exports.create = (req, res) => {
     });
 };
 
+exports.append = async (req, res) => {
+  try {
+    const answer = await Answer.findOneAndUpdate(
+      {
+        _id: req.params.answerId
+      },
+      {
+        question: req.body.question,
+        answers: req.body.answers
+      },
+      {
+        new: true
+      }
+    );
+
+    if (!answer) {
+      return res.status(404).send("No answer found manje");
+    }
+    res.send(answer);
+  } catch (err) {
+    if (err.kind === "ObjectId") {
+      return res.status(417).send("Geen geldig ID");
+    }
+    return res.status(500).send(err);
+  }
+};
+
 exports.findAll = async (req, res) => {
   try {
     const questions = await Answer.find();
@@ -55,7 +82,7 @@ exports.update = async (req, res) => {
   try {
     const answer = await Answer.findOneAndUpdate(
       {
-        _id: req.params.questionId
+        _id: req.params.answerId
       },
       {
         question: req.body.question,
@@ -67,7 +94,7 @@ exports.update = async (req, res) => {
     );
 
     if (!answer) {
-      return res.status(404).send("No answer found");
+      return res.status(404).send("No answer found manje");
     }
     res.send(answer);
   } catch (err) {

@@ -2,13 +2,14 @@ import React, { Component } from "react";
 // import Menu from "../components/Menu";
 // import styles from "./Projectie.module.css";
 import { socket } from "./App.js";
+import { inject, observer } from "mobx-react";
 
 class Projectie extends Component {
   //const antwoord = antwoordPlayer.location.antwoord;
   roomRef = React.createRef();
   constructor(props) {
     super(props);
-    this.state = { antwoorden: [], roomId: "" };
+    this.state = { antwoorden: [], roomId: "", question: "" };
   }
 
   componentDidMount() {
@@ -19,10 +20,24 @@ class Projectie extends Component {
       this.setState({ antwoorden: [] });
     });
 
-    socket.on("answer", answer => {
+    socket.on("answer", ({ antwoord, id }) => {
       // antwoord toevoegen aan de state indien een nieuw antwoord binnekomt
       this.setState({
-        antwoorden: [...this.state.antwoorden, answer]
+        antwoorden: [...this.state.antwoorden, { antwoord: antwoord, id: id }]
+      });
+      console.log(`antwoorden`, this.state.antwoorden);
+      //console.log(`id`, id);
+    });
+
+    socket.on("question", type => {
+      console.log(type.question);
+      this.setState({ question: type.question });
+    });
+
+    socket.on("tijd op", () => {
+      this.props.answerStore.addAnswerToDatabase({
+        question: this.state.question,
+        answers: [this.state.antwoorden]
       });
     });
   }
@@ -58,7 +73,7 @@ class Projectie extends Component {
           <p>De verschillende antwoorden waren:</p>
           <ul>
             {antwoorden.map(antwoord => (
-              <li key={antwoord}>{antwoord}</li>
+              <li key={antwoord.antwoord}>{antwoord.antwoord}</li>
             ))}
           </ul>
         </>
@@ -67,4 +82,4 @@ class Projectie extends Component {
   }
 }
 
-export default Projectie;
+export default inject(`answerStore`)(observer(Projectie));
