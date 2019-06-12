@@ -25,10 +25,26 @@ class Admin extends Component {
 
     socket.emit("question", {
       // stuur een socket vraag event en geef de vraag en room mee
-      question: this.props.questionStore.questions[this.state.selectedOption],
+      question: this.props.questionStore.questions[this.state.currentQuestion],
       room: this.state.roomName
     });
     clearInterval(this.mijnInterval);
+
+    if (
+      this.state.currentQuestion < this.props.questionStore.questions.length
+    ) {
+      this.setState((prevState, props) => ({
+        currentQuestion: parseInt((prevState.currentQuestion += 1))
+      }));
+    } else {
+      console.log(`vragen zijn op`);
+
+      // this.props.questionStore.questions[this.state.currentQuestion].question =
+      //   "Er zijn geen vragen meer";
+    }
+
+    console.log(this.state.currentQuestion);
+    console.log(`lengte`, this.props.questionStore.questions.length);
 
     this.mijnInterval = setInterval(() => {
       this.setState(prevState => ({
@@ -165,6 +181,19 @@ class Admin extends Component {
         >
           <div className={styles.admin_input_wrapper}>
             {this.props.questionStore.questions.length > 0 ? (
+              this.state.currentQuestion <
+              this.props.questionStore.questions.length ? (
+                <span className={radioStyles.radio_span}>
+                  {
+                    this.props.questionStore.questions[
+                      this.state.currentQuestion
+                    ].question
+                  }
+                </span>
+              ) : (
+                <span className={radioStyles.radio_span}>vragen zijn op</span>
+              )
+            ) : (
               // this.props.questionStore.questions.map((question, index) => (
               //   <label
               //     htmlFor={question._id}
@@ -201,13 +230,7 @@ class Admin extends Component {
               //       required
               //       className={radioStyles.radio_input}
               //     />
-              <span className={radioStyles.radio_span}>
-                {
-                  this.props.questionStore.questions[this.state.currentQuestion]
-                    .question
-                }
-              </span>
-            ) : (
+
               // </label>
               <p>Vragen aan het ophalen...</p>
             )}
@@ -222,7 +245,12 @@ class Admin extends Component {
             }
             type="submit"
             value="Verstuur vraag"
-            disabled={selectedOption === "" ? true : false}
+            disabled={
+              this.state.currentQuestion <
+              this.props.questionStore.questions.length
+                ? false
+                : true
+            }
           />
         </form>
         <div className={styles.wachtscherm_wrapper}>
