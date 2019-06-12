@@ -30,9 +30,20 @@
 .radio_label .radio_input:checked ~ .radio_span svg g g{
   fill: var(--white-color);
 }
-.radio_label .radio_input:checked ~ .radio_span svg g {
+/* .radio_label .radio_input:checked ~ .radio_span svg g {
   opacity: 1;
-}
+} */
 .radio_label .radio_input:checked ~ .radio_span{
-  filter: drop-shadow(0 0 4rem var(--bright-red-color)) 
+  filter: drop-shadow(0 0 4rem var(--white-color)) 
+}
+
+.option_wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 12rem;
+  height: 12rem;
+  background-color: var(--dark-red-color);
+  box-shadow: inset 0 0 3rem 0 rgba(0,0,0,0.30), 0 0 11rem .1rem var(--transparant-bright-red-color);
+  border-radius: 100rem;
 }

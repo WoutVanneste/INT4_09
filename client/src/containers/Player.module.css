@@ -50,7 +50,7 @@
   stroke-width: .2rem;
   stroke: white;
   fill: none;
-  animation: countdown 10s linear infinite forwards;
+  animation: countdown 15s linear infinite forwards;
 }
 
 .title{
