@@ -8,7 +8,7 @@ const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT;
 const index = require("./app/routes/index");
 
 mongoose
