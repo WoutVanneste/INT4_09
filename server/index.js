@@ -35,7 +35,10 @@ app.use(bodyParser.json());
 require("./app/routes/questions.routes.js")(app);
 require("./app/routes/answers.routes.js")(app);
 
-const server = http.createServer(app);
+// const server = http.createServer(app);
+const server = express()
+  .use((req, res) => res.sendFile(index))
+  .listen(port, () => console.log(`Listening on ${port}`));
 
 const io = socketIo(server, { pingTimeout: 60000 }); // initialiseer socket
 
@@ -101,4 +104,4 @@ app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
 });
 
-server.listen(port, () => console.log(`Listening on port ${port}`));
+//server.listen(port, () => console.log(`Listening on port ${port}`));
