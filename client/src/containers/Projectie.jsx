@@ -15,7 +15,8 @@ class Projectie extends Component {
       question: "",
       mogelijkeAntwoorden: [],
       enkelAntwoorden: [],
-      antwoordTest: []
+      antwoordTest: [],
+      finaalAntwoord: []
     };
   }
 
@@ -37,7 +38,7 @@ class Projectie extends Component {
         enkelAntwoorden: [...this.state.enkelAntwoorden, antwoord]
       });
       console.log(`enkel antwoorden`, this.state.enkelAntwoorden);
-      this.calculateAnswers(this.state.enkelAntwoorden);
+      //this.calculateAnswers(this.state.enkelAntwoorden);
     });
 
     socket.on("question", type => {
@@ -52,6 +53,9 @@ class Projectie extends Component {
         question: this.state.question,
         answers: [this.state.antwoorden]
       });
+
+      // Tijd is op? toon de antwoorden
+      this.showWinningAnswer();
     });
   }
 
@@ -67,13 +71,17 @@ class Projectie extends Component {
     }
   };
 
-  calculateAnswers = antwoorden => {
-    const map = antwoorden.reduce((obj, b) => {
-      obj[b] = ++obj[b] || 1;
-      return obj;
-    }, {});
+  // calculateAnswers = antwoorden => {
+  //   const map = antwoorden.reduce((obj, b) => {
+  //     obj[b] = ++obj[b] || 1;
+  //     return obj;
+  //   }, {});
 
-    console.log(map);
+  //   console.log(map);
+  // };
+
+  showWinningAnswer = () => {
+    console.log(`toon het antwoord`);
   };
 
   render() {
@@ -97,11 +105,11 @@ class Projectie extends Component {
           <p className="title">Projectie container</p>
           <p>{question}</p>
           <p>Jullie kozen voor:</p>
-          <ul>
+          {/* <ul>
             {mogelijkeAntwoorden.map(antwoord => (
               <li key={antwoord}>{antwoord} - 0%</li>
             ))}
-          </ul>
+          </ul> */}
           {/* <ul>
             {antwoorden.map(antwoord => (
               <li key={antwoord.antwoord}>{antwoord.antwoord}</li>

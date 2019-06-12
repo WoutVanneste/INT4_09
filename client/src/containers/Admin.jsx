@@ -14,7 +14,8 @@ class Admin extends Component {
       roomName: "",
       numberOfAnswers: 0,
       playerCount: 0,
-      counter: 15
+      counter: 15,
+      currentQuestion: 0
     };
   }
   handleSubmitForm = e => {
@@ -101,6 +102,10 @@ class Admin extends Component {
         numberOfAnswers: parseInt((prevState.numberOfAnswers += 1))
       }));
       console.log(`antwoord gegeven`);
+      if (this.state.numberOfAnswers === this.state.playerCount) {
+        socket.emit("tijd op", this.state.roomName);
+        console.log(`iedereen heeft geantwoord`);
+      }
     });
 
     socket.on("player count", playerCount => {
@@ -163,30 +168,50 @@ class Admin extends Component {
         >
           <div className={styles.admin_input_wrapper}>
             {this.props.questionStore.questions.length > 0 ? (
-              this.props.questionStore.questions.map((question, index) => (
-                <label
-                  htmlFor={question._id}
-                  className={radioStyles.radio_label}
-                  key={`vraag_${question._id}`}
-                >
-                  <input
-                    id={question._id}
-                    type="radio"
-                    name="keuze"
-                    value={index}
-                    checked={selectedOption === index}
-                    onChange={this.handleChangeOption}
-                    required
-                    className={radioStyles.radio_input}
-                  />
-                  <span className={radioStyles.radio_span}>
-                    <div className={radioStyles.option_wrapper}>
-                      {question.question}
-                    </div>
-                  </span>
-                </label>
-              ))
+              // this.props.questionStore.questions.map((question, index) => (
+              //   <label
+              //     htmlFor={question._id}
+              //     className={radioStyles.radio_label}
+              //     key={`vraag_${question._id}`}
+              //   >
+              //     <input
+              //       id={question._id}
+              //       type="radio"
+              //       name="keuze"
+              //       value={index}
+              //       checked={selectedOption === index}
+              //       onChange={this.handleChangeOption}
+              //       required
+              //       className={radioStyles.radio_input}
+              //     />
+              //     <span className={radioStyles.radio_span}>
+              //       {question.question}
+              //     </span>
+              //   </label>
+              // ))
+              // <label
+              //     htmlFor={question._id}
+              //     className={radioStyles.radio_label}
+              //     key={`vraag_${question._id}`}
+              //   >
+              //     <input
+              //       id={question._id}
+              //       type="radio"
+              //       name="keuze"
+              //       value={index}
+              //       checked={selectedOption === index}
+              //       onChange={this.handleChangeOption}
+              //       required
+              //       className={radioStyles.radio_input}
+              //     />
+              <span className={radioStyles.radio_span}>
+                {
+                  this.props.questionStore.questions[this.state.currentQuestion]
+                    .question
+                }
+              </span>
             ) : (
+              // </label>
               <p>Vragen aan het ophalen...</p>
             )}
           </div>
