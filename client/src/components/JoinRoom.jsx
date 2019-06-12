@@ -9,7 +9,7 @@ const JoinRoom = props => {
   const handleJoinRoom = e => {
     e.preventDefault();
     if (roomRef.current.value) {
-      socket.emit("join", roomRef.current.value);
+      socket.emit("join", { room: roomRef.current.value, user: "player" });
       props.joinedRoom(roomRef.current.value);
     }
   };

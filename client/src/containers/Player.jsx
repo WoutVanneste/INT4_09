@@ -65,15 +65,14 @@ class Player extends Component {
     console.log(antwoord);
     // console.log(`antwoord verstuurd`);
     this.setState({ aantalKeuzes: "op tijd" });
-    socket.emit("answer", { antwoord: antwoord.antwoord, id: socket.id }); // emit de value van de input.
+    socket.emit("answer", {
+      answer: { antwoord: antwoord.antwoord, id: socket.id },
+      room: this.state.room
+    }); // emit de value van de input.
 
     clearInterval(this.mijnInterval);
     // console.log(this.props);
 
-    // this.props.answerStore.addAnswerToDatabase({
-    //   question: "dit is de tweede vraag",
-    //   answers: [{ answer: "dit is het eerste antwoord" }]
-    // });
     console.log(this.state.question);
     // this.props.answerStore.addAnswerToDatabase({
     //   question: this.state.question.question,

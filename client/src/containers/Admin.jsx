@@ -14,19 +14,20 @@ class Admin extends Component {
       roomName: "",
       numberOfAnswers: 0,
       playerCount: 0,
-      counter: 10
+      counter: 1000
     };
   }
   handleSubmitForm = e => {
     e.preventDefault(); // stop form versturen
 
-    socket.emit("clear", true); // verwijder alles op de projectie
+    socket.emit("clear", { message: true, room: this.state.roomName }); // verwijder alles op de projectie
 
     socket.emit("question", {
       // stuur een socket vraag event en geef de vraag en room mee
       question: this.props.questionStore.questions[this.state.selectedOption],
       room: this.state.roomName
     });
+    clearInterval(this.mijnInterval);
 
     this.mijnInterval = setInterval(() => {
       this.setState(prevState => ({
@@ -35,7 +36,7 @@ class Admin extends Component {
       if (this.state.counter === 0) {
         clearInterval(this.mijnInterval);
         // na 10 seconden krijgt speler scherm 'te laat' te zien
-        socket.emit("tijd op");
+        socket.emit("tijd op", this.state.roomName);
       }
     }, 1000);
 
@@ -61,7 +62,7 @@ class Admin extends Component {
 
   handleCreateRoom = e => {
     e.preventDefault();
-    socket.emit("join", this.state.roomName); // join de room
+    socket.emit("join", { room: this.state.roomName, user: "admin" }); // join de room
   };
 
   handleChangeRoomTekst = e => {
@@ -87,8 +88,6 @@ class Admin extends Component {
       console.log(`socket message`, type);
     });
 
-    // socket.emit("admin", "admin");
-
     socket.on("user joined", msg => {
       console.log(`user joined`);
     });
@@ -101,11 +100,14 @@ class Admin extends Component {
       this.setState((prevState, props) => ({
         numberOfAnswers: parseInt((prevState.numberOfAnswers += 1))
       }));
+      console.log(`antwoord gegeven`);
     });
 
-    // socket.on("player count", playerCount => {
-    //   this.setState({ playerCount: playerCount });
-    // });
+    socket.on("player count", playerCount => {
+      this.setState({ playerCount: playerCount });
+      console.log(`user connected`);
+      console.log(this.state.playerCount);
+    });
   }
 
   render() {
@@ -119,8 +121,8 @@ class Admin extends Component {
     return (
       <>
         {/* <Menu /> */}
-        {/* <p>{`aantal spelers: ${playerCount}`}</p> */}
-        <p>{`aantal antwoorden: ${numberOfAnswers}`}</p>
+        <p>{`aantal spelers: ${playerCount}`}</p>
+        <p>{`aantal antwoorden: ${numberOfAnswers}/${playerCount}`}</p>
         <span className={styles.timer}>{counter}</span>
 
         <div className={styles.room_wrapper}>
