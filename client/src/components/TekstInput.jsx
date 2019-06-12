@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+// import { socket } from "../containers/App.js";
 import buttonStyles from "../styles/buttons.module.css";
 import styles from "./form.module.css";
 import textStyles from "./TekstIput.module.css";

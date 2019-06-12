@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+// import { socket } from "../containers/App.js";
 import buttonStyles from "../styles/buttons.module.css";
 import styles from "./form.module.css";
 import sliderStyles from "./SliderInput.module.css";

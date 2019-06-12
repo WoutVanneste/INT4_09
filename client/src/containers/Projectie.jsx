@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { socket } from "./App.js";
 import { inject, observer } from "mobx-react";
+import roomStyles from "./Admin.module.css";
+import styles from "./Projectie.module.css";
 
 class Projectie extends Component {
   roomRef = React.createRef();
@@ -102,19 +104,31 @@ class Projectie extends Component {
 
     if (roomId === "") {
       return (
-        <>
-          <p>Join een room</p>
-          <form action="" onSubmit={this.handleJoinRoom}>
-            <input type="text" ref={this.roomRef} />
-            <input type="submit" value="Join een room" />
+        <div className={`${roomStyles.room_wrapper} ${styles.room_wrapper}`}>
+          <h1 className={roomStyles.title}>Join een room</h1>
+          <form
+            className={roomStyles.room_form}
+            action=""
+            onSubmit={this.handleJoinRoom}
+          >
+            <input
+              className={roomStyles.room_input}
+              type="text"
+              ref={this.roomRef}
+              placeholder="Roomnaam"
+            />
+            <input
+              className={roomStyles.submit_form}
+              type="submit"
+              value="Join een room"
+            />
           </form>
-        </>
+        </div>
       );
     } else {
       return (
         <>
-          <p className="title">Projectie container</p>
-          <p>{question}</p>
+          {question ? <p>{question}</p> : ""}
           <p>Jullie kozen voor:</p>
 
           <p>{finaalAntwoord}</p>
