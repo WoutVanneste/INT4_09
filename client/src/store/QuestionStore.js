@@ -20,10 +20,12 @@ class QuestionStore {
 
   getAll = () => {
     this.api.getAll().then(d => d.forEach(this.addQuestionsToArray));
+    //this.api.getAll().then(d => console.log(d));
   };
 
   addQuestionsToArray = data => {
     this.questions.push(data);
+    console.log(data);
   };
 }
 

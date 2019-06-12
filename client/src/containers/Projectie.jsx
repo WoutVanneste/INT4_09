@@ -25,7 +25,7 @@ class Projectie extends Component {
   componentDidMount() {
     // Vangt de emit op
     socket.on("clear", answer => {
-      this.setState({ antwoorden: [] });
+      this.setState({ antwoorden: [], enkelAntwoorden: [] });
     });
 
     socket.on("answer", ({ antwoord, id }) => {
@@ -48,6 +48,7 @@ class Projectie extends Component {
       this.setState({ question: type.question });
       this.setState({ mogelijkeAntwoorden: type.options });
       console.log(`mogelijke antwoorden`, this.state.mogelijkeAntwoorden);
+      this.setState({ finaalAntwoord: "" });
     });
 
     socket.on("tijd op", () => {
@@ -73,23 +74,35 @@ class Projectie extends Component {
     }
   };
 
-  // calculateAnswers = antwoorden => {
-  //   const map = antwoorden.reduce((obj, b) => {
-  //     obj[b] = ++obj[b] || 1;
-  //     return obj;
-  //   }, {});
-
-  //   console.log(map);
-  // };
-
   showWinningAnswer = () => {
+    let counts = {};
+    let compare = 0;
+    let mostFrequent;
+    for (var i = 0, len = this.state.enkelAntwoorden.length; i < len; i++) {
+      let antwoord = this.state.enkelAntwoorden[i];
+
+      if (counts[antwoord] === undefined) {
+        counts[antwoord] = 1;
+      } else {
+        counts[antwoord] = counts[antwoord] + 1;
+      }
+      if (counts[antwoord] > compare) {
+        compare = counts[antwoord];
+        mostFrequent = this.state.enkelAntwoorden[i];
+      }
+    }
+
     console.log(`toon het antwoord`);
+    this.setState({ finaalAntwoord: mostFrequent });
   };
 
   render() {
     const {
+      antwoorden,
       roomId,
-      question /*, antwoorden, mogelijkeAntwoorden */
+      question,
+      mogelijkeAntwoorden,
+      finaalAntwoord
     } = this.state;
 
     if (roomId === "") {
@@ -130,6 +143,7 @@ class Projectie extends Component {
               <li key={antwoord.antwoord}>{antwoord.antwoord}</li>
             ))}
           </ul> */}
+          <p>{finaalAntwoord}</p>
         </>
       );
     }
