@@ -37,38 +37,33 @@ require("./app/routes/answers.routes.js")(app);
 
 const server = http.createServer(app);
 
-const io = socketIo(server); // initialiseer socket
+const io = socketIo(server, { pingTimeout: 60000 }); // initialiseer socket
 
 let connectionCounter = 0;
 
 io.on("connection", socket => {
-  console.log(`socket id`, socket.id);
+  // User connected
+  console.log(`${socket.id} connected to the site`);
 
-  connectionCounter++;
-  socket.emit("player count", connectionCounter);
-  console.log(connectionCounter);
-
-  //io.emit("user joined", msg);
-
-  socket.on("admin", () => {
-    connectionCounter--;
-    socket.emit("player count", connectionCounter);
-    console.log(`admin connected`);
-    console.log(connectionCounter);
-  });
-
-  socket.on("projectie", () => {
-    connectionCounter--;
-    socket.emit("player count", connectionCounter);
-
-    console.log(`projectie connected`);
-    console.log(connectionCounter);
+  // User disconnected
+  socket.on("disconnect", () => {
+    console.log(`${socket.id} disconnected from the site`);
   });
 
   // Join a custom room created by the admin
-  socket.on("join", room => {
+  socket.on("join", ({ room, user }) => {
     socket.join(room);
     console.log("room: " + room + " joined by:" + socket.id);
+
+    // Als een speler de room joint, verhoog de spelercount
+    if (user === "player") {
+      connectionCounter++;
+    }
+
+    // Stuur de spelercount door als iemand verbindt
+    //socket.emit("player count", connectionCounter);
+    io.to(room).emit("player count", connectionCounter);
+    console.log(`aantal spelers:`, connectionCounter);
 
     // Vraag doorsturen
     socket.on("question", ({ question, room }) => {
@@ -76,26 +71,29 @@ io.on("connection", socket => {
       io.to(room).emit("question", question);
     });
     // Antwoord doorsturen
-    socket.on("answer", msg => {
+    socket.on("answer", ({ answer, room }) => {
       console.log(`answer emit`);
-      io.emit("answer", msg);
+      io.to(room).emit("answer", answer);
     });
     // Projectie clearen
-    socket.on("clear", msg => {
+    socket.on("clear", ({ message, room }) => {
       console.log(`clear emit`);
-      io.emit("clear", msg);
+      io.to(room).emit("clear", message);
     });
 
-    socket.on("tijd op", () => {
-      io.emit("tijd op");
+    socket.on("tijd op", room => {
+      io.to(room).emit("tijd op");
     });
-  });
-  // User connected
-  console.log("a user connected");
-  socket.on("disconnect", () => {
-    connectionCounter--;
-    console.log(connectionCounter);
-    console.log("user disconnected");
+
+    socket.on("disconnect", () => {
+      if (user === "player") {
+        connectionCounter--;
+        console.log(`player disconnected`);
+      }
+
+      console.log(connectionCounter);
+      console.log(`user: ${socket.id} left room: ${room}`);
+    });
   });
 });
 

@@ -9,12 +9,17 @@ class Projectie extends Component {
   roomRef = React.createRef();
   constructor(props) {
     super(props);
-    this.state = { antwoorden: [], roomId: "", question: "" };
+    this.state = {
+      antwoorden: [],
+      roomId: "",
+      question: "",
+      mogelijkeAntwoorden: [],
+      enkelAntwoorden: [],
+      antwoordTest: []
+    };
   }
 
   componentDidMount() {
-    // socket.emit("projectie", "projectie");
-
     // Vangt de emit op
     socket.on("clear", answer => {
       this.setState({ antwoorden: [] });
@@ -26,12 +31,20 @@ class Projectie extends Component {
         antwoorden: [...this.state.antwoorden, { antwoord: antwoord, id: id }]
       });
       console.log(`antwoorden`, this.state.antwoorden);
-      //console.log(`id`, id);
+
+      // maak een array met alleen de antwoorden aan
+      this.setState({
+        enkelAntwoorden: [...this.state.enkelAntwoorden, antwoord]
+      });
+      console.log(`enkel antwoorden`, this.state.enkelAntwoorden);
+      this.calculateAnswers(this.state.enkelAntwoorden);
     });
 
     socket.on("question", type => {
-      console.log(type.question);
+      console.log(type);
       this.setState({ question: type.question });
+      this.setState({ mogelijkeAntwoorden: type.options });
+      console.log(`mogelijke antwoorden`, this.state.mogelijkeAntwoorden);
     });
 
     socket.on("tijd op", () => {
@@ -46,13 +59,25 @@ class Projectie extends Component {
     e.preventDefault();
     // Room joinen
     if (this.roomRef.current.value) {
-      socket.emit("join", this.roomRef.current.value);
+      socket.emit("join", {
+        room: this.roomRef.current.value,
+        user: "projectie"
+      });
       this.setState({ roomId: this.roomRef.current.value });
     }
   };
 
+  calculateAnswers = antwoorden => {
+    const map = antwoorden.reduce((obj, b) => {
+      obj[b] = ++obj[b] || 1;
+      return obj;
+    }, {});
+
+    console.log(map);
+  };
+
   render() {
-    const { antwoorden, roomId } = this.state;
+    const { antwoorden, roomId, question, mogelijkeAntwoorden } = this.state;
 
     if (roomId === "") {
       return (
@@ -70,12 +95,18 @@ class Projectie extends Component {
         <>
           {/* <Menu /> */}
           <p className="title">Projectie container</p>
-          <p>De verschillende antwoorden waren:</p>
+          <p>{question}</p>
+          <p>Jullie kozen voor:</p>
           <ul>
+            {mogelijkeAntwoorden.map(antwoord => (
+              <li key={antwoord}>{antwoord} - 0%</li>
+            ))}
+          </ul>
+          {/* <ul>
             {antwoorden.map(antwoord => (
               <li key={antwoord.antwoord}>{antwoord.antwoord}</li>
             ))}
-          </ul>
+          </ul> */}
         </>
       );
     }
