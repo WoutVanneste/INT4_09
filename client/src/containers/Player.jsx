@@ -20,7 +20,7 @@ class Player extends Component {
     this.state = {
       aantalKeuzes: "",
       taal: "",
-      counter: 20,
+      counter: 1000,
       question: "",
       room: ""
     };
@@ -39,7 +39,7 @@ class Player extends Component {
       clearInterval(this.mijnInterval);
       // Verander de state zodat keuzeswitch opnieuw wordt gerenderd
       // timer wordt opnieuw op 10 gezet door een nieuwe vraag
-      this.setState({ aantalKeuzes: type.type, counter: 20, question: type });
+      this.setState({ aantalKeuzes: type.type, counter: 1000, question: type });
       console.log(`question state`, this.state.question);
 
       // timer start als je op player komt.
@@ -241,7 +241,7 @@ class Player extends Component {
         );
       } else {
         console.log(`nu is er een taal`);
-        return <>{keuzeSwitch()}</>;
+        return <div className={styles.wrapper}>{keuzeSwitch()}</div>;
       }
     }
   }

@@ -1,0 +1,16 @@
+.input{
+  width: 40rem;
+  -webkit-appearance: none !important;
+  height:2.5rem;
+  border-radius: 2.5rem;
+  background: var(--white-color);
+  margin: 0 auto;
+}
+
+.input::-webkit-slider-thumb {
+    -webkit-appearance: none !important;
+    background:var(--bright-red-color);
+    height:3rem;
+    width:3rem;
+    border-radius: 1.5rem;
+}

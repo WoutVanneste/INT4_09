@@ -1,40 +1,48 @@
 .title{
   font-size: 5rem;
 }
-.form_wrapper, .room_wrapper{
+.room_wrapper{
   display: grid;
-  grid-gap: 5rem;
+  grid-template-rows: 10rem 1fr;
+  grid-gap: 10rem;
   justify-items: center;
+  height: calc(100vh - 10rem);;
+}
+
+.title_wrapper{
+  text-align: center;
+  display: grid;
+  grid-gap: 2rem;
 }
 
 .bijschrift{
   font-size: 2rem;
 }
 
-.room_wrapper{
-  margin-top: 15rem;
-}
-
-.form_wrapper, {
-  margin-top: 10rem;
-  width: 35rem;
-}
-
-.input, .input::placeholder{
-  color: var(--white-color);
-  font-family:  adobe-caslon-pro;
-  text-align: center;
+.form_wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .input{
   font-size: 2.5rem;
-  margin: 3rem 0;
+  margin: 0 auto;
   padding: 1.5rem 2rem;
-  width: 100%;
+  width: 40rem;
+  /* height: 5rem; */
   display: inline-block;
-  background: var( --ultradark-color);
-  border: .1rem solid rgba(187,213,237,0.50);
-  border-radius: 3.5rem;
+  background: var( --white-color);
+  color: var(--dark-red-color);
+  border: none;
+  outline-color: var(--dark-red-color)
+}
+
+.input, .input::placeholder{
+  color: var(--dark-red-color);
+  font-family:  Montserrat;
+  text-align: center;
 }
 
 .input::placeholder{

@@ -12,18 +12,27 @@
   position: relative;
   display: inline-block;
   text-align: center;
-  width: 15rem;
-  height: 20rem;
-  background: #3E3D5E;
-  border: .1rem solid rgba(187,213,237,0.50);
-  box-shadow: inset 0 .1rem 3rem 0 rgba(0,0,0,0.30);
-  transition: box-shadow ease-out .2s;
+  width: 14rem;
+  height: 14rem;
+  transition: filter .2s ease-in-out
+  /* box-shadow: none;
+  transition: box-shadow ease-out .2s; */
+  /* background-color: transparent; */
 }
 
-.radio_label .radio_input:checked ~.radio_span, .radio_label .radio_input:hover ~.radio_span{
-  background: var(--darkorange-color);
-  border: .1rem solid var(--transparant-orange-color);
-  box-shadow: inset 0 0 3rem 0 rgba(0,0,0,0.30), 0 0 11rem .1rem var(--transparant-orange-color);
-  
-}
+/* .radio_label .radio_input:checked ~.radio_span, .radio_label .radio_input:hover ~.radio_span{
+  /* background: var(--darkbright-red-color);
+  border: .1rem solid var(--transparant-bright-red-color); */
+  /* box-shadow: inset 0 0 3rem 0 rgba(0,0,0,0.30), 0 0 11rem .1rem var(--transparant-bright-red-color); */
+  /* filter: drop-shadow(.5rem .5rem 1rem .3rem green) 
+} */
 
+.radio_label .radio_input:checked ~ .radio_span svg g g{
+  fill: var(--white-color);
+}
+.radio_label .radio_input:checked ~ .radio_span svg g {
+  opacity: 1;
+}
+.radio_label .radio_input:checked ~ .radio_span{
+  filter: drop-shadow(0 0 4rem var(--bright-red-color)) 
+}

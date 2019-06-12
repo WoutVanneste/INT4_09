@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import { socket } from "../containers/App.js";
 import buttonStyles from "../styles/buttons.module.css";
 import styles from "./form.module.css";
+import textStyles from "./TekstIput.module.css";
 
 class TekstInput extends Component {
   constructor(props) {
@@ -24,10 +25,20 @@ class TekstInput extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmitForm} className={styles.player_form}>
-        <input
+        {/* <input
           type="text"
           onChange={this.handleChangeTekst}
           value={this.huidigAntwoord}
+          className={textStyles.input}
+        /> */}
+        <textarea
+          name="textInput"
+          cols="75"
+          rows="10"
+          placeholder="Schrijf hier je tekst"
+          onChange={this.handleChangeTekst}
+          value={this.huidigAntwoord}
+          className={textStyles.input}
         />
         <input
           type="submit"

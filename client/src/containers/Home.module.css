@@ -27,6 +27,6 @@
 }
 
 .link:hover, .link:focus{
-  color: var(--orange-color);
-  border-color: var(--orange-color);
+  color: var(--bright-red-color);
+  border-color: var(--bright-red-color);
 }

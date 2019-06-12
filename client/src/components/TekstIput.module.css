@@ -1,0 +1,14 @@
+.input{
+  /* Dit is de css voor de textarea,
+  dit moet veranderen indien toch de input gebruikt wordt! */
+  
+  margin: 0 auto;
+  outline-color: var(--dark-red-color);
+  padding: 2rem;
+  font-size: 2rem;
+}
+
+.input::placeholder{
+  opacity: .5;
+  font-style: italic;
+}

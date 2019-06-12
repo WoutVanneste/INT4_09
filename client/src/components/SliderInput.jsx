@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { socket } from "../containers/App.js";
 import buttonStyles from "../styles/buttons.module.css";
 import styles from "./form.module.css";
+import sliderStyles from "./SliderInput.module.css";
 
 class SliderInput extends Component {
   constructor(props) {
@@ -28,6 +29,7 @@ class SliderInput extends Component {
           max="100"
           onChange={this.handleChangeSlider}
           value={this.state.huidigAntwoord}
+          className={sliderStyles.input}
         />
         <input
           type="submit"

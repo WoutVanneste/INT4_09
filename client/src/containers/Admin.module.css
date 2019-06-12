@@ -19,7 +19,7 @@
 }
 
 .admin_radio_label .admin_radio_input:checked ~.admin_radio_span{
-  color: var(--orange-color);
+  color: var(--bright-red-color);
 }
 
 .admin_keuze{
@@ -28,9 +28,9 @@
   padding: 1.5rem 5rem;
   min-width: 50%;
   display: inline-block;
-  background: var( --ultradark-color);
+  color: var(--dark-bright-red-color);
+  background: var( --white-color);
   border: .1rem solid rgba(187,213,237,0.50);
-  border-radius: 3.5rem;
 }
 
 .admin_submit{

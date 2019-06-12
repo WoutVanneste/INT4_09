@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { socket } from "../containers/App.js";
 import styles from "./JoinRoom.module.css";
 import buttonStyles from "../styles/buttons.module.css";
 
 const JoinRoom = props => {
   const roomRef = React.createRef();
+
+  const [room, setRoom] = useState("");
 
   const handleJoinRoom = e => {
     e.preventDefault();
@@ -14,13 +16,20 @@ const JoinRoom = props => {
     }
   };
 
+  const handleChangeInput = e => {
+    setRoom(e.currentTarget.value);
+  };
+
   return (
     <>
       <div className={styles.room_wrapper}>
-        <h1 className={styles.title}>Interactieve voorstelling</h1>
-        <span className={styles.bijschrift}>
-          Vul hieronder de voorstelling van de gamemaster in
-        </span>
+        <div className={styles.title_wrapper}>
+          <h1 className={styles.title}>Interactieve voorstelling</h1>
+          <span className={styles.bijschrift}>
+            Vul hieronder de voorstelling van de gamemaster in
+          </span>
+        </div>
+
         <form
           action=""
           onSubmit={handleJoinRoom}
@@ -30,12 +39,17 @@ const JoinRoom = props => {
             type="text"
             ref={roomRef}
             className={styles.input}
+            onChange={handleChangeInput}
             placeholder="voorstelling123"
           />
           <input
             type="submit"
             value="Deelnemen aan voorstelling"
-            className={buttonStyles.submit_form}
+            className={
+              room === ""
+                ? buttonStyles.submit_form_empty
+                : buttonStyles.submit_form
+            }
           />
         </form>
       </div>

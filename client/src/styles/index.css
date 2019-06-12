@@ -13,14 +13,14 @@ html {
 
 body {
   color: var(--white-color);;
-  font-family: adobe-caslon-pro;
-  background-image: radial-gradient(200% 50% at 0 0, var(--blue-color) 15%, var(--dark-color) 60%);
+  font-family: Montserrat;
+  background-image: linear-gradient(180deg, #50142C 0%, #50142C 100%);
   background-size: cover;
   background-repeat: no-repeat;
-  min-width: 100vw;
-  min-height: 100vh;
-  padding: 5rem;
+  width: 100vw;
+  height: 100vh;
   background-attachment: fixed;
+  padding-top: 10rem;
 }
 
 .title{
