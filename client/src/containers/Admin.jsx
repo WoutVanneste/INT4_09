@@ -14,7 +14,7 @@ class Admin extends Component {
       roomName: "",
       numberOfAnswers: 0,
       playerCount: 0,
-      counter: 1000
+      counter: 15
     };
   }
   handleSubmitForm = e => {
@@ -119,12 +119,7 @@ class Admin extends Component {
     } = this.state;
 
     return (
-      <>
-        {/* <Menu /> */}
-        <p>{`aantal spelers: ${playerCount}`}</p>
-        <p>{`aantal antwoorden: ${numberOfAnswers}/${playerCount}`}</p>
-        <span className={styles.timer}>{counter}</span>
-
+      <div className={styles.total_wrapper}>
         <div className={styles.room_wrapper}>
           <h1 className={styles.title}>Maak een room aan</h1>
           <form
@@ -136,23 +131,31 @@ class Admin extends Component {
               className={styles.room_input}
               type="text"
               onChange={this.handleChangeRoomTekst}
+              placeholder="Roomnaam"
             />
             <input
-              className={`${buttonStyles.submit_form} ${styles.room_submit}`}
+              className={
+                this.state.roomName === ""
+                  ? styles.submit_form_empty
+                  : styles.submit_form
+              }
               type="submit"
               value="Maak een room"
             />
           </form>
+        </div>
+
+        <div>
           <p className={`${styles.room_info} ${styles.room_info_naam}`}>
             Room name: {this.state.roomName}
           </p>
           <p className={`${styles.room_info} ${styles.room_info_aantal}`}>
             Aantal antwoorden voor deze vraag: {numberOfAnswers}
           </p>
+          <p>{`aantal spelers in de room: ${playerCount}`}</p>
+          <p>{`aantal antwoorden op deze vraag: ${numberOfAnswers}/${playerCount}`}</p>
+          <span className={styles.timer}>{counter}</span>
         </div>
-        <p className={styles.admin_keuze}>
-          Kies welk soort vraag moeten de spelers krijgen?
-        </p>
         <form
           action=""
           onSubmit={this.handleSubmitForm}
@@ -177,7 +180,9 @@ class Admin extends Component {
                     className={radioStyles.radio_input}
                   />
                   <span className={radioStyles.radio_span}>
-                    {question.question}
+                    <div className={radioStyles.option_wrapper}>
+                      {question.question}
+                    </div>
                   </span>
                 </label>
               ))
@@ -198,7 +203,7 @@ class Admin extends Component {
             disabled={selectedOption === "" ? true : false}
           />
         </form>
-        <div className={styles.wachtscherm_wrapper}>
+        {/* <div className={styles.wachtscherm_wrapper}>
           <p className={styles.wachtscherm_tekst}>
             Laat de spelers maar weer wachten
           </p>
@@ -208,8 +213,8 @@ class Admin extends Component {
           >
             Wachtscherm
           </button>
-        </div>
-      </>
+        </div> */}
+      </div>
     );
   }
 }

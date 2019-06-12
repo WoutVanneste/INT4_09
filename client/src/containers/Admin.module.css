@@ -28,7 +28,7 @@
   padding: 1.5rem 5rem;
   min-width: 50%;
   display: inline-block;
-  color: var(--dark-bright-red-color);
+  color: var(--dark-red-color);
   background: var( --white-color);
   border: .1rem solid rgba(187,213,237,0.50);
 }
@@ -47,14 +47,13 @@
 }
 
 .admin_form{
-  margin: 7.5rem 0;
   width: 100%;
   grid-gap: 7.5rem;
   display: grid;
   justify-items: center;
   grid-template-areas: 'wrapper'
   'submit';
-  grid-template-rows: repeat(2, max-content);
+  grid-template-rows: 1fr 9rem
 }
 
 .wachtscherm_wrapper{
@@ -69,15 +68,13 @@
 
 .room_wrapper{
   display: grid;
-  /* width: 40rem; */
   grid-gap: 2.5rem;
   align-items: center;
   grid-template-areas: 
-  'title title'
-  'form form'
-  'infoAantal infoNaam';
-  grid-template-columns: repeat(2, 40rem);
-  grid-template-rows: repeat(2, auto);
+  'title'
+  'form';
+  grid-template-columns: repeat(2, max-content);
+  grid-template-rows: repeat(2, max-content);
 }
 
 .room_form{
@@ -87,19 +84,8 @@
   grid-template-columns: 40rem min-content;
   display: grid;
   grid-template-areas: 
-  'input submit'
-}
-
-.room_info_aantal{
-  grid-area: infoAantal
-}
-
-.room_info_naam{
-  grid-area: infoNaam;
-}
-
-.room_submit{
-  grid-area: submit
+  'input submit';
+  height: 6rem;
 }
 
 .title{
@@ -112,15 +98,54 @@
 }
 
 .room_input{
-  width: 40rem;
-  grid-area: input;
-  color: var(--white-color);
-  font-family:  adobe-caslon-pro;
   font-size: 2.5rem;
-  margin: 3rem 0;
+  margin: 0 auto;
   padding: 1.5rem 2rem;
+  width: 40rem;
   display: inline-block;
-  background: var( --ultradark-color);
-  border: .1rem solid rgba(187,213,237,0.50);
-  border-radius: 3.5rem;
+  background: var( --white-color);
+  color: var(--dark-red-color);
+  border: none;
+  outline-color: var(--dark-red-color)
+}
+
+.room_input, .room_input::placeholder{
+  color: var(--dark-red-color);
+  font-family:  Montserrat;
+}
+
+.room_input::placeholder{
+  font-style: italic;
+  opacity: .5;
+}
+
+.submit_form, .submit_form_empty{
+  border: none;
+  font-family: Montserrat;
+  text-transform: uppercase;
+  font-size: 2rem;
+  text-align: right;
+  color: var(--dark-red-color);
+  font-weight: 600;
+  letter-spacing: 0;
+  display: block;
+  padding: 1rem;
+  height: 6rem;
+  background-color: var(--white-color);
+  transition: opacity .2s ease-in-out, color .2s ease-in-out, border-color .2s ease-in-out;
+  outline-color: var(--dark-red-color);
+  grid-area: submit
+}
+.submit_form{
+  cursor: pointer;
+}
+.submit_form_empty{
+  opacity: 0.5;
+}
+.total_wrapper{
+  display: grid;
+  grid-template-rows: 10rem 10rem 1fr;
+  grid-gap: 4rem;
+  justify-items: center;
+  height: calc(100vh - 10rem);
 }

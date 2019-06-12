@@ -61,7 +61,7 @@ class TweeKeuzeInput extends Component {
                       stroke-width="1"
                       fill="none"
                       fill-rule="evenodd"
-                      opacity="0.2"
+                      opacity="1"
                     >
                       <g
                         id="Input_4_publiek-Copy-18"
