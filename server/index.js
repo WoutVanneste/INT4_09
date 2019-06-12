@@ -10,6 +10,7 @@ require("dotenv").config();
 
 const port = process.env.PORT;
 const index = require("./app/routes/index");
+// const index = path.join(__dirname, "./app/routes/index");
 
 mongoose
   .connect(process.env.DB_URL, {
@@ -36,9 +37,15 @@ require("./app/routes/questions.routes.js")(app);
 require("./app/routes/answers.routes.js")(app);
 
 // const server = http.createServer(app);
-const server = express()
-  .use((req, res) => res.sendFile(index))
-  .listen(port, () => console.log(`Listening on ${port}`));
+// const server = express()
+//   .use((req, res) => res.sendFile(index))
+//   .listen(port, () => console.log(`Listening on ${port}`));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+});
+
+const server = app.listen(port, () => console.log(`Listening on port ${port}`));
 
 const io = socketIo(server, { pingTimeout: 60000 }); // initialiseer socket
 
@@ -99,9 +106,3 @@ io.on("connection", socket => {
     });
   });
 });
-
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
-});
-
-//server.listen(port, () => console.log(`Listening on port ${port}`));
