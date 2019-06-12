@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { observer, inject } from "mobx-react";
-import { socket } from "../containers/App.js";
 import radioStyles from "../styles/radioButtons.module.css";
 import buttonStyles from "../styles/buttons.module.css";
 import styles from "./form.module.css";
@@ -13,12 +12,6 @@ class TweeKeuzeInput extends Component {
 
   handleSubmitForm = e => {
     e.preventDefault();
-
-    // Het antwoord wordt uit de state gehaald.
-    // this.props.answerStore.addAnswerToDatabase({
-    //   question: "dit is de tweede vraag",
-    //   answers: [{ answer: this.state.huidigAntwoord }]
-    // });
     this.props.verstuurAntwoord({ antwoord: this.state.huidigAntwoord });
   };
 

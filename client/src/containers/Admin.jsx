@@ -37,10 +37,7 @@ class Admin extends Component {
         currentQuestion: parseInt((prevState.currentQuestion += 1))
       }));
     } else {
-      console.log(`vragen zijn op`);
-
-      // this.props.questionStore.questions[this.state.currentQuestion].question =
-      //   "Er zijn geen vragen meer";
+      console.log(`Er zijn geen vragen meer`);
     }
 
     console.log(this.state.currentQuestion);
@@ -56,25 +53,11 @@ class Admin extends Component {
         socket.emit("tijd op", this.state.roomName);
       }
     }, 1000);
-
-    // this.props.answerStore.addAnswerToDatabase({
-    //   question: this.props.questionStore.questions[this.state.selectedOption]
-    //     .question,
-    //   answers: []
-    // });
   };
 
   handleChangeOption = e => {
     // Elke keer het antwoord verandert wordt deze aangepast in de state.
     this.setState({ selectedOption: parseInt(e.currentTarget.value, 10) }); // aangeduide optie in state opslaan als een Int
-
-    // code toen state genest was
-    // this.setState({
-    //   selectedOption: {
-    //     ...this.state.selectedOption,
-    //     type: e.currentTarget.value
-    //   }
-    // });
   };
 
   handleCreateRoom = e => {
@@ -89,13 +72,6 @@ class Admin extends Component {
   handleClickButton = e => {
     //spelers krijgen een wachtscherm te zien.
     e.preventDefault();
-    //this.setState({ selectedOption: "wachtscherm" });
-    // this.setState({
-    //   selectedOption: {
-    //     ...this.state.selectedOption,
-    //     type: "wachtscherm"
-    //   }
-    // });
     socket.emit("question", { type: "wachtscherm" }); // stuur wachtscherm door via socket
   };
 

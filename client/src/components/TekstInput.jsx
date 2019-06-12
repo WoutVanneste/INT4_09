@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import { socket } from "../containers/App.js";
 import buttonStyles from "../styles/buttons.module.css";
 import styles from "./form.module.css";
 import textStyles from "./TekstIput.module.css";
@@ -13,7 +12,6 @@ class TekstInput extends Component {
 
   handleSubmitForm = e => {
     // Het antwoord wordt uit de state gehaald.
-    //socket.emit("answer", this.huidigAntwoord); // emit de value van de input.
     e.preventDefault();
     this.props.verstuurAntwoord({ antwoord: this.state.huidigAntwoord });
   };
@@ -25,12 +23,6 @@ class TekstInput extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmitForm} className={styles.player_form}>
-        {/* <input
-          type="text"
-          onChange={this.handleChangeTekst}
-          value={this.huidigAntwoord}
-          className={textStyles.input}
-        /> */}
         <textarea
           name="textInput"
           cols="75"

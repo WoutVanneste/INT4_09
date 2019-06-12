@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-// import Menu from "../components/Menu";
-// import styles from "./Projectie.module.css";
 import { socket } from "./App.js";
 import { inject, observer } from "mobx-react";
 
 class Projectie extends Component {
-  //const antwoord = antwoordPlayer.location.antwoord;
   roomRef = React.createRef();
   constructor(props) {
     super(props);
@@ -106,7 +103,6 @@ class Projectie extends Component {
     if (roomId === "") {
       return (
         <>
-          {/* <Menu /> */}
           <p>Join een room</p>
           <form action="" onSubmit={this.handleJoinRoom}>
             <input type="text" ref={this.roomRef} />
@@ -117,20 +113,10 @@ class Projectie extends Component {
     } else {
       return (
         <>
-          {/* <Menu /> */}
           <p className="title">Projectie container</p>
           <p>{question}</p>
           <p>Jullie kozen voor:</p>
-          {/* <ul>
-            {mogelijkeAntwoorden.map(antwoord => (
-              <li key={antwoord}>{antwoord} - 0%</li>
-            ))}
-          </ul> */}
-          {/* <ul>
-            {antwoorden.map(antwoord => (
-              <li key={antwoord.antwoord}>{antwoord.antwoord}</li>
-            ))}
-          </ul> */}
+
           <p>{finaalAntwoord}</p>
         </>
       );

@@ -1,5 +1,4 @@
 import { decorate, observable, configure, action } from "mobx";
-// import Drink from "../models/Drink";
 import Api from "../api";
 
 configure({ enforceActions: `observed` });
