@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { observer, inject } from "mobx-react";
-import { socket } from "../containers/App.js";
+// import { socket } from "../containers/App.js";
 import radioStyles from "../styles/radioButtons.module.css";
 import buttonStyles from "../styles/buttons.module.css";
 import styles from "./form.module.css";
