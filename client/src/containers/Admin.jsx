@@ -63,6 +63,12 @@ class Admin extends Component {
   handleCreateRoom = e => {
     e.preventDefault();
     socket.emit("join", { room: this.state.roomName, user: "admin" }); // join de room
+
+    //Laad de speler counter opnieuw in bij het joinen van een room.
+    socket.emit("get players", this.state.roomName);
+    socket.on("player count", players => {
+      this.setState({ aantalPlayers: players });
+    });
   };
 
   handleChangeRoomTekst = e => {

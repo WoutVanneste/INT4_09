@@ -185,6 +185,10 @@ io.on("connection", socket => {
     io.to(room).emit("player count", connectionCounter);
     console.log(`aantal spelers:`, connectionCounter);
 
+    socket.on("get players", room => {
+      io.to(room).emit("player count", connectionCounter);
+    });
+
     // Vraag doorsturen
     socket.on("question", ({ question, room }) => {
       console.log(`question emit`, room);
