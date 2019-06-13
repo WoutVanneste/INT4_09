@@ -64,12 +64,13 @@ io.on("connection", socket => {
     if (user === "player") {
       if (connectionCounter[room] == undefined) {
         connectionCounter[room] = 1;
+        io.to(room).emit("player count", connectionCounter[room]);
       } else {
         connectionCounter[room]++;
+        io.to(room).emit("player count", connectionCounter[room]);
       }
       // Stuur de spelercount door als een speler verbindt
 
-      io.to(room).emit("player count", connectionCounter[room]);
       console.log(`aantal spelers:`, connectionCounter[room]);
     }
 
