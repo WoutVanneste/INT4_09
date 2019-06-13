@@ -29,6 +29,36 @@ class MeerKeuze extends Component {
     // Elke keer het antwoord verandert wordt deze aangepast in de state.
     this.setState({ huidigAntwoord: e.currentTarget.value });
   };
+
+  checkImg = img => {
+    // Hier wordt gecontroleerd of de svg die we ophalen bestaat
+    // indien deze niet bestaat betekent dit dat het een jpg moet zijn.
+
+    var http = new XMLHttpRequest();
+    const path = `/assets/img/${img}.svg`;
+
+    http.open("GET", path, false);
+    http.send();
+
+    if (http.status != 404) {
+      return (
+        <img
+          className={radioStyles.svg}
+          src={`/assets/img/${img}.svg`}
+          alt={img}
+        />
+      );
+    } else {
+      return (
+        <img
+          className={radioStyles.jpg}
+          src={`/assets/img/${img}.jpg`}
+          alt={img}
+        />
+      );
+    }
+  };
+
   render() {
     return (
       <form onSubmit={this.handleSubmitForm} className={styles.player_form}>
@@ -49,11 +79,11 @@ class MeerKeuze extends Component {
                   onChange={this.handleChangeRadio}
                   className={radioStyles.radio_input}
                 />
-                <img
-                  className={radioStyles.svg}
-                  src={`/assets/img/${question}.svg`}
-                  alt={question}
-                />
+                {this.checkImg(question)}
+
+                {/* <object data={`/assets/img/${question}.jpg`} type="image/jpg">
+                  <img src={`/assets/img/${question}.svg`} alt={question} />
+                </object> */}
               </label>
             ))
           ) : (

@@ -10,8 +10,15 @@
   width: 15rem;
   height: 20rem;
 }
+.jpg{
+  width: 20rem;
+  height: 20rem;
+}
 .radio_label .radio_input:checked ~ .svg{
   filter: brightness(0) invert(1) drop-shadow(0 0 4rem var(--white-color)) ;
+}
+.radio_label .radio_input:checked ~ .jpg{
+  filter: drop-shadow(0 0 4rem var(--white-color)) ;
 }
 
 .radio_span{

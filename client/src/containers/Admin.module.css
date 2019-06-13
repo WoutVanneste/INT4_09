@@ -38,10 +38,12 @@
 .admin_input_wrapper{
   width: 100%;
   text-align: center;
+  padding: 0 5rem;
 }
 
 .admin_vraag, .admin_vraag_grey{
   font-size: 4rem;
+  line-height: 6rem;
 }
 
 .admin_vraag_grey{
