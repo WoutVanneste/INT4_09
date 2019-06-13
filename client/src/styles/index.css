@@ -49,6 +49,7 @@ body {
   width: 100vw;
   height: 100vh;
   animation: flash .25s ease;
+  -webkit-animation: flash .25s ease;
   opacity: 0;
   background-color: white;
   z-index: 1000;
@@ -57,6 +58,11 @@ body {
 }
 
 @keyframes flash {
+  0%{opacity: 0;}
+  60%{opacity: 0.3;}
+  100%{opacity: 0;}
+}
+@-webkit-keyframes flash {
   0%{opacity: 0;}
   60%{opacity: 0.3;}
   100%{opacity: 0;}
