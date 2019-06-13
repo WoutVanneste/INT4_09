@@ -22,9 +22,11 @@ class Geantwoord extends Component {
 
   render() {
     return (
-      <p className={meldingStyles.player_melding}>
-        Super, je antwoord werd verstuurd!
-      </p>
+      <div className={meldingStyles.player_melding_wrapper}>
+        <p className={meldingStyles.player_melding}>
+          Super, je antwoord werd goed ontvangen!
+        </p>
+      </div>
     );
   }
 }

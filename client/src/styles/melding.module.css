@@ -2,5 +2,57 @@
   color: var(--white-color);
   font-size: 3rem;
   text-align: center;
+  margin: auto;
   /* margin: 5rem 0; */
+}
+.player_melding_wrapper{
+  height: calc(100vh - 50rem);
+  display: flex;
+  margin-top: 25rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.bolletje_wrapper{
+  width: 12rem;
+  height: 2rem;
+  display: flex;
+  justify-content: space-between;
+
+}
+.bolletje{
+  border-radius: 10rem;
+  width: 2rem;
+  height: 2rem;
+  display: block;
+  background-color: var(--bright-red-color);
+  animation: wave 1.3s ease-in-out infinite;
+  -webkit-animation: wave 1.3s ease-in-out infinite;
+}
+
+.bolletje:nth-child(2) {
+  animation-delay: -1s;
+}
+
+.bolletje:nth-child(3) {
+  animation-delay: -0.9s;
+}
+
+@keyframes wave {
+	0%, 60%, 100% {
+		transform: initial;
+	}
+
+	30% {
+		transform: translateY(-15px);
+	}
+}
+@-webkit-keyframes wave {
+	0%, 60%, 100% {
+		transform: initial;
+	}
+
+	30% {
+		transform: translateY(-15px);
+	}
 }

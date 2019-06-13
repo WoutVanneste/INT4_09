@@ -21,9 +21,9 @@ class TijdOp extends Component {
 
   render() {
     return (
-      <p className={meldingStyles.player_melding}>
-        Helaas, de tijd is om. Antwoord sneller bij de volgende vraag!
-      </p>
+      <div className={meldingStyles.player_melding_wrapper}>
+        <p className={meldingStyles.player_melding}>Helaas, de tijd is om!</p>
+      </div>
     );
   }
 }

@@ -40,8 +40,12 @@
   text-align: center;
 }
 
-.admin_vraag{
+.admin_vraag, .admin_vraag_grey{
   font-size: 4rem;
+}
+
+.admin_vraag_grey{
+  opacity: .5;
 }
 
 .admin_form{
