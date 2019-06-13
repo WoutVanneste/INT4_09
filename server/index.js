@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const socketIo = require("socket.io");
 const app = express();
-const server = require("https").Server(app);
+const server = require("http").Server(app);
 
 // const cors = require("cors");
 const cookieParser = require("cookie-parser");
@@ -46,9 +46,7 @@ const io = socketIo(server, { pingTimeout: 60000 }); // initialiseer socket
 //let connectionCounter = 0;
 let connectionCounter = {};
 
-const nsp = io.of("/");
-
-nsp.on("connection", socket => {
+io.on("connection", socket => {
   // User connected
   console.log(`${socket.id} connected to the site`);
 
