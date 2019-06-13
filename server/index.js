@@ -159,7 +159,8 @@ app.get("/api/data", (req, res) => {
 const io = socketIo(server, { pingTimeout: 60000 }); // initialiseer socket
 
 // Socket io code
-let connectionCounter = 0;
+//let connectionCounter = 0;
+let connectionCounter = {};
 
 io.on("connection", socket => {
   // User connected
@@ -177,16 +178,19 @@ io.on("connection", socket => {
 
     // Als een speler de room joint, verhoog de spelercount
     if (user === "player") {
-      connectionCounter++;
+      if (connectionCounter[room] == undefined) {
+        connectionCounter[room] = 1;
+      } else {
+        connectionCounter[room]++;
+      }
+      // Stuur de spelercount door als een speler verbindt
+
+      io.to(room).emit("player count", connectionCounter[room]);
+      console.log(`aantal spelers:`, connectionCounter[room]);
     }
 
-    // Stuur de spelercount door als iemand verbindt
-    //socket.emit("player count", connectionCounter);
-    io.to(room).emit("player count", connectionCounter);
-    console.log(`aantal spelers:`, connectionCounter);
-
     socket.on("get players", room => {
-      io.to(room).emit("player count", connectionCounter);
+      io.to(room).emit("player count", connectionCounter[room]);
     });
 
     // Vraag doorsturen
@@ -211,12 +215,13 @@ io.on("connection", socket => {
 
     socket.on("disconnect", () => {
       if (user === "player") {
-        connectionCounter--;
+        connectionCounter[room]--;
         console.log(`player disconnected`);
       }
 
-      console.log(connectionCounter);
+      console.log(connectionCounter[room]);
       console.log(`user: ${socket.id} left room: ${room}`);
+      io.to(room).emit("player count", connectionCounter[room]);
     });
   });
 });

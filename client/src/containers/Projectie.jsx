@@ -43,7 +43,7 @@ class Projectie extends Component {
     socket.on("question", type => {
       console.log(type);
       this.setState({ question: type.question });
-      this.setState({ mogelijkeAntwoorden: type.options });
+      // this.setState({ mogelijkeAntwoorden: type.options });
       console.log(`mogelijke antwoorden`, this.state.mogelijkeAntwoorden);
       this.setState({ finaalAntwoord: "" });
     });
@@ -94,13 +94,7 @@ class Projectie extends Component {
   };
 
   render() {
-    const {
-      antwoorden,
-      roomId,
-      question,
-      mogelijkeAntwoorden,
-      finaalAntwoord
-    } = this.state;
+    const { roomId, question, finaalAntwoord } = this.state;
 
     if (roomId === "") {
       return (
