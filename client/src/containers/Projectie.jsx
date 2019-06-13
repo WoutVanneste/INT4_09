@@ -144,7 +144,7 @@ class Projectie extends Component {
       return (
         <>
           {question ? <p>{question}</p> : ""}
-          {finaalAntwoord !== "" || finaalAntwoord === "undefined" ? (
+          {finaalAntwoord != "" || finaalAntwoord === "undefined" ? (
             <>
               <p>Jullie kozen voor:</p>
               <img
