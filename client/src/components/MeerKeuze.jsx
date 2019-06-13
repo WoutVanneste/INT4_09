@@ -35,28 +35,30 @@ class MeerKeuze extends Component {
     // indien deze niet bestaat betekent dit dat het een jpg moet zijn.
 
     var http = new XMLHttpRequest();
-    const path = `/assets/img/${img}.svg`;
+    http.onreadystatechange = function() {
+      const path = `/assets/img/${img}.svg`;
 
-    http.open("GET", path, false);
-    http.send();
+      http.open("GET", path, false);
+      http.send();
 
-    if (http.status != 404) {
-      return (
-        <img
-          className={radioStyles.svg}
-          src={`/assets/img/${img}.svg`}
-          alt={img}
-        />
-      );
-    } else {
-      return (
-        <img
-          className={radioStyles.jpg}
-          src={`/assets/img/${img}.jpg`}
-          alt={img}
-        />
-      );
-    }
+      if (http.status != 404) {
+        return (
+          <img
+            className={radioStyles.svg}
+            src={`/assets/img/${img}.svg`}
+            alt={img}
+          />
+        );
+      } else {
+        return (
+          <img
+            className={radioStyles.jpg}
+            src={`/assets/img/${img}.jpg`}
+            alt={img}
+          />
+        );
+      }
+    };
   };
 
   render() {
