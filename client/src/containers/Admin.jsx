@@ -14,7 +14,7 @@ class Admin extends Component {
       room: false,
       numberOfAnswers: 0,
       playerCount: 0,
-      counter: 1,
+      counter: 15,
       currentQuestion: 0,
       questionIsBeingAnswered: false
     };
@@ -55,7 +55,7 @@ class Admin extends Component {
         clearInterval(this.mijnInterval);
         // na 15 seconden krijgt speler scherm 'te laat' te zien
         socket.emit("tijd op", this.state.roomName);
-        this.setState({ counter: 1 });
+        this.setState({ counter: 15 });
         if (
           this.state.currentQuestion < this.props.questionStore.questions.length
         ) {
@@ -119,7 +119,7 @@ class Admin extends Component {
         socket.emit("tijd op", this.state.roomName);
         console.log(`iedereen heeft geantwoord`);
         clearInterval(this.mijnInterval);
-        this.setState({ counter: 1 });
+        this.setState({ counter: 15 });
         this.setState({ questionIsBeingAnswered: false });
         console.log(`terug naar wit`);
       }
