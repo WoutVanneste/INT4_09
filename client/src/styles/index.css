@@ -22,7 +22,7 @@ body {
   height: 100vh;
   animation: letters_moving 7.5s ease-in-out infinite;
   /* background-attachment: fixed; */
-  padding-top: 10rem;
+  padding-top: 10rem; 
 }
 
 .title{
@@ -31,7 +31,7 @@ body {
 }
 
 @keyframes letters_moving{
-  0%{background-position: left top -.5rem, center top 1.5rem, right top, left}
-  50%{background-position: left top -2rem, center top -.5rem, right top -2.5rem, left}
-  100%{background-position: left top -.5rem, center top 1.5rem, right top, left}
+  0%{-webkit-background-position: left top -.5rem, center top 1.5rem, right top, left}
+  50%{-webkit-background-position: left top -2rem, center top -.5rem, right top -2.5rem, left}
+  100%{-webkit-background-position: left top -.5rem, center top 1.5rem, right top, left}
 }
