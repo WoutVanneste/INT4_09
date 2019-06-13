@@ -5,6 +5,9 @@ import radioStyles from "../styles/radioButtons.module.css";
 import buttonStyles from "../styles/buttons.module.css";
 import styles from "./form.module.css";
 
+// import jurkje from "../../public/assets/img/jurkje.svg";
+// import trainingsoutfit from "../../public/assets/img/trainingsoutfit.svg";
+
 class MeerKeuze extends Component {
   constructor(props) {
     super(props);
@@ -48,8 +51,8 @@ class MeerKeuze extends Component {
                 />
                 <img
                   className={radioStyles.svg}
-                  src="../assets/img/Kat.svg"
-                  alt="kat"
+                  src={`/assets/img/${question}.svg`}
+                  alt={question}
                 />
               </label>
             ))

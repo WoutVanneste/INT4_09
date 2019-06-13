@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="155.06mm" height="212.69mm" viewBox="0 0 439.54 602.9">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #e62b41;
+        stroke-miterlimit: 10;
+        stroke-width: 11px;
+      }
+    </style>
+  </defs>
+  <title>obv icons</title>
+  <g id="Laag_1" data-name="Laag 1">
+    <path class="cls-1" d="M144.73,283.39h-25.6a27.07,27.07,0,0,1-27.08-27.08V117.48H362.12V256.31A27.07,27.07,0,0,1,335,283.39H311.27"/>
+    <rect class="cls-1" x="73.34" y="71.38" width="303.72" height="46.1" rx="5.42"/>
+    <path class="cls-1" d="M72.83,162.23H92a0,0,0,0,1,0,0V192a0,0,0,0,1,0,0H72.83a13.67,13.67,0,0,1-13.67-13.67V175.9A13.67,13.67,0,0,1,72.83,162.23Z"/>
+  </g>
+  <g id="Laag_2" data-name="Laag 2">
+    <path class="cls-1" d="M146,368.49a84,84,0,0,0,167.4,0Z"/>
+    <polygon class="cls-1" points="288.08 508.17 176.38 508.17 193.58 444.95 267.06 444.95 288.08 508.17"/>
+    <rect class="cls-1" x="125.87" y="329.86" width="206.23" height="37.94" rx="5.37"/>
+    <rect class="cls-1" x="155.29" y="509.2" width="152.46" height="28.77" rx="4.02"/>
+    <path class="cls-1" d="M301.38,329.81c8.08-18,12.75-39.26,12.75-62,0-64.86-37.86-117.45-84.57-117.45S145,202.92,145,267.78c0,22.77,4.67,44,12.75,62Z"/>
+  </g>
+</svg>

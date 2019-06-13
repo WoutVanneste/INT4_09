@@ -15,11 +15,12 @@ body {
   color: var(--white-color);;
   font-family: Montserrat;
   background-image: url('/assets/img/logoO.svg'),url('/assets/img/logoB.svg'),url('/assets/img/logoV.svg'), linear-gradient(180deg, #50142C 0%, #50142C 100%);
-  background-size: 25%, 25%, 25%, cover;
-  background-position: left top -1rem, center top 5rem, right top, left;
+  background-size: 30%, 30%, 30%, cover;
+  background-position: left top -1rem, center top 1.5rem, right top, left;
   background-repeat: no-repeat, no-repeat,no-repeat, no-repeat;
   width: 100vw;
   height: 100vh;
+  animation: letters_moving 7.5s ease-in-out infinite;
   /* background-attachment: fixed; */
   padding-top: 10rem;
 }
@@ -27,4 +28,10 @@ body {
 .title{
   font-size: 1.5rem;
   color: var(--white-color);
+}
+
+@keyframes letters_moving{
+  0%{background-position: left top -.5rem, center top 1.5rem, right top, left}
+  50%{background-position: left top -2rem, center top -.5rem, right top -2.5rem, left}
+  100%{background-position: left top -.5rem, center top 1.5rem, right top, left}
 }
