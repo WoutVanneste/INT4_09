@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { socket } from "./App.js";
 import { inject, observer } from "mobx-react";
-import roomStyles from "./Admin.module.css";
-import styles from "./Projectie.module.css";
+import kamerStyles from "../components/Kamer.module.css";
+import buttonStyles from "../styles/buttons.module.css";
 
 class Projectie extends Component {
   roomRef = React.createRef();
@@ -15,7 +15,8 @@ class Projectie extends Component {
       mogelijkeAntwoorden: [],
       enkelAntwoorden: [],
       antwoordTest: [],
-      finaalAntwoord: []
+      finaalAntwoord: [],
+      roomname: ""
     };
   }
 
@@ -71,6 +72,10 @@ class Projectie extends Component {
     }
   };
 
+  handleChangeInput = e => {
+    this.setState({ roomname: e.currentTarget.value });
+  };
+
   showWinningAnswer = () => {
     let counts = {};
     let compare = 0;
@@ -98,23 +103,37 @@ class Projectie extends Component {
 
     if (roomId === "") {
       return (
-        <div className={`${roomStyles.room_wrapper} ${styles.room_wrapper}`}>
-          <h1 className={roomStyles.title}>Join een room</h1>
+        <div className={kamerStyles.room_wrapper}>
+          <div className={kamerStyles.title_wrapper}>
+            <h1 className={kamerStyles.title}>Vul hier de kamernaam in</h1>
+            <div className={kamerStyles.role}>
+              <p className={kamerStyles.role_name}>projectie</p>
+            </div>
+          </div>
           <form
-            className={roomStyles.room_form}
+            className={kamerStyles.form_wrapper}
             action=""
             onSubmit={this.handleJoinRoom}
           >
             <input
-              className={roomStyles.room_input}
+              className={
+                this.state.roomname === ""
+                  ? kamerStyles.input
+                  : kamerStyles.input_true
+              }
               type="text"
               ref={this.roomRef}
-              placeholder="Roomnaam"
+              placeholder="Kamernaam"
+              onChange={this.handleChangeInput}
             />
             <input
-              className={roomStyles.submit_form}
+              className={
+                this.state.roomname === ""
+                  ? buttonStyles.submit_form_empty
+                  : buttonStyles.submit_form
+              }
               type="submit"
-              value="Join een room"
+              value="Deelnemen met kamer"
             />
           </form>
         </div>

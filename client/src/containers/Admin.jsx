@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-// import Menu from "../components/Menu";
 import styles from "./Admin.module.css";
-import radioStyles from "../styles/radioButtons.module.css";
 import buttonStyles from "../styles/buttons.module.css";
+import kamerStyles from "../components/Kamer.module.css";
 import { socket } from "./App.js";
 import { inject, observer } from "mobx-react";
 
@@ -125,47 +124,45 @@ class Admin extends Component {
 
     if (this.state.room === false) {
       return (
-        <>
-          <div className={styles.total_wrapper}>
-            <div className={styles.title_wrapper}>
-              <h1 className={styles.title}>Vul hier de roomnaam in</h1>
-              <div className={styles.role}>
-                <p className={styles.role_name}>Admin</p>
-              </div>
+        <div className={kamerStyles.room_wrapper}>
+          <div className={kamerStyles.title_wrapper}>
+            <h1 className={kamerStyles.title}>Vul hier de kamernaam in</h1>
+            <div className={kamerStyles.role}>
+              <p className={kamerStyles.role_name}>admin</p>
             </div>
-            <form
-              className={styles.admin_form}
-              action=""
-              onSubmit={this.handleCreateRoom}
-            >
-              <input
-                className={
-                  this.state.roomName === "" ? styles.input : styles.input_true
-                }
-                type="text"
-                onChange={this.handleChangeRoomTekst}
-                placeholder="Roomnaam"
-              />
-              <input
-                className={
-                  styles.admin_submit +
-                  " " +
-                  (this.state.roomName === ""
-                    ? buttonStyles.submit_form_empty
-                    : buttonStyles.submit_form)
-                }
-                type="submit"
-                value="Maak een room"
-                disabled={
-                  this.state.currentQuestion <
-                  this.props.questionStore.questions.length
-                    ? false
-                    : true
-                }
-              />
-            </form>
           </div>
-        </>
+          <form
+            className={kamerStyles.form_wrapper}
+            action=""
+            onSubmit={this.handleCreateRoom}
+          >
+            <input
+              className={
+                this.state.roomName === ""
+                  ? kamerStyles.input
+                  : kamerStyles.input_true
+              }
+              type="text"
+              onChange={this.handleChangeRoomTekst}
+              placeholder="Kamernaam"
+            />
+            <input
+              className={
+                this.state.roomName === ""
+                  ? buttonStyles.submit_form_empty
+                  : buttonStyles.submit_form
+              }
+              type="submit"
+              value="Maak een kamer"
+              disabled={
+                this.state.currentQuestion <
+                this.props.questionStore.questions.length
+                  ? false
+                  : true
+              }
+            />
+          </form>
+        </div>
       );
     } else {
       return (

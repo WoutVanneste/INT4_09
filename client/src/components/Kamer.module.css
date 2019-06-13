@@ -1,6 +1,7 @@
 .title{
   font-size: 4rem;
 }
+
 .room_wrapper{
   display: grid;
   grid-template-rows: 10rem 1fr;
@@ -47,7 +48,6 @@
   width: 40rem;
   display: inline-block;
   background: var( --dark-red-color);
-  /* color: var(--white-color); */
   border: .4rem solid var(--bright-red-color);
   outline-color: var(--white-color);
   border-radius: 0.75rem;
@@ -63,6 +63,5 @@
 }
 
 .input::placeholder{
-  font-style: italic;
   opacity: .5;
 }
