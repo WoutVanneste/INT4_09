@@ -32,14 +32,14 @@ body {
 }
 
 @keyframes letters_moving{
-  0%{background-position: left top 0rem, center top 3.5rem, right top, left}
-  50%{background-position: left top -5rem, center top -3.5rem, right top -5.5rem, left}
-  100%{background-position: left top 0rem, center top 3.5rem, right top, left}
+  0%{background-position: left top 0rem, center top 4.5rem, right top, left}
+  50%{background-position: left top -10rem, center top -4.5rem, right top -7.5rem, left}
+  100%{background-position: left top 0rem, center top 4.5rem, right top, left}
 }
 @-webkit-keyframes letters_moving{
-  0%{background-position: left top 0rem, center top 3.5rem, right top, left}
-  50%{background-position: left top -5rem, center top -3.5rem, right top -5.5rem, left}
-  100%{background-position: left top 0rem, center top 3.5rem, right top, left}
+  0%{background-position: left top 0rem, center top 4.5rem, right top, left}
+  50%{background-position: left top -10rem, center top -4.5rem, right top -7.5rem, left}
+  100%{background-position: left top 0rem, center top 4.5rem, right top, left}
 }
 
 .flash {

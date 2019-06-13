@@ -3,16 +3,38 @@
   font-size: 3rem;
   text-align: center;
   margin: auto;
-  /* margin: 5rem 0; */
 }
-.player_melding_wrapper{
-  height: calc(100vh - 50rem);
+.player_melding_wrapper, .player_melding_wrapper_small{
+  height: calc(100vh - 55rem);
   display: flex;
-  margin-top: 25rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 25rem;
 }
+
+.player_melding_full_wrapper{
+  height: calc(100vh - 10rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.player_melding_wrapper_small{
+  animation: moveUp .7s ease-in-out forwards;
+  -webkit-animation: moveUp .7s ease-in-out forwards;
+  animation-delay: .5s;
+}
+
+@keyframes moveUp {
+  0%{transform: translateY(0);}
+  100%{transform: translateY(-25rem);}
+}
+@-webkit-keyframes moveUp {
+  0%{transform: translateY(0);}
+  100%{transform: translateY(-25rem);}
+}
+
 .bolletje_wrapper{
   width: 12rem;
   height: 2rem;

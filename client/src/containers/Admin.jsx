@@ -137,12 +137,7 @@ class Admin extends Component {
   }
 
   render() {
-    const {
-      selectedOption,
-      playerCount,
-      numberOfAnswers,
-      counter
-    } = this.state;
+    const { playerCount, numberOfAnswers, counter } = this.state;
 
     if (this.state.room === false) {
       return (
