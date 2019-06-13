@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const socketIo = require("socket.io");
 const app = express();
-const server = require("http").Server(app);
+const server = require("https").Server(app);
 
 // const cors = require("cors");
 const cookieParser = require("cookie-parser");
