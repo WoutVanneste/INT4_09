@@ -36,3 +36,8 @@ body {
   50%{background-position: left top -2rem, center top -.5rem, right top -2.5rem, left}
   100%{background-position: left top -.5rem, center top 1.5rem, right top, left}
 }
+@-webkit-keyframes letters_moving{
+  0%{background-position: left top -.5rem, center top 1.5rem, right top, left}
+  50%{background-position: left top -2rem, center top -.5rem, right top -2.5rem, left}
+  100%{background-position: left top -.5rem, center top 1.5rem, right top, left}
+}
