@@ -12,6 +12,7 @@ class Admin extends Component {
     this.state = {
       selectedOption: 0,
       roomName: "",
+      room: false,
       numberOfAnswers: 0,
       playerCount: 0,
       counter: 15,
@@ -79,6 +80,7 @@ class Admin extends Component {
 
   handleCreateRoom = e => {
     e.preventDefault();
+    this.setState({ room: true });
     socket.emit("join", { room: this.state.roomName, user: "admin" }); // join de room
   };
 
@@ -139,136 +141,150 @@ class Admin extends Component {
       counter
     } = this.state;
 
-    return (
-      <div className={styles.total_wrapper}>
-        <div className={styles.room_wrapper}>
-          <h1 className={styles.title}>Maak een room aan</h1>
-          <form
-            className={styles.room_form}
-            action=""
-            onSubmit={this.handleCreateRoom}
-          >
-            <input
-              className={styles.room_input}
-              type="text"
-              onChange={this.handleChangeRoomTekst}
-              placeholder="Roomnaam"
-            />
-            <input
-              className={
-                this.state.roomName === ""
-                  ? styles.submit_form_empty
-                  : styles.submit_form
-              }
-              type="submit"
-              value="Maak een room"
-            />
-          </form>
-        </div>
-
-        <div>
-          <p className={`${styles.room_info} ${styles.room_info_naam}`}>
-            Room name: {this.state.roomName}
-          </p>
-          <p className={`${styles.room_info} ${styles.room_info_aantal}`}>
-            Aantal antwoorden voor deze vraag: {numberOfAnswers}
-          </p>
-          <p>{`aantal spelers in de room: ${playerCount}`}</p>
-          <p>{`aantal antwoorden op deze vraag: ${numberOfAnswers}/${playerCount}`}</p>
-          <span className={styles.timer}>{counter}</span>
-        </div>
-        <form
-          action=""
-          onSubmit={this.handleSubmitForm}
-          className={styles.admin_form}
-        >
-          <div className={styles.admin_input_wrapper}>
-            {this.props.questionStore.questions.length > 0 ? (
-              this.state.currentQuestion <
-              this.props.questionStore.questions.length ? (
-                <span className={radioStyles.radio_span}>
-                  {
-                    this.props.questionStore.questions[
-                      this.state.currentQuestion
-                    ].question
-                  }
-                </span>
-              ) : (
-                <span className={radioStyles.radio_span}>vragen zijn op</span>
-              )
-            ) : (
-              // this.props.questionStore.questions.map((question, index) => (
-              //   <label
-              //     htmlFor={question._id}
-              //     className={radioStyles.radio_label}
-              //     key={`vraag_${question._id}`}
-              //   >
-              //     <input
-              //       id={question._id}
-              //       type="radio"
-              //       name="keuze"
-              //       value={index}
-              //       checked={selectedOption === index}
-              //       onChange={this.handleChangeOption}
-              //       required
-              //       className={radioStyles.radio_input}
-              //     />
-              //     <span className={radioStyles.radio_span}>
-              //       {question.question}
-              //     </span>
-              //   </label>
-              // ))
-              // <label
-              //     htmlFor={question._id}
-              //     className={radioStyles.radio_label}
-              //     key={`vraag_${question._id}`}
-              //   >
-              //     <input
-              //       id={question._id}
-              //       type="radio"
-              //       name="keuze"
-              //       value={index}
-              //       checked={selectedOption === index}
-              //       onChange={this.handleChangeOption}
-              //       required
-              //       className={radioStyles.radio_input}
-              //     />
-
-              // </label>
-              <p>Vragen aan het ophalen...</p>
-            )}
+    if (this.state.room === false) {
+      return (
+        <>
+          <div className={styles.total_wrapper}>
+            <div className={styles.title_wrapper}>
+              <h1 className={styles.title}>Vul hier de roomnaam in</h1>
+              <div className={styles.role}>
+                <p className={styles.role_name}>Admin</p>
+              </div>
+            </div>
+            <form
+              className={styles.admin_form}
+              action=""
+              onSubmit={this.handleCreateRoom}
+            >
+              <input
+                className={
+                  this.state.roomName === "" ? styles.input : styles.input_true
+                }
+                type="text"
+                onChange={this.handleChangeRoomTekst}
+                placeholder="Roomnaam"
+              />
+              <input
+                className={
+                  styles.admin_submit +
+                  " " +
+                  (this.state.roomName === ""
+                    ? buttonStyles.submit_form_empty
+                    : buttonStyles.submit_form)
+                }
+                type="submit"
+                value="Maak een room"
+                disabled={
+                  this.state.currentQuestion <
+                  this.props.questionStore.questions.length
+                    ? false
+                    : true
+                }
+              />
+            </form>
           </div>
-          <input
-            className={
-              styles.admin_submit +
-              " " +
-              (selectedOption === ""
-                ? buttonStyles.submit_form_empty
-                : buttonStyles.submit_form)
-            }
-            type="submit"
-            value="Verstuur vraag"
-            disabled={
-              this.state.currentQuestion <
-              this.props.questionStore.questions.length
-                ? false
-                : true
-            }
-          />
-        </form>
-        {/* <div className={styles.wachtscherm_wrapper}>
-          <p className={styles.wachtscherm_tekst}>
-            Laat de spelers maar weer wachten
-          </p>
-          <button
-            className={buttonStyles.submit_form}
-            onClick={this.handleClickButton}
-          >
-            Wachtscherm
-          </button>
-        </div> */}
-      </div>
-    );
+        </>
+      );
+    } else {
+      return (
+        <>
+          <div className={styles.total_wrapper_questions}>
+            <div className={styles.top_wrapper}>
+              <div className={styles.room_block}>
+                <p className={styles.room_name}>{this.state.roomName}</p>
+              </div>
+
+              <div className={styles.about_block}>
+                <div className={styles.room_info}>
+                  <p className={styles.aantal_antwoorden}>
+                    Antwoorden op deze vraag: {numberOfAnswers}/{playerCount}
+                  </p>
+                  <p>Spelers in de room: {playerCount}</p>
+                </div>
+                <span className={styles.timer}>Timer: {counter}</span>
+              </div>
+            </div>
+            <form
+              action=""
+              onSubmit={this.handleSubmitForm}
+              className={styles.admin_form}
+            >
+              <div className={styles.admin_input_wrapper}>
+                {this.props.questionStore.questions.length > 0 ? (
+                  this.state.currentQuestion <
+                  this.props.questionStore.questions.length ? (
+                    <span className={styles.admin_vraag}>
+                      {
+                        this.props.questionStore.questions[
+                          this.state.currentQuestion
+                        ].question
+                      }
+                    </span>
+                  ) : (
+                    <span className={styles.admin_vraag}>vragen zijn op</span>
+                  )
+                ) : (
+                  // this.props.questionStore.questions.map((question, index) => (
+                  //   <label
+                  //     htmlFor={question._id}
+                  //     className={radioStyles.radio_label}
+                  //     key={`vraag_${question._id}`}
+                  //   >
+                  //     <input
+                  //       id={question._id}
+                  //       type="radio"
+                  //       name="keuze"
+                  //       value={index}
+                  //       checked={selectedOption === index}
+                  //       onChange={this.handleChangeOption}
+                  //       required
+                  //       className={radioStyles.radio_input}
+                  //     />
+                  //     <span className={radioStyles.radio_span}>
+                  //       {question.question}
+                  //     </span>
+                  //   </label>
+                  // ))
+                  // <label
+                  //     htmlFor={question._id}
+                  //     className={radioStyles.radio_label}
+                  //     key={`vraag_${question._id}`}
+                  //   >
+                  //     <input
+                  //       id={question._id}
+                  //       type="radio"
+                  //       name="keuze"
+                  //       value={index}
+                  //       checked={selectedOption === index}
+                  //       onChange={this.handleChangeOption}
+                  //       required
+                  //       className={radioStyles.radio_input}
+                  //     />
+
+                  // </label>
+                  <p>Vragen aan het ophalen...</p>
+                )}
+              </div>
+              <input
+                className={
+                  selectedOption === ""
+                    ? buttonStyles.submit_form_empty
+                    : buttonStyles.submit_form
+                }
+                type="submit"
+                value="Verstuur vraag"
+                disabled={
+                  this.state.currentQuestion <
+                  this.props.questionStore.questions.length
+                    ? false
+                    : true
+                }
+              />
+            </form>
+          </div>
+        </>
+      );
+    }
   }
 }
 

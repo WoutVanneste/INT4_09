@@ -1,5 +1,5 @@
 .title{
-  font-size: 5rem;
+  font-size: 4rem;
 }
 .room_wrapper{
   display: grid;
@@ -10,13 +10,27 @@
 }
 
 .title_wrapper{
-  text-align: center;
-  display: grid;
-  grid-gap: 2rem;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 5rem;
 }
 
-.bijschrift{
-  font-size: 2rem;
+.role{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 2rem;
+  width: 25rem;
+  height: 10rem;
+  border-right: 1rem solid var(--white-color);
+}
+
+.role_name{
+  color: var(--white-color);
+  font-size: 3rem;
+  font-weight: 600;
 }
 
 .form_wrapper {
@@ -26,22 +40,26 @@
   justify-content: space-between;
 }
 
-.input{
+.input, .input_true{
   font-size: 2.5rem;
   margin: 0 auto;
-  padding: 1.5rem 2rem;
+  padding: 2.5rem 2.5rem;
   width: 40rem;
   display: inline-block;
-  background: var( --white-color);
-  color: var(--dark-red-color);
-  border: none;
-  outline-color: var(--dark-red-color)
+  background: var( --dark-red-color);
+  /* color: var(--white-color); */
+  border: .4rem solid var(--bright-red-color);
+  outline-color: var(--white-color);
+  border-radius: 0.75rem;
 }
 
-.input, .input::placeholder{
-  color: var(--dark-red-color);
+.input:focus, .input_true{
+  border-color: white;
+}
+
+.input, .input::placeholder, .input_true{
+  color: var(--white-color);
   font-family:  Montserrat;
-  text-align: center;
 }
 
 .input::placeholder{

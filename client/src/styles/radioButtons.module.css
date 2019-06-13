@@ -6,6 +6,14 @@
   display: none;
 }
 
+.svg{
+  /* filter: invert(.5); */
+  width: 7.5rem;
+}
+.radio_label .radio_input:checked ~ .svg{
+  filter: brightness(0) invert(1) drop-shadow(0 0 4rem var(--white-color)) ;
+}
+
 .radio_span{
   font-size: 2rem;
   padding: 1rem;

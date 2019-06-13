@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TweeKeuzeInput from "../components/TweeKeuzeInput";
+import MeerKeuze from "../components/MeerKeuze";
 import TekstInput from "../components/TekstInput";
 import SliderInput from "../components/SliderInput";
 import Wachtscherm from "../components/Wachtscherm";
@@ -131,9 +131,6 @@ class Player extends Component {
         case "3":
         case "4":
         case "5":
-        case "6":
-        case "7":
-        case "8":
           return (
             <>
               <div className={styles.vraag_wrapper}>
@@ -151,7 +148,7 @@ class Player extends Component {
                   </svg>
                 </div>
               </div>
-              <TweeKeuzeInput
+              <MeerKeuze
                 verstuurAntwoord={this.antwoordVersturen}
                 question={this.state.question}
               />

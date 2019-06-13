@@ -21,6 +21,35 @@
   height: calc(100vh - 10rem);;
 }
 
+.title{
+  font-size: 5rem;
+  text-align: center;
+  display: inline-block;
+  width: 100%;
+}
+
+.taal_wrapper{
+  display: grid;
+  grid-gap: 4rem;
+  width: 30rem;
+  margin: 10rem auto;
+}
+
+.link{
+  cursor: pointer;
+  color: var(--dark-red-color);
+  background-color: var(--white-color);
+  font-size: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  height: 5rem;
+  border: .3rem solid var(--white-color);
+  transition: color .2s ease-in-out, border-color .2s ease-in-out;
+  outline-color: var(--dark-red-color)
+}
+
 .timer_wrapper{
   position: relative;
   width: 4rem;
@@ -53,36 +82,6 @@
   animation: countdown 15s linear infinite forwards;
 }
 
-.title{
-  font-size: 5rem;
-  text-align: center;
-  display: inline-block;
-  width: 100%;
-}
-
-.taal_wrapper{
-  display: grid;
-  grid-gap: 4rem;
-  width: 30rem;
-  margin: 10rem auto;
-}
-
-.link{
-  cursor: pointer;
-  color: var(--dark-red-color);
-  background-color: var(--white-color);
-  font-size: 2.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  height: 5rem;
-  border: .3rem solid var(--white-color);
-  transition: color .2s ease-in-out, border-color .2s ease-in-out;
-  outline-color: var(--dark-red-color)
-}
-
-/* Hier zal iets moeten veranderen, dit moet eigenlijk via de state hersteld kunnen worden */
 @keyframes countdown{
   from {
     stroke-dashoffset: 0;

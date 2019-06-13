@@ -24,10 +24,10 @@ const JoinRoom = props => {
     <>
       <div className={styles.room_wrapper}>
         <div className={styles.title_wrapper}>
-          <h1 className={styles.title}>Interactieve voorstelling</h1>
-          <span className={styles.bijschrift}>
-            Vul hieronder de voorstelling van de gamemaster in
-          </span>
+          <h1 className={styles.title}>Vul hier de roomnaam in</h1>
+          <div className={styles.role}>
+            <p className={styles.role_name}>Speler</p>
+          </div>
         </div>
 
         <form
@@ -38,7 +38,7 @@ const JoinRoom = props => {
           <input
             type="text"
             ref={roomRef}
-            className={styles.input}
+            className={room === "" ? styles.input : styles.input_true}
             onChange={handleChangeInput}
             placeholder="voorstelling123"
           />

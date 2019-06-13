@@ -14,12 +14,13 @@ html {
 body {
   color: var(--white-color);;
   font-family: Montserrat;
-  background-image: linear-gradient(180deg, #50142C 0%, #50142C 100%);
-  background-size: cover;
-  background-repeat: no-repeat;
+  background-image: url('/assets/img/logoO.svg'),url('/assets/img/logoB.svg'),url('/assets/img/logoV.svg'), linear-gradient(180deg, #50142C 0%, #50142C 100%);
+  background-size: 25%, 25%, 25%, cover;
+  background-position: left top -1rem, center top 5rem, right top, left;
+  background-repeat: no-repeat, no-repeat,no-repeat, no-repeat;
   width: 100vw;
   height: 100vh;
-  background-attachment: fixed;
+  /* background-attachment: fixed; */
   padding-top: 10rem;
 }
 
