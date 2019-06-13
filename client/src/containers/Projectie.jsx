@@ -106,24 +106,33 @@ class Projectie extends Component {
     // indien deze niet bestaat betekent dit dat het een jpg moet zijn.
 
     var http = new XMLHttpRequest();
-    const path = `/assets/img/${img}.svg`;
+    http.onreadystatechange = function() {
+      const path = `/assets/img/${img}.svg`;
 
-    http.open("GET", path, false);
-    http.send();
+      http.open("GET", path, false);
+      http.send();
 
-    if (http.status != 404) {
-      return (
-        <img className={styles.img} src={`/assets/img/${img}.svg`} alt={img} />
-      );
-    } else {
-      return (
-        <img className={styles.img} src={`/assets/img/${img}.jpg`} alt={img} />
-      );
-    }
+      if (http.status != 404) {
+        return (
+          <img
+            className={styles.img}
+            src={`/assets/img/${img}.svg`}
+            alt={img}
+          />
+        );
+      } else {
+        return (
+          <img
+            className={styles.img}
+            src={`/assets/img/${img}.jpg`}
+            alt={img}
+          />
+        );
+      }
+    };
   };
 
   showProjection(question, finaalAntwoord) {
-    console.log(question, finaalAntwoord);
     return (
       <>
         <div
@@ -145,7 +154,11 @@ class Projectie extends Component {
         {finaalAntwoord != "" || finaalAntwoord === "undefined" ? (
           <div className={styles.antwoord_wrapper}>
             <h1 className={styles.antwoord}>Jullie kozen voor:</h1>
-            {this.checkImg(finaalAntwoord)}
+            <img
+              className={styles.finaalAntwoord}
+              src={`/assets/img/${finaalAntwoord}.svg`}
+              alt={finaalAntwoord}
+            />
           </div>
         ) : (
           ""

@@ -79,7 +79,11 @@ class MeerKeuze extends Component {
                   onChange={this.handleChangeRadio}
                   className={radioStyles.radio_input}
                 />
-                {this.checkImg(question)}
+                <img
+                  className={radioStyles.svg}
+                  src={`/assets/img/${question}.svg`}
+                  alt={question}
+                />
 
                 {/* <object data={`/assets/img/${question}.jpg`} type="image/jpg">
                   <img src={`/assets/img/${question}.svg`} alt={question} />
