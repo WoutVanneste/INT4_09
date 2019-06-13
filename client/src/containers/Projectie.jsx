@@ -3,6 +3,7 @@ import { socket } from "./App.js";
 import { inject, observer } from "mobx-react";
 import roomStyles from "./Admin.module.css";
 import styles from "./Projectie.module.css";
+import radioStyles from "../styles/radioButtons.module.css";
 
 class Projectie extends Component {
   roomRef = React.createRef();
@@ -74,7 +75,7 @@ class Projectie extends Component {
   showWinningAnswer = () => {
     let counts = {};
     let compare = 0;
-    let mostFrequent;
+    let mostFrequent = "";
     for (var i = 0, len = this.state.enkelAntwoorden.length; i < len; i++) {
       let antwoord = this.state.enkelAntwoorden[i];
 
@@ -91,6 +92,7 @@ class Projectie extends Component {
 
     console.log(`toon het antwoord`);
     this.setState({ finaalAntwoord: mostFrequent });
+    console.log(this.state.finaalAntwoord);
   };
 
   render() {
@@ -123,9 +125,18 @@ class Projectie extends Component {
       return (
         <>
           {question ? <p>{question}</p> : ""}
-          <p>Jullie kozen voor:</p>
-
-          <p>{finaalAntwoord}</p>
+          {finaalAntwoord !== "" || finaalAntwoord === "undefined" ? (
+            <>
+              <p>Jullie kozen voor:</p>
+              <img
+                className={radioStyles.svg}
+                src={`/assets/img/${finaalAntwoord}.svg`}
+                alt={finaalAntwoord}
+              />
+            </>
+          ) : (
+            ""
+          )}
         </>
       );
     }

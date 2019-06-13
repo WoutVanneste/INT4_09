@@ -16,7 +16,8 @@ class Admin extends Component {
       numberOfAnswers: 0,
       playerCount: 0,
       counter: 15,
-      currentQuestion: 0
+      currentQuestion: 0,
+      questionIsBeingAnswered: false
     };
   }
   handleSubmitForm = e => {
@@ -30,6 +31,8 @@ class Admin extends Component {
       room: this.state.roomName
     });
     clearInterval(this.mijnInterval);
+    this.setState({ questionIsBeingAnswered: true });
+    console.log(`grijs`);
 
     if (
       this.state.currentQuestion < this.props.questionStore.questions.length
@@ -50,8 +53,11 @@ class Admin extends Component {
       }));
       if (this.state.counter === 0) {
         clearInterval(this.mijnInterval);
-        // na 10 seconden krijgt speler scherm 'te laat' te zien
+        // na 15 seconden krijgt speler scherm 'te laat' te zien
         socket.emit("tijd op", this.state.roomName);
+        this.setState({ counter: 15 });
+        this.setState({ questionIsBeingAnswered: false });
+        console.log(`terug wit`);
       }
     }, 1000);
   };
@@ -64,7 +70,10 @@ class Admin extends Component {
   handleCreateRoom = e => {
     e.preventDefault();
     this.setState({ room: true });
-    socket.emit("join", { room: this.state.roomName, user: "admin" }); // join de room
+    socket.emit("join", {
+      room: this.state.roomName.toLowerCase(),
+      user: "admin"
+    }); // join de room
 
     //Laad de speler counter opnieuw in bij het joinen van een room.
     socket.emit("get players", this.state.roomName);
@@ -74,7 +83,7 @@ class Admin extends Component {
   };
 
   handleChangeRoomTekst = e => {
-    this.setState({ roomName: e.currentTarget.value });
+    this.setState({ roomName: e.currentTarget.value.toLowerCase() });
   };
 
   handleClickButton = e => {
@@ -105,6 +114,10 @@ class Admin extends Component {
       if (this.state.numberOfAnswers === this.state.playerCount) {
         socket.emit("tijd op", this.state.roomName);
         console.log(`iedereen heeft geantwoord`);
+        clearInterval(this.mijnInterval);
+        this.setState({ counter: 15 });
+        this.setState({ questionIsBeingAnswered: false });
+        console.log(`terug naar wit`);
       }
     });
 
@@ -195,7 +208,11 @@ class Admin extends Component {
                 {this.props.questionStore.questions.length > 0 ? (
                   this.state.currentQuestion <
                   this.props.questionStore.questions.length ? (
-                    <span className={styles.admin_vraag}>
+                    <span
+                      className={`${styles.admin_vraag} ${
+                        this.state.questionIsBeingAnswered ? "" : ""
+                      }`}
+                    >
                       {
                         this.props.questionStore.questions[
                           this.state.currentQuestion
