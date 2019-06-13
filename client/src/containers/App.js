@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import socketIOClient from "socket.io-client";
 
-import styles from "./App.module.css";
-
 // import Home from "./Home";
 import Admin from "./Admin";
 import Player from "./Player";
@@ -23,7 +21,7 @@ class App extends Component {
 
   render() {
     return (
-      <main className={styles.layout}>
+      <main>
         <Switch>
           <Route path={ROUTES.home} exact strict component={Player} />{" "}
           {/* ga direct naar de player pagina via home */}

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { socket } from "../containers/App.js";
-import styles from "./JoinRoom.module.css";
 import buttonStyles from "../styles/buttons.module.css";
+import kamerStyles from "./Kamer.module.css";
 
 const JoinRoom = props => {
   const roomRef = React.createRef();
@@ -25,25 +25,25 @@ const JoinRoom = props => {
 
   return (
     <>
-      <div className={styles.room_wrapper}>
-        <div className={styles.title_wrapper}>
-          <h1 className={styles.title}>Vul hier de roomnaam in</h1>
-          <div className={styles.role}>
-            <p className={styles.role_name}>Speler</p>
+      <div className={kamerStyles.room_wrapper}>
+        <div className={kamerStyles.title_wrapper}>
+          <h1 className={kamerStyles.title}>Vul hier de kamernaam in</h1>
+          <div className={kamerStyles.role}>
+            <p className={kamerStyles.role_name}>speler</p>
           </div>
         </div>
 
         <form
           action=""
           onSubmit={handleJoinRoom}
-          className={styles.form_wrapper}
+          className={kamerStyles.form_wrapper}
         >
           <input
             type="text"
             ref={roomRef}
-            className={room === "" ? styles.input : styles.input_true}
+            className={room === "" ? kamerStyles.input : kamerStyles.input_true}
             onChange={handleChangeInput}
-            placeholder="voorstelling123"
+            placeholder="Kamernaam"
           />
           <input
             type="submit"
@@ -53,6 +53,7 @@ const JoinRoom = props => {
                 ? buttonStyles.submit_form_empty
                 : buttonStyles.submit_form
             }
+            disabled={room === "" ? true : false}
           />
         </form>
       </div>

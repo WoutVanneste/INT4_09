@@ -23,7 +23,7 @@ class Geantwoord extends Component {
   render() {
     return (
       <p className={meldingStyles.player_melding}>
-        Super, de gamemaster kreeg je antwoord!
+        Super, je antwoord werd verstuurd!
       </p>
     );
   }

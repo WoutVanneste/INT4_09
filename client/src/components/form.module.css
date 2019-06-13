@@ -6,20 +6,11 @@
   grid-area: wrapper;
   display: grid;
   width: 100%;
-
   justify-items: center;
   grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
 }
 
 .player_form{
-  /* margin: 7.5rem 0;
-  width: 100%;
-  grid-gap: 7.5rem;
-  display: grid;
-  justify-items: center;
-  grid-template-areas: 'wrapper'
-  'submit';
-  grid-template-rows: repeat(2, max-content); */
   width: 100%;
   display: flex;
   flex-direction: column;
