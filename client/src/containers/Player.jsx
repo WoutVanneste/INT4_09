@@ -9,6 +9,7 @@ import JoinRoom from "../components/JoinRoom";
 
 import styles from "./Player.module.css";
 // import taalStyles from "./Home.module.css";
+// import animationStyles from "../styles/index.css";
 
 // import meldingStyles from "../styles/melding.module.css";
 import { socket } from "./App.js";
@@ -22,7 +23,8 @@ class Player extends Component {
       taal: "",
       counter: 15,
       question: "",
-      room: ""
+      room: "",
+      answering: false
     };
 
     this.antwoordVersturen = this.antwoordVersturen.bind(this);
@@ -37,6 +39,7 @@ class Player extends Component {
       // timer wordt opnieuw op 10 gezet door een nieuwe vraag
       this.setState({ aantalKeuzes: type.type, counter: 15, question: type });
       console.log(`question state`, this.state.question);
+      this.setState({ answering: true });
 
       // timer start als je op player komt.
       // de timer css klopt nog niet volledig
@@ -65,6 +68,7 @@ class Player extends Component {
       answer: { antwoord: antwoord.antwoord, id: socket.id },
       room: this.state.room
     }); // emit de value van de input.
+    this.setState({ answering: false });
 
     clearInterval(this.mijnInterval);
     // console.log(this.props);
@@ -125,6 +129,7 @@ class Player extends Component {
         case "5":
           return (
             <>
+              <div className={"flash"} />
               <div className={styles.vraag_wrapper}>
                 <p className={styles.vraag}>{this.state.question.question}</p>
 

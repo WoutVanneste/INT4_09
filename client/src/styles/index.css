@@ -41,3 +41,23 @@ body {
   50%{background-position: left top -5rem, center top -3.5rem, right top -5.5rem, left}
   100%{background-position: left top 0rem, center top 3.5rem, right top, left}
 }
+
+.flash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  animation: flash .25s ease;
+  opacity: 0;
+  background-color: white;
+  z-index: 1000;
+  pointer-events: none;
+
+}
+
+@keyframes flash {
+  0%{opacity: 0;}
+  60%{opacity: 0.3;}
+  100%{opacity: 0;}
+}
