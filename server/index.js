@@ -6,6 +6,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 require("dotenv").config();
 
 const port = process.env.PORT;
@@ -29,6 +30,7 @@ app.use(index);
 
 app.use(express.static(path.resolve(__dirname, "../client/build")));
 
+app.use(cors());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -36,14 +38,18 @@ app.use(bodyParser.json());
 require("./app/routes/questions.routes.js")(app);
 require("./app/routes/answers.routes.js")(app);
 
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+});
+
+app.get("/api/data", (req, res) => {
+  res.send({ message: "ok", secret: process.env.SECRET });
+});
+
 // const server = http.createServer(app);
 // const server = express()
 //   .use((req, res) => res.sendFile(index))
 //   .listen(port, () => console.log(`Listening on ${port}`));
-
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
-});
 
 const server = app.listen(port, () => console.log(`Listening on port ${port}`));
 
