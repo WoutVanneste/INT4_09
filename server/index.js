@@ -46,7 +46,9 @@ const io = socketIo(server, { pingTimeout: 60000 }); // initialiseer socket
 //let connectionCounter = 0;
 let connectionCounter = {};
 
-io.on("connection", socket => {
+const nsp = io.of("/");
+
+nsp.on("connection", socket => {
   // User connected
   console.log(`${socket.id} connected to the site`);
 
