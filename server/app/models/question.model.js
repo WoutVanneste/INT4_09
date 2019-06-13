@@ -6,4 +6,4 @@ const QuestionSchema = mongoose.Schema({
   options: [{}]
 });
 
-module.exports = mongoose.model("Question", QuestionSchema, "questions");
+module.exports = mongoose.model("Question", QuestionSchema);
