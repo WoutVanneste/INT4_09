@@ -1,6 +1,6 @@
 export const ROUTES = {
   home: `/`,
-  player: `/player`,
+  player: `/speler`,
   admin: `/admin`,
   projectie: `/projectie`
 };

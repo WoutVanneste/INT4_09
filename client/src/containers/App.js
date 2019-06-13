@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch, withRouter } from "react-router-dom";
+import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import socketIOClient from "socket.io-client";
 
 import styles from "./App.module.css";
@@ -15,7 +15,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      endpoint: "http://localhost:4000/"
+      endpoint: "/"
     };
 
     socket = socketIOClient(this.state.endpoint);
@@ -30,6 +30,8 @@ class App extends Component {
           <Route path={ROUTES.admin} component={Admin} />
           <Route path={ROUTES.player} component={Player} />
           <Route path={ROUTES.projectie} component={Projectie} />
+          {/* redirect naar de playerpagina indien de pagina niet bestaat */}
+          <Route render={() => <Redirect to="/" />} />
         </Switch>
       </main>
     );
