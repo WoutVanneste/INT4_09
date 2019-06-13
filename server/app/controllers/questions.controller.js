@@ -24,6 +24,7 @@ exports.findAll = async (req, res) => {
     const questions = await Question.find();
     res.send(questions);
   } catch (err) {
+    console.log(err);
     res.status(500).send({ err: err.question || "Error" });
   }
 };

@@ -1,5 +1,4 @@
 import { decorate, observable, configure, action } from "mobx";
-// import Drink from "../models/Drink";
 import Api from "../api";
 
 configure({ enforceActions: `observed` });
@@ -19,8 +18,8 @@ class QuestionStore {
   };
 
   getAll = () => {
+    this.api.getAll().then(d => console.log(d));
     this.api.getAll().then(d => d.forEach(this.addQuestionsToArray));
-    //this.api.getAll().then(d => console.log(d));
   };
 
   addQuestionsToArray = data => {

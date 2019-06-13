@@ -30,10 +30,6 @@ class Player extends Component {
   }
 
   componentDidMount() {
-    // Vangt de emit op
-    socket.on("connect", data => {
-      console.log(`connected`, data);
-    });
     socket.on("question", type => {
       console.log(`socket message`, type);
       clearInterval(this.mijnInterval);
@@ -74,10 +70,6 @@ class Player extends Component {
     // console.log(this.props);
 
     console.log(this.state.question);
-    // this.props.answerStore.addAnswerToDatabase({
-    //   question: this.state.question.question,
-    //   answers: [antwoord]
-    // });
   };
 
   joinedRoom = roomId => {

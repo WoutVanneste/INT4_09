@@ -13,7 +13,6 @@ class TekstInput extends Component {
 
   handleSubmitForm = e => {
     // Het antwoord wordt uit de state gehaald.
-    //socket.emit("answer", this.huidigAntwoord); // emit de value van de input.
     e.preventDefault();
     this.props.verstuurAntwoord({ antwoord: this.state.huidigAntwoord });
   };
@@ -25,12 +24,6 @@ class TekstInput extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmitForm} className={styles.player_form}>
-        {/* <input
-          type="text"
-          onChange={this.handleChangeTekst}
-          value={this.huidigAntwoord}
-          className={textStyles.input}
-        /> */}
         <textarea
           name="textInput"
           cols="75"

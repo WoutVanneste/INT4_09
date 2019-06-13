@@ -1,13 +1,10 @@
 import React, { Component } from "react";
-// import Menu from "../components/Menu";
-// import styles from "./Projectie.module.css";
 import { socket } from "./App.js";
 import { inject, observer } from "mobx-react";
 import roomStyles from "./Admin.module.css";
 import styles from "./Projectie.module.css";
 
 class Projectie extends Component {
-  //const antwoord = antwoordPlayer.location.antwoord;
   roomRef = React.createRef();
   constructor(props) {
     super(props);
@@ -46,7 +43,7 @@ class Projectie extends Component {
     socket.on("question", type => {
       console.log(type);
       this.setState({ question: type.question });
-      this.setState({ mogelijkeAntwoorden: type.options });
+      // this.setState({ mogelijkeAntwoorden: type.options });
       console.log(`mogelijke antwoorden`, this.state.mogelijkeAntwoorden);
       this.setState({ finaalAntwoord: "" });
     });
@@ -97,13 +94,7 @@ class Projectie extends Component {
   };
 
   render() {
-    const {
-      antwoorden,
-      roomId,
-      question,
-      mogelijkeAntwoorden,
-      finaalAntwoord
-    } = this.state;
+    const { roomId, question, finaalAntwoord } = this.state;
 
     if (roomId === "") {
       return (
@@ -133,16 +124,7 @@ class Projectie extends Component {
         <>
           {question ? <p>{question}</p> : ""}
           <p>Jullie kozen voor:</p>
-          {/* <ul>
-            {mogelijkeAntwoorden.map(antwoord => (
-              <li key={antwoord}>{antwoord} - 0%</li>
-            ))}
-          </ul> */}
-          {/* <ul>
-            {antwoorden.map(antwoord => (
-              <li key={antwoord.antwoord}>{antwoord.antwoord}</li>
-            ))}
-          </ul> */}
+
           <p>{finaalAntwoord}</p>
         </>
       );
