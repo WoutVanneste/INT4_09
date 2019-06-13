@@ -119,6 +119,7 @@ const path = require("path");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const socketIo = require("socket.io");
+const app = express();
 const server = require("http").Server(app);
 
 // const cors = require("cors");
@@ -136,8 +137,6 @@ mongoose
     console.log("Error, exiting", e);
     process.exit();
   });
-
-const app = express();
 
 app.use(express.static(path.resolve(__dirname, "../client/build")));
 
