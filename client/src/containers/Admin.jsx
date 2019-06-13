@@ -206,9 +206,11 @@ class Admin extends Component {
                   this.state.currentQuestion <
                   this.props.questionStore.questions.length ? (
                     <span
-                      className={`${styles.admin_vraag} ${
-                        this.state.questionIsBeingAnswered ? "" : ""
-                      }`}
+                      className={
+                        this.state.questionIsBeingAnswered
+                          ? styles.admin_vraag_grey
+                          : styles.admin_vraag
+                      }
                     >
                       {
                         this.props.questionStore.questions[
@@ -263,17 +265,22 @@ class Admin extends Component {
               </div>
               <input
                 className={
-                  selectedOption === ""
+                  (this.state.currentQuestion <
+                  this.props.questionStore.questions.length
+                    ? buttonStyles.submit_form
+                    : buttonStyles.submit_form_empty) &&
+                  (this.state.questionIsBeingAnswered === true
                     ? buttonStyles.submit_form_empty
-                    : buttonStyles.submit_form
+                    : buttonStyles.submit_form)
                 }
                 type="submit"
                 value="Verstuur vraag"
                 disabled={
-                  this.state.currentQuestion <
+                  (this.state.currentQuestion <
                   this.props.questionStore.questions.length
                     ? false
-                    : true
+                    : true) ||
+                  (this.state.questionIsBeingAnswered === true ? true : false)
                 }
               />
             </form>
