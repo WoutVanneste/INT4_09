@@ -49,6 +49,7 @@ const server = app.listen(port, () => console.log(`Listening on port ${port}`));
 
 const io = socketIo(server, { pingTimeout: 60000 }); // initialiseer socket
 
+// Socket io code
 let connectionCounter = 0;
 
 io.on("connection", socket => {
