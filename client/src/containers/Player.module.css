@@ -77,7 +77,7 @@
   stroke-dashoffset: 0;
   stroke-linecap: flat;
   stroke-width: .2rem;
-  stroke: white;
+  stroke: var(--white-color);
   fill: none;
   animation: countdown 15s linear infinite forwards;
 }

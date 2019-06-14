@@ -1,9 +1,4 @@
 :global(:root){
-  --light-color: #3E3D5E;
-  --ultralight-color: #BBD5ED;
-  --dark-color: #0E0D36;
-  --blue-color: #110E5C;
-  --ultradark-color: #02002c;
   --bright-red-color: #FA1D3B;
   --dark-red-color: #50142C;
   --transparant-bright-red-color: rgba(250,29,59, 0.5);

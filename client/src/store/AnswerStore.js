@@ -12,14 +12,11 @@ class AnswerStore {
   }
 
   addAnswerToDatabase = data => {
-    console.log(data);
     const newAnswer = new Answer(this.rootStore);
     newAnswer.updateFromServer(data);
-    console.log(`answer addanswer`, newAnswer);
 
     this.api
       .create(newAnswer)
-      .then(console.log(`apiAnswer`, newAnswer))
       .then(answerValues => newAnswer.updateFromServer(answerValues));
   };
 }

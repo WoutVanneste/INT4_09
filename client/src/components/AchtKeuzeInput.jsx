@@ -8,7 +8,6 @@ class AchtKeuzeInput extends Component {
   constructor(props) {
     super(props);
     this.state = { huidigAntwoord: "" };
-    console.log(props);
   }
 
   handleSubmitForm = e => {

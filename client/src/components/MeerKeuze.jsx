@@ -18,10 +18,6 @@ class MeerKeuze extends Component {
     e.preventDefault();
 
     // Het antwoord wordt uit de state gehaald.
-    // this.props.answerStore.addAnswerToDatabase({
-    //   question: "dit is de tweede vraag",
-    //   answers: [{ answer: this.state.huidigAntwoord }]
-    // });
     this.props.verstuurAntwoord({ antwoord: this.state.huidigAntwoord });
   };
 
@@ -86,10 +82,6 @@ class MeerKeuze extends Component {
                   src={`/assets/img/${question}.svg`}
                   alt={question}
                 />
-
-                {/* <object data={`/assets/img/${question}.jpg`} type="image/jpg">
-                  <img src={`/assets/img/${question}.svg`} alt={question} />
-                </object> */}
               </label>
             ))
           ) : (

@@ -33,16 +33,13 @@ class Player extends Component {
 
   componentDidMount() {
     socket.on("question", type => {
-      console.log(`socket message`, type);
       clearInterval(this.mijnInterval);
       // Verander de state zodat keuzeswitch opnieuw wordt gerenderd
       // timer wordt opnieuw op 10 gezet door een nieuwe vraag
       this.setState({ aantalKeuzes: type.type, counter: 15, question: type });
-      console.log(`question state`, this.state.question);
       this.setState({ answering: true });
 
       // timer start als je op player komt.
-      // de timer css klopt nog niet volledig
       this.mijnInterval = setInterval(() => {
         this.setState(prevState => ({
           counter: prevState.counter >= 1 ? prevState.counter - 1 : 0
@@ -61,8 +58,6 @@ class Player extends Component {
   }
 
   antwoordVersturen = antwoord => {
-    console.log(antwoord);
-    // console.log(`antwoord verstuurd`);
     this.setState({ aantalKeuzes: "op tijd" });
     socket.emit("answer", {
       answer: { antwoord: antwoord.antwoord, id: socket.id },
@@ -71,55 +66,20 @@ class Player extends Component {
     this.setState({ answering: false });
 
     clearInterval(this.mijnInterval);
-    // console.log(this.props);
-
-    console.log(this.state.question);
   };
 
   joinedRoom = roomId => {
-    console.log(roomId);
     this.setState({ room: roomId });
   };
 
-  handleClickLanguage = e => {
-    console.log(e);
-  };
+  handleClickLanguage = e => {};
 
   //op basis van het aantal opties wordt een andere component getoond met het juiste aantal opties.
-  //als er niks is meegegeven, komt er een empty state melding.
+  //als er niks is meegegeven, wordt het wachtscherm getoond.
 
   //via vraag.location.vraag kunnen we de data die we meegaven vanuit de admin opvragen, zo weten we hoeveel opties er zijn voor de vraag.
   render() {
     const { aantalKeuzes, counter } = this.state;
-    // const taalSwitch = () => {
-    //   switch (this.state.taal) {
-    //     case "nl":
-    //       return (
-    //         <p className={meldingStyles.player_melding}>
-    //           De gamemaster heeft nog geen vraag doorgestuurd
-    //         </p>
-    //       );
-    //     case "fr":
-    //       return (
-    //         <p className={meldingStyles.player_melding}>
-    //           Le gamemaster n'a pas encore envoyé de question
-    //         </p>
-    //       );
-    //     case "en":
-    //       return (
-    //         <p className={meldingStyles.player_melding}>
-    //           The gamemaster has not yet forwarded a question
-    //         </p>
-    //       );
-
-    //     default:
-    //       return (
-    //         <p className={meldingStyles.player_melding}>
-    //           De gamemaster heeft nog geen vraag doorgestuurd
-    //         </p>
-    //       );
-    //   }
-    // };
 
     const keuzeSwitch = () => {
       switch (aantalKeuzes) {
@@ -201,7 +161,6 @@ class Player extends Component {
     };
 
     if (this.state.room === "") {
-      console.log(`nog geen room man`);
       return (
         <>
           <JoinRoom joinedRoom={this.joinedRoom} />
@@ -237,7 +196,6 @@ class Player extends Component {
           </>
         );
       } else {
-        console.log(`nu is er een taal`);
         return <div className={styles.wrapper}>{keuzeSwitch()}</div>;
       }
     }

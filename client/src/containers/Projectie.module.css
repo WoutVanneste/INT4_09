@@ -14,6 +14,16 @@
   left: 0;
 }
 
+.antwoord{
+  font-size: 4rem;
+  padding: 2rem;
+}
+
+.img{
+  width: 35rem;
+  height: 35rem;
+}
+
 @keyframes fadeIn {
   0%{opacity: 0}
   100%{opacity: 1}
@@ -21,13 +31,4 @@
 @-webkit-keyframes fadeIn {
   0%{opacity: 0}
   100%{opacity: 1}
-}
-
-.antwoord{
-  font-size: 4rem;
-  padding: 2rem;
-}
-.img{
-  width: 35rem;
-  height: 35rem;
 }

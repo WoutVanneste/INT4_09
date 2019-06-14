@@ -31,7 +31,6 @@ class Admin extends Component {
     });
     clearInterval(this.mijnInterval);
     this.setState({ questionIsBeingAnswered: true });
-    console.log(`grijs`);
 
     if (
       this.state.currentQuestion < this.props.questionStore.questions.length
@@ -40,12 +39,8 @@ class Admin extends Component {
         currentQuestion: parseInt((prevState.currentQuestion += 1))
       }));
     } else {
-      console.log(`Er zijn geen vragen meer`);
       this.setState({ questionIsBeingAnswered: true });
     }
-
-    console.log(this.state.currentQuestion);
-    console.log(`lengte`, this.props.questionStore.questions.length);
 
     this.mijnInterval = setInterval(() => {
       this.setState(prevState => ({
@@ -61,7 +56,6 @@ class Admin extends Component {
         ) {
           this.setState({ questionIsBeingAnswered: false });
         }
-        console.log(`terug wit`);
       }
     }, 1000);
   };
@@ -103,12 +97,9 @@ class Admin extends Component {
   componentDidMount() {
     socket.on("question", type => {
       // vang een socket emit op. Puur om te testen of de vraag verstuurd was, mag weg later
-      console.log(`socket message`, type);
     });
 
-    socket.on("user joined", msg => {
-      console.log(`user joined`);
-    });
+    socket.on("user joined", msg => {});
 
     socket.on("clear", msg => {
       this.setState({ numberOfAnswers: 0 });
@@ -118,21 +109,22 @@ class Admin extends Component {
       this.setState((prevState, props) => ({
         numberOfAnswers: parseInt((prevState.numberOfAnswers += 1))
       }));
-      console.log(`antwoord gegeven`);
       if (this.state.numberOfAnswers === this.state.playerCount) {
         socket.emit("tijd op", this.state.roomName);
-        console.log(`iedereen heeft geantwoord`);
         clearInterval(this.mijnInterval);
         this.setState({ counter: 15 });
-        this.setState({ questionIsBeingAnswered: false });
-        console.log(`terug naar wit`);
+        if (
+          this.state.currentQuestion < this.props.questionStore.questions.length
+        ) {
+          this.setState({ questionIsBeingAnswered: false });
+        } else {
+          this.setState({ questionIsBeingAnswered: true });
+        }
       }
     });
 
     socket.on("player count", playerCount => {
       this.setState({ playerCount: playerCount });
-      console.log(`user connected`);
-      console.log(this.state.playerCount);
     });
   }
 
@@ -226,56 +218,18 @@ class Admin extends Component {
                     <span className={styles.admin_vraag}>vragen zijn op</span>
                   )
                 ) : (
-                  // this.props.questionStore.questions.map((question, index) => (
-                  //   <label
-                  //     htmlFor={question._id}
-                  //     className={radioStyles.radio_label}
-                  //     key={`vraag_${question._id}`}
-                  //   >
-                  //     <input
-                  //       id={question._id}
-                  //       type="radio"
-                  //       name="keuze"
-                  //       value={index}
-                  //       checked={selectedOption === index}
-                  //       onChange={this.handleChangeOption}
-                  //       required
-                  //       className={radioStyles.radio_input}
-                  //     />
-                  //     <span className={radioStyles.radio_span}>
-                  //       {question.question}
-                  //     </span>
-                  //   </label>
-                  // ))
-                  // <label
-                  //     htmlFor={question._id}
-                  //     className={radioStyles.radio_label}
-                  //     key={`vraag_${question._id}`}
-                  //   >
-                  //     <input
-                  //       id={question._id}
-                  //       type="radio"
-                  //       name="keuze"
-                  //       value={index}
-                  //       checked={selectedOption === index}
-                  //       onChange={this.handleChangeOption}
-                  //       required
-                  //       className={radioStyles.radio_input}
-                  //     />
-
-                  // </label>
                   <p>Vragen aan het ophalen...</p>
                 )}
               </div>
               <input
                 className={
+                  (this.state.questionIsBeingAnswered === true
+                    ? buttonStyles.submit_form_empty
+                    : buttonStyles.submit_form) ||
                   (this.state.currentQuestion <
                   this.props.questionStore.questions.length
                     ? buttonStyles.submit_form
-                    : buttonStyles.submit_form_empty) &&
-                  (this.state.questionIsBeingAnswered === true
-                    ? buttonStyles.submit_form_empty
-                    : buttonStyles.submit_form)
+                    : buttonStyles.submit_form_empty)
                 }
                 type="submit"
                 value="Verstuur vraag"
