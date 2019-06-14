@@ -33,21 +33,15 @@ class Projectie extends Component {
       this.setState({
         antwoorden: [...this.state.antwoorden, { antwoord: antwoord, id: id }]
       });
-      console.log(`antwoorden`, this.state.antwoorden);
 
       // maak een array met alleen de antwoorden aan
       this.setState({
         enkelAntwoorden: [...this.state.enkelAntwoorden, antwoord]
       });
-      console.log(`enkel antwoorden`, this.state.enkelAntwoorden);
-      //this.calculateAnswers(this.state.enkelAntwoorden);
     });
 
     socket.on("question", type => {
-      console.log(type);
       this.setState({ question: type.question });
-      // this.setState({ mogelijkeAntwoorden: type.options });
-      console.log(`mogelijke antwoorden`, this.state.mogelijkeAntwoorden);
       this.setState({ finaalAntwoord: "" });
     });
 
@@ -96,40 +90,7 @@ class Projectie extends Component {
       }
     }
 
-    console.log(`toon het antwoord`);
     this.setState({ finaalAntwoord: mostFrequent });
-    console.log(this.state.finaalAntwoord);
-  };
-
-  checkImg = img => {
-    // Hier wordt gecontroleerd of de svg die we ophalen bestaat
-    // indien deze niet bestaat betekent dit dat het een jpg moet zijn.
-
-    var http = new XMLHttpRequest();
-    http.onreadystatechange = function() {
-      const path = `/assets/img/${img}.svg`;
-
-      http.open("GET", path, false);
-      http.send();
-
-      if (http.status != 404) {
-        return (
-          <img
-            className={styles.img}
-            src={`/assets/img/${img}.svg`}
-            alt={img}
-          />
-        );
-      } else {
-        return (
-          <img
-            className={styles.img}
-            src={`/assets/img/${img}.jpg`}
-            alt={img}
-          />
-        );
-      }
-    };
   };
 
   showProjection(question, finaalAntwoord) {
@@ -155,7 +116,7 @@ class Projectie extends Component {
           <div className={styles.antwoord_wrapper}>
             <h1 className={styles.antwoord}>Jullie kozen voor:</h1>
             <img
-              className={styles.finaalAntwoord}
+              className={styles.img}
               src={`/assets/img/${finaalAntwoord}.svg`}
               alt={finaalAntwoord}
             />

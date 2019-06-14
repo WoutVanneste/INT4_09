@@ -1,4 +1,3 @@
-// import uuid from "uuid";
 import { decorate, observable, action, computed } from "mobx";
 
 class Answer {

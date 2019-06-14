@@ -26,15 +26,6 @@
   animation-delay: .5s;
 }
 
-@keyframes moveUp {
-  0%{transform: translateY(0);}
-  100%{transform: translateY(-25rem);}
-}
-@-webkit-keyframes moveUp {
-  0%{transform: translateY(0);}
-  100%{transform: translateY(-25rem);}
-}
-
 .bolletje_wrapper{
   width: 12rem;
   height: 2rem;
@@ -60,6 +51,14 @@
   animation-delay: -0.9s;
 }
 
+@keyframes moveUp {
+  0%{transform: translateY(0);}
+  100%{transform: translateY(-25rem);}
+}
+@-webkit-keyframes moveUp {
+  0%{transform: translateY(0);}
+  100%{transform: translateY(-25rem);}
+}
 @keyframes wave {
 	0%, 60%, 100% {
 		transform: initial;

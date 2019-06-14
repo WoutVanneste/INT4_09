@@ -54,7 +54,7 @@
 }
 
 .input:focus, .input_true{
-  border-color: white;
+  border-color: var(--white-color);
 }
 
 .input, .input::placeholder, .input_true{

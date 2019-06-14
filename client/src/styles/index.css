@@ -10,7 +10,6 @@ html {
   box-sizing: inherit;
 }
 
-
 body {
   color: var(--white-color);;
   font-family: Montserrat;
@@ -21,7 +20,6 @@ body {
   width: 100vw;
   height: 100vh;
   animation: letters_moving 7.5s ease-in-out infinite;
-  /* background-attachment: fixed; */
   padding-top: 10rem; 
   -webkit-animation: letters_moving 7.5s ease-in-out infinite;
 }
@@ -29,6 +27,20 @@ body {
 .title{
   font-size: 1.5rem;
   color: var(--white-color);
+}
+
+.flash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  animation: flash .25s ease;
+  -webkit-animation: flash .25s ease;
+  opacity: 0;
+  background-color: var(--white-color);
+  z-index: 1000;
+  pointer-events: none;
 }
 
 @keyframes letters_moving{
@@ -41,22 +53,6 @@ body {
   50%{background-position: left top -10rem, center top -4.5rem, right top -7.5rem, left}
   100%{background-position: left top 0rem, center top 4.5rem, right top, left}
 }
-
-.flash {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  animation: flash .25s ease;
-  -webkit-animation: flash .25s ease;
-  opacity: 0;
-  background-color: white;
-  z-index: 1000;
-  pointer-events: none;
-
-}
-
 @keyframes flash {
   0%{opacity: 0;}
   60%{opacity: 0.3;}

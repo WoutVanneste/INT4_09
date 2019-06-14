@@ -16,9 +16,7 @@ mongoose
     useFindAndModify: false,
     useCreateIndex: true
   })
-  .then(() => console.log("db connected"))
   .catch(e => {
-    console.log("Error, exiting", e);
     process.exit();
   });
 
@@ -48,17 +46,13 @@ let connectionCounter = {};
 
 io.on("connection", socket => {
   // User connected
-  console.log(`${socket.id} connected to the site`);
 
   // User disconnected
-  socket.on("disconnect", () => {
-    console.log(`${socket.id} disconnected from the site`);
-  });
+  socket.on("disconnect", () => {});
 
   // Join a custom room created by the admin
   socket.on("join", ({ room, user }) => {
     socket.join(room);
-    console.log("room: " + room + " joined by:" + socket.id);
 
     // Als een speler de room joint, verhoog de spelercount
     if (user === "player") {
@@ -70,27 +64,24 @@ io.on("connection", socket => {
         io.to(room).emit("player count", connectionCounter[room]);
       }
       // Stuur de spelercount door als een speler verbindt
-
-      console.log(`aantal spelers:`, connectionCounter[room]);
     }
 
     socket.on("get players", room => {
-      io.to(room).emit("player count", connectionCounter[room]);
+      if (connectionCounter[room] != undefined) {
+        io.to(room).emit("player count", connectionCounter[room]);
+      }
     });
 
     // Vraag doorsturen
     socket.on("question", ({ question, room }) => {
-      console.log(`question emit`, room);
       io.to(room).emit("question", question);
     });
     // Antwoord doorsturen
     socket.on("answer", ({ answer, room }) => {
-      console.log(`answer emit`);
       io.to(room).emit("answer", answer);
     });
     // Projectie clearen
     socket.on("clear", ({ message, room }) => {
-      console.log(`clear emit`);
       io.to(room).emit("clear", message);
     });
 
@@ -101,16 +92,11 @@ io.on("connection", socket => {
     socket.on("disconnect", () => {
       if (user === "player") {
         connectionCounter[room]--;
-        console.log(`player disconnected`);
       }
 
-      console.log(connectionCounter[room]);
-      console.log(`user: ${socket.id} left room: ${room}`);
       io.to(room).emit("player count", connectionCounter[room]);
     });
   });
 });
 
-server.listen(process.env.PORT, () => {
-  console.log(`Server luistert op poort ${process.env.PORT}`);
-});
+server.listen(process.env.PORT, () => {});
